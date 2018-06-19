@@ -3,6 +3,7 @@ This module provides a set of static functions that are meant to be used for com
 
 Import this module by typing: from maq20.utilities import *
 """
+import ctypes
 
 
 def signed16_to_unsigned16(number):
@@ -29,16 +30,22 @@ def unsigned16_to_signed16(number):
 def response_to_string(int_array) -> str:
     """
     Utility function used to convert a low level register access to ASCII characters.
+    If int_array input is not valid, an empty str is returned.
     :param int_array: input should be an array of integers returned by the low level register access functions.
     :return: a str composed of ASCII characters.
     """
+    if type(int_array) is str:
+        return int_array
     response_string = ''
-    for c in int_array:
-        try:
-            response_string += chr(c)
-        except ValueError:
-            response_string += ' '
-    return response_string
+    try:
+        for c in int_array:
+            try:
+                response_string += chr(c)
+            except ValueError:
+                response_string += ' '
+        return response_string
+    except TypeError:
+        return response_string
 
 
 def __generate_crc16_table():
@@ -107,6 +114,10 @@ def int16_to_int32(numbers, msb_first=True):
     :return: 32 bit interpretation of input.
     """
     return (numbers[0] << 16) | numbers[1] if msb_first else (numbers[1] << 16) | numbers[0]
+
+
+def int32_to_uint32(i):
+    return ctypes.c_uint32(i).value
 
 
 def int32_to_int16s(number, msb_first=True):

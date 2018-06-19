@@ -12,18 +12,23 @@ class MAQ20:
     A class that provides easy to use high level functions for MAQ20 Modules.
     """
 
-    def __init__(self, ip_address="192.168.128.100", port=502):
+    def __init__(self, ip_address="192.168.128.100", port=502, com=None, timeout=3):
         """
         Initializes the MAQ20 with the given input parameters.
         :param ip_address: a string containing the ip address of the MAQ20, default is 192.168.128.100
         :param port: default is 502
         """
         self._com = None  # type: COMx
-        self._ip_address = ip_address
-        self._port = port
+        self._ip_address = ''
+        self._port = 0
         self._username = ''
         self._password = ''
-        self._com = COMx(ip_address, port)
+        if com is None:
+            self._ip_address = ip_address
+            self._port = port
+            self._com = COMx(ip_address, port, timeout)
+        else:
+            self._com = com  # type: COMx
         self._module_list = []  # type: list[MAQ20Module]
         self.scan_module_list()
         self._iter_index = 0
@@ -176,10 +181,10 @@ class MAQ20:
     def ftp_dir(self):
         if self._com.read_card_available():
             with FTP(self._ip_address) as ftp:
-                catcher = self.StdoutCatcher()
+                result = []
                 ftp.login(user=self._username, passwd=self._password)
-                ftp.dir()
-                result = catcher.get_text()
+                ftp.set_pasv(False)
+                ftp.dir(result.append)
             return result
         else:
             return 'SD card not inserted.'
@@ -188,6 +193,7 @@ class MAQ20:
         if self._com.read_card_available():
             with FTP(self._ip_address) as ftp:
                 ftp.login(user=self._username, passwd=self._password)
+                # ftp.set_pasv(False)
                 with open(filename, 'wb') as local_file:
                     result = ftp.retrbinary('RETR {}'.format(filename.upper()), local_file.write)
             return result
@@ -205,34 +211,12 @@ class MAQ20:
 
     def ftp_filenames(self):
         result = []
-        response = self.ftp_dir().split('\n')
+        response = self.ftp_dir()
         for line in response:
             line_sections = line.split(' ')
-            if len(line_sections[-1]) > 0:  # Check that line is not empty
+            if len(line_sections[-1]) > 0 and line_sections[-1].endswith('.TXT'):  # Check that line is not empty
                 result.append(line_sections[-1])
         return result
-
-    class StdoutCatcher:
-        """
-        This inner class is used to catch stdout output because the standard FTP libraries write to stdout.
-        """
-        def __init__(self):
-            import sys
-            self._txt = ''
-            self._backup_stdout = sys.stdout
-            sys.stdout = self
-
-        def write(self, txt):
-            self._txt += txt
-
-        def get_text(self):
-            import sys
-            sys.stdout = self._backup_stdout
-            return self._txt
-
-        def __del__(self):
-            import sys
-            sys.stdout = self._backup_stdout  # this is done in case function get_text was not called.
 
     def setup_sd_card_logging(
             self,

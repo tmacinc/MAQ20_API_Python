@@ -17,6 +17,6 @@ for a_module in maq20:
 print('\nlen(maq20) : {}'.format(len(maq20)))
 
 # Access a module with array notation.
-if len(maq20) > 1:
+if len(maq20) > 3:
     some_module = maq20[2]
     print('\nmaq20[2] = {}'.format(some_module.get_name()))

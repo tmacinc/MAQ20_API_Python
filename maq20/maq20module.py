@@ -290,7 +290,7 @@ class MAQ20Module:
         Construct a string in human readable form of range information for all ranges in the module.
         :return: str
         """
-        if self._number_of_ranges is None:
+        if not self.has_range_information():
             return False
         info_str = ''
         range_num = 0

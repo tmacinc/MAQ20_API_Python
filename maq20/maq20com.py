@@ -1,25 +1,6 @@
 from maq20.maq20module import *
 from maq20.utilities import *
-MODBUS_BACKEND = 0
-PYMODBUS3 = 1
-UMODBUS = 2
-
-try:
-    # raise ImportError("Us")
-    from pymodbus3.client.sync import ModbusTcpClient
-    MODBUS_BACKEND = PYMODBUS3
-except ImportError:
-    try:
-        import socket
-        from umodbus import conf
-        from umodbus.client import tcp
-        MODBUS_BACKEND = UMODBUS
-    except:
-        raise ImportError("No Modbus backend available.")
-
-
-def get_modbus_backend():
-    return MODBUS_BACKEND
+from maq20.modbus_client.client.sync import ModbusTcpClient
 
 
 class COMx(MAQ20Module):
@@ -28,14 +9,11 @@ class COMx(MAQ20Module):
     Takes care of the communication backend and provides functions that read the COMx register map.
     """
 
-    def __init__(self, ip_address, port):
+    def __init__(self, ip_address, port=502, timeout=3):
+        from maq20.modbus_client.constants import Defaults
+        Defaults.Timeout = timeout
         if ip_address is not None or port is not None:
-            if MODBUS_BACKEND == PYMODBUS3:
-                self._client = ModbusTcpClient(ip_address, port=port)
-            if MODBUS_BACKEND == UMODBUS:
-                self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self._sock.settimeout(2)  # seconds
-                self._sock.connect((ip_address, port))
+            self._client = ModbusTcpClient(ip_address, port=502)
         super(COMx, self).__init__(com=self, registration_number=0)
 
     def read_register(self, address):
@@ -55,17 +33,12 @@ class COMx(MAQ20Module):
         :param number_of_registers: number of registers to be read in sequence.
         :return: list(int) [-32767, 32767]
         """
-        if MODBUS_BACKEND == PYMODBUS3:
-            result = self._client.read_holding_registers(address=address, count=number_of_registers)
-            # converts the returned values to signed.
-            try:
-                return [unsigned16_to_signed16(value) for value in result.registers]
-            except AttributeError:
-                return None
-        if MODBUS_BACKEND == UMODBUS:
-            message = tcp.read_holding_registers(0, address, number_of_registers)
-            result = tcp.send_message(message, self._sock)
-            return [unsigned16_to_signed16(value) for value in result]
+        result = self._client.read_holding_registers(address=address, count=number_of_registers)
+        # converts the returned values to signed.
+        try:
+            return [unsigned16_to_signed16(value) for value in result.registers]
+        except AttributeError:
+            return None
 
     def write_register(self, address, value):
         """
@@ -78,13 +51,7 @@ class COMx(MAQ20Module):
         if type(value) is str:
             value = ord(value[0])
         value = signed16_to_unsigned16(value)
-        if MODBUS_BACKEND == PYMODBUS3:
-            return self._client.write_register(address, value)
-        if MODBUS_BACKEND == UMODBUS:
-            message = tcp.write_single_register(slave_id=0,
-                                                address=address,
-                                                value=value)
-            return tcp.send_message(message, self._sock)
+        return self._client.write_register(address, value)
 
     def write_registers(self, address, values=None):
         """
@@ -100,13 +67,7 @@ class COMx(MAQ20Module):
                 ints.append(ord(c))
         else:
             ints = [signed16_to_unsigned16(x) for x in values]
-        if MODBUS_BACKEND == PYMODBUS3:
-            return self._client.write_registers(address, ints)
-        if MODBUS_BACKEND == UMODBUS:
-            message = tcp.write_multiple_registers(slave_id=0,
-                                                   starting_address=address,
-                                                   values=ints)
-            return tcp.send_message(message, self._sock)
+        return self._client.write_registers(address, ints)
 
     def read_ip_address(self):
         return self._com.read_registers(50, 4)
@@ -411,7 +372,7 @@ class COMx(MAQ20Module):
         return self.write_register(1127, value)
 
     def read_log_interval(self):
-        return utils.int16_to_int32(self.read_registers(1130, 2))
+        return utils.int16_to_int32(self.read_registers(1130, 2), msb_first=True)
 
     def write_log_interval(self, value):
         return self.write_registers(1130, utils.int32_to_int16s(value))
@@ -432,10 +393,10 @@ class COMx(MAQ20Module):
         return self.read_register(1150)
 
     def read_total_space(self):
-        return utils.int16_to_int32(self.read_registers(1151, 2))
+        return utils.int16_to_int32([utils.signed16_to_unsigned16(x) for x in self.read_registers(1151, 2)])
 
     def read_free_space(self):
-        return utils.int16_to_int32(self.read_registers(1153, 2))
+        return utils.int16_to_int32([utils.signed16_to_unsigned16(x) for x in self.read_registers(1153, 2)])
 
     #############################
     # Module RTC and Temperature.
@@ -989,9 +950,4 @@ class COMx(MAQ20Module):
         return result
 
     def __del__(self):
-        if MODBUS_BACKEND == PYMODBUS3:
-            self._client.close()
-        if MODBUS_BACKEND == UMODBUS:
-            self._sock.close()
-        # print("\n\n-------------------------------------------------------------------------")
-        # print("MAQ20 connection closed.")
+        self._client.close()

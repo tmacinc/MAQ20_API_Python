@@ -1,9 +1,10 @@
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
     name='maq20',
-    version='0.9.0',
-    packages=['maq20', 'maq20/examples', 'maq20/modules'],
+    version='0.9.2',
+    packages=find_packages(),
     url='https://github.com/DataforthCorporation/MAQ20_API_Python',
     license='LICENSE.txt',
     author='Dataforth Corporation',
