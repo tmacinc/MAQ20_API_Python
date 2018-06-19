@@ -19,15 +19,18 @@ class MAQ20Module:
         self._com = com
         self._registration_number = registration_number
         self._starting_address = registration_number * 2000
-        self._name = self.read_name()
-        self._inputs = self.read_input_channels()
-        self._outputs = self.read_output_channels()
+
+        module_information = self.read_registers(0, 42)
+
+        self._name = utils.response_to_string(module_information[0:15])  # self.read_name()
+        self._inputs = module_information[40]  # self.read_input_channels()
+        self._outputs = module_information[41]  # self.read_output_channels()
         self._number_of_channels = self._inputs + self._outputs
         if self._number_of_channels < 0:
             self._number_of_channels = 0
-        self._serialNumber = self.read_serial_number()
-        self._dateCode = self.read_date_code()
-        self._firmwareVersion = self.read_firmware_revision()
+        self._serialNumber = utils.response_to_string(module_information[19:30])  # self.read_serial_number()
+        self._dateCode = utils.response_to_string(module_information[30:35])  # self.read_date_code()
+        self._firmwareVersion = utils.response_to_string(module_information[35:40])  # self.read_firmware_revision()
         self._iter_index = 0
 
         # This variable stores the number of ranges that have range information available,
