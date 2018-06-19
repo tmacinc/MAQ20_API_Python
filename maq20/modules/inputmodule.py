@@ -129,7 +129,7 @@ class InputModule(MAQ20Module):
         :param new_range: int
         :return: modbus response
         """
-        if 0 < channel < self._number_of_channels and new_range < self._number_of_ranges:
+        if 0 <= channel < self._number_of_channels and new_range < self._number_of_ranges:
             self._channel_active_ranges[channel] = new_range
             return self.write_register(100 + channel, new_range)
         else:
