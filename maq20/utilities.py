@@ -16,10 +16,7 @@ def signed16_to_unsigned16(number: int) -> int:
     """
     if number < -32767 or number > 65535:
         raise ValueError("input number is outside the range of 16-bit numbers: [-32767, 65535]")
-    if number < 0:
-        return number % (1 << 16)
-    else:
-        return number
+    return ctypes.c_uint16(number).value
 
 
 def unsigned16_to_signed16(number: int) -> int:
@@ -33,7 +30,7 @@ def unsigned16_to_signed16(number: int) -> int:
         raise ValueError("input number is outside the range of 16-bit numbers: [-32767, 65535]")
     if number <= 0:
         return number
-    return number - 2 ** 16 if number & 2 ** 15 else number
+    return ctypes.c_int16(number).value
 
 
 def response_to_string(int_array) -> str:
@@ -112,7 +109,7 @@ def try_except(success, failure, *exceptions):
         return failure() if callable(failure) else failure
 
 
-def int16_to_int32(numbers, msb_first=True):
+def int16_to_int32(numbers, msb_first=True) -> int:
     """
     This function is meant to be used when a number from the register map spans two registers.
     This means that address map x is MSB, and x+1 is LSB.
@@ -120,6 +117,8 @@ def int16_to_int32(numbers, msb_first=True):
     :param msb_first: choose whether msb or lsb is first, True or False.
     :return: 32 bit interpretation of input.
     """
+    if len(numbers) != 2:
+        raise ValueError("2 numbers are needed to convert to a single value")
     return (
         (numbers[0] << 16) | numbers[1]
         if msb_first

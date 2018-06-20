@@ -41,7 +41,12 @@ class TestMAQ20(unittest.TestCase):
         self.assertEqual("   ", utils.response_to_string([-2, 3.0, None]))
 
     def test_int16_to_int32(self):
-        pass
+        self.assertEqual(2147483647, utils.int16_to_int32([0x7FFF, 0xFFFF]))
+        self.assertEqual(2147483647, utils.int16_to_int32([0xFFFF, 0x7FFF], msb_first=False))
+        self.assertNotEqual(0, utils.int16_to_int32([0x7FFF, 0xFFFF]))
+        self.assertNotEqual(0, utils.int16_to_int32([0x7FFF, 0xFFFF], msb_first=False))
+        self.assertEqual(-1, utils.int16_to_int32([0xFFFF, 0xFFFF]))
+        self.assertEqual(-1, utils.int16_to_int32([0xFFFF, 0xFFFF], msb_first=False))
 
     def test_int32_to_uint32(self):
         pass
