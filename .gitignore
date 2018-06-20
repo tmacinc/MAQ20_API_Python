@@ -64,8 +64,8 @@ target/
 .ropeproject
 
 .idea
-.vscode
 rtf
 latex
 html
 .pytest_cache/
+.vscode/*
