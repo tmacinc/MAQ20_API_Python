@@ -13,7 +13,7 @@ class COMx(MAQ20Module):
         from maq20.modbus_client.constants import Defaults
         Defaults.Timeout = timeout
         if ip_address is not None or port is not None:
-            self._client = ModbusTcpClient(ip_address, port=502)
+            self._client = ModbusTcpClient(ip_address, port=port)
         super(COMx, self).__init__(com=self, registration_number=0)
 
     def read_register(self, address):
