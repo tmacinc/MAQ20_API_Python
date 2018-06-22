@@ -49,8 +49,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request =\
-            bit_read_msg.ReadDiscreteInputsRequest(address, count, **kwargs)
+        request = bit_read_msg.ReadDiscreteInputsRequest(address, count, **kwargs)
         return self.execute(request)
 
     def write_coil(self, address, value, **kwargs):
@@ -61,8 +60,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request =\
-            bit_write_msg.WriteSingleCoilRequest(address, value, **kwargs)
+        request = bit_write_msg.WriteSingleCoilRequest(address, value, **kwargs)
         return self.execute(request)
 
     def write_coils(self, address, values, **kwargs):
@@ -73,9 +71,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request = bit_write_msg.WriteMultipleCoilsRequest(
-            address, values, **kwargs
-        )
+        request = bit_write_msg.WriteMultipleCoilsRequest(address, values, **kwargs)
         return self.execute(request)
 
     def write_register(self, address, value, **kwargs):
@@ -86,9 +82,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request = reg_write_msg.WriteSingleRegisterRequest(
-            address, value, **kwargs
-        )
+        request = reg_write_msg.WriteSingleRegisterRequest(address, value, **kwargs)
         return self.execute(request)
 
     def write_registers(self, address, values, **kwargs):
@@ -99,9 +93,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request = reg_write_msg.WriteMultipleRegistersRequest(
-            address, values, **kwargs
-        )
+        request = reg_write_msg.WriteMultipleRegistersRequest(address, values, **kwargs)
         return self.execute(request)
 
     def read_holding_registers(self, address, count=1, **kwargs):
@@ -112,8 +104,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request =\
-            reg_read_msg.ReadHoldingRegistersRequest(address, count, **kwargs)
+        request = reg_read_msg.ReadHoldingRegistersRequest(address, count, **kwargs)
         return self.execute(request)
 
     def read_input_registers(self, address, count=1, **kwargs):
@@ -124,8 +115,7 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request =\
-            reg_read_msg.ReadInputRegistersRequest(address, count, **kwargs)
+        request = reg_read_msg.ReadInputRegistersRequest(address, count, **kwargs)
         return self.execute(request)
 
     def readwrite_registers(self, *args, **kwargs):
@@ -138,10 +128,9 @@ class ModbusClientMixin(object):
         :param unit: The slave unit this request is targeting
         :returns: A deferred response handle
         """
-        request =\
-            reg_read_msg.ReadWriteMultipleRegistersRequest(*args, **kwargs)
+        request = reg_read_msg.ReadWriteMultipleRegistersRequest(*args, **kwargs)
         return self.execute(request)
 
 
 # Exported symbols
-__all__ = ['ModbusClientMixin', ]
+__all__ = ["ModbusClientMixin"]

@@ -26,25 +26,23 @@ class FileRecord(object):
         :params record_length: The length in registers of the record
         :params response_length: The length in bytes of the record
         """
-        self.reference_type = kwargs.get('reference_type', 0x06)
-        self.file_number = kwargs.get('file_number', 0x00)
-        self.record_number = kwargs.get('record_number', 0x00)
-        self.record_data = kwargs.get('record_data', '')
-        self.record_length = kwargs.get(
-            'record_length', len(self.record_data) // 2
-        )
-        self.response_length = kwargs.get(
-            'response_length', len(self.record_data) + 1
-        )
+        self.reference_type = kwargs.get("reference_type", 0x06)
+        self.file_number = kwargs.get("file_number", 0x00)
+        self.record_number = kwargs.get("record_number", 0x00)
+        self.record_data = kwargs.get("record_data", "")
+        self.record_length = kwargs.get("record_length", len(self.record_data) // 2)
+        self.response_length = kwargs.get("response_length", len(self.record_data) + 1)
 
     def __eq__(self, relf):
         """ Compares the left object to the right
         """
-        equals = self.reference_type == relf.reference_type and\
-            self.file_number == relf.file_number and\
-            self.record_number == relf.record_number and\
-            self.record_length == relf.record_length and\
-            self.record_data == relf.record_data
+        equals = (
+            self.reference_type == relf.reference_type
+            and self.file_number == relf.file_number
+            and self.record_number == relf.record_number
+            and self.record_length == relf.record_length
+            and self.record_data == relf.record_data
+        )
         return equals
 
     def __ne__(self, relf):
@@ -55,7 +53,7 @@ class FileRecord(object):
     def __repr__(self):
         """ Gives a representation of the file record
         """
-        return 'FileRecord(file={0}, record={1}, length={2})'.format(
+        return "FileRecord(file={0}, record={1}, length={2})".format(
             self.file_number, self.record_number, self.record_length
         )
 
@@ -82,6 +80,7 @@ class ReadFileRecordRequest(ModbusRequest):
     in the expected response, must not exceed the allowable length of the
     MODBUS PDU: 235 bytes.
     """
+
     function_code = 0x14
     _rtu_byte_count_pos = 2
 
@@ -98,14 +97,14 @@ class ReadFileRecordRequest(ModbusRequest):
 
         :returns: The byte encoded packet
         """
-        packet = struct.pack('B', len(self.records) * 7)
+        packet = struct.pack("B", len(self.records) * 7)
         for record in self.records:
             packet += struct.pack(
-                '>BHHH',
+                ">BHHH",
                 0x06,
                 record.file_number,
                 record.record_number,
-                record.record_length
+                record.record_length,
             )
         return packet
 
@@ -117,10 +116,12 @@ class ReadFileRecordRequest(ModbusRequest):
         self.records = []
         byte_count = data[0]
         for count in range(1, byte_count, 7):
-            decoded = struct.unpack('>BHHH', data[count:count+7])
-            record = FileRecord(file_number=decoded[1],
-                                record_number=decoded[2],
-                                record_length=decoded[3])
+            decoded = struct.unpack(">BHHH", data[count : count + 7])
+            record = FileRecord(
+                file_number=decoded[1],
+                record_number=decoded[2],
+                record_length=decoded[3],
+            )
             if decoded[0] == 0x06:
                 self.records.append(record)
 
@@ -144,6 +145,7 @@ class ReadFileRecordResponse(ModbusResponse):
     bytes in all 'sub-responses.' In addition, each 'sub-response'
     contains a field that shows its own byte count.
     """
+
     function_code = 0x14
     _rtu_byte_count_pos = 2
 
@@ -161,9 +163,9 @@ class ReadFileRecordResponse(ModbusResponse):
         :returns: The byte encoded message
         """
         total = sum(record.response_length + 1 for record in self.records)
-        packet = struct.pack('B', total)
+        packet = struct.pack("B", total)
         for record in self.records:
-            packet += struct.pack('>BB', 0x06, record.record_length)
+            packet += struct.pack(">BB", 0x06, record.record_length)
             packet += record.record_data
         return packet
 
@@ -176,12 +178,12 @@ class ReadFileRecordResponse(ModbusResponse):
         byte_count = data[0]
         while count < byte_count:
             response_length, reference_type = struct.unpack(
-                '>BB', data[count:count+2]
+                ">BB", data[count : count + 2]
             )
             count += response_length + 1  # the count is not included
             record = FileRecord(
                 response_length=response_length,
-                record_data=data[count - response_length + 1:count]
+                record_data=data[count - response_length + 1 : count],
             )
             if reference_type == 0x06:
                 self.records.append(record)
@@ -194,6 +196,7 @@ class WriteFileRecordRequest(ModbusRequest):
     and all record lengths are provided in terms of the number of 16
     bit words.
     """
+
     function_code = 0x15
     _rtu_byte_count_pos = 2
 
@@ -210,16 +213,16 @@ class WriteFileRecordRequest(ModbusRequest):
 
         :returns: The byte encoded packet
         """
-        total_length = sum(
-            (record.record_length * 2) + 7 for record in self.records
-        )
-        packet = struct.pack('B', total_length)
+        total_length = sum((record.record_length * 2) + 7 for record in self.records)
+        packet = struct.pack("B", total_length)
         for record in self.records:
-            packet += struct.pack('>BHHH',
-                                  0x06,
-                                  record.file_number,
-                                  record.record_number,
-                                  record.record_length)
+            packet += struct.pack(
+                ">BHHH",
+                0x06,
+                record.file_number,
+                record.record_number,
+                record.record_length,
+            )
             packet += record.record_data
         return packet
 
@@ -231,14 +234,14 @@ class WriteFileRecordRequest(ModbusRequest):
         count, self.records = 1, []
         byte_count = data[0]
         while count < byte_count:
-            decoded = struct.unpack('>BHHH', data[count:count+7])
+            decoded = struct.unpack(">BHHH", data[count : count + 7])
             response_length = decoded[3] * 2
             count += response_length + 7
             record = FileRecord(
                 record_length=decoded[3],
                 file_number=decoded[1],
                 record_number=decoded[2],
-                record_data=data[count - response_length:count]
+                record_data=data[count - response_length : count],
             )
             if decoded[0] == 0x06:
                 self.records.append(record)
@@ -259,6 +262,7 @@ class WriteFileRecordResponse(ModbusResponse):
     """
     The normal response is an echo of the request.
     """
+
     function_code = 0x15
     _rtu_byte_count_pos = 2
 
@@ -275,16 +279,16 @@ class WriteFileRecordResponse(ModbusResponse):
 
         :returns: The byte encoded message
         """
-        total_length = sum(
-            (record.record_length * 2) + 7 for record in self.records
-        )
-        packet = struct.pack('B', total_length)
+        total_length = sum((record.record_length * 2) + 7 for record in self.records)
+        packet = struct.pack("B", total_length)
         for record in self.records:
-            packet += struct.pack('>BHHH',
-                                  0x06,
-                                  record.file_number,
-                                  record.record_number,
-                                  record.record_length)
+            packet += struct.pack(
+                ">BHHH",
+                0x06,
+                record.file_number,
+                record.record_number,
+                record.record_length,
+            )
             packet += record.record_data
         return packet
 
@@ -296,14 +300,14 @@ class WriteFileRecordResponse(ModbusResponse):
         count, self.records = 1, []
         byte_count = data[0]
         while count < byte_count:
-            decoded = struct.unpack('>BHHH', data[count:count+7])
+            decoded = struct.unpack(">BHHH", data[count : count + 7])
             response_length = decoded[3] * 2
             count += response_length + 7
             record = FileRecord(
                 record_length=decoded[3],
                 file_number=decoded[1],
                 record_number=decoded[2],
-                record_data=data[count - response_length:count]
+                record_data=data[count - response_length : count],
             )
             if decoded[0] == 0x06:
                 self.records.append(record)
@@ -316,12 +320,11 @@ class MaskWriteRegisterRequest(ModbusRequest):
     register's current contents. The function can be used to set or clear
     individual bits in the register.
     """
+
     function_code = 0x16
     _rtu_frame_size = 10
 
-    def __init__(
-            self, address=0x0000, and_mask=0xffff, or_mask=0x0000, **kwargs
-    ):
+    def __init__(self, address=0x0000, and_mask=0xffff, or_mask=0x0000, **kwargs):
         """ Initializes a new instance
 
         :param address: The mask pointer address (0x0000 to 0xffff)
@@ -338,14 +341,14 @@ class MaskWriteRegisterRequest(ModbusRequest):
 
         :returns: The byte encoded packet
         """
-        return struct.pack('>HHH', self.address, self.and_mask, self.or_mask)
+        return struct.pack(">HHH", self.address, self.and_mask, self.or_mask)
 
     def decode(self, data):
         """ Decodes the incoming request
 
         :param data: The data to decode into the address
         """
-        self.address, self.and_mask, self.or_mask = struct.unpack('>HHH', data)
+        self.address, self.and_mask, self.or_mask = struct.unpack(">HHH", data)
 
     def execute(self, context):
         """ Run a mask write register request against the store
@@ -360,11 +363,9 @@ class MaskWriteRegisterRequest(ModbusRequest):
         if not context.validate(self.function_code, self.address, 1):
             return self.do_exception(ModbusExceptions.IllegalAddress)
         values = context.get_values(self.function_code, self.address, 1)[0]
-        values = ((values & self.and_mask) | self.or_mask)
+        values = (values & self.and_mask) | self.or_mask
         context.set_values(self.function_code, self.address, [values])
-        return MaskWriteRegisterResponse(
-            self.address, self.and_mask, self.or_mask
-        )
+        return MaskWriteRegisterResponse(self.address, self.and_mask, self.or_mask)
 
 
 class MaskWriteRegisterResponse(ModbusResponse):
@@ -372,12 +373,11 @@ class MaskWriteRegisterResponse(ModbusResponse):
     The normal response is an echo of the request. The response is returned
     after the register has been written.
     """
+
     function_code = 0x16
     _rtu_frame_size = 10
 
-    def __init__(
-            self, address=0x0000, and_mask=0xffff, or_mask=0x0000, **kwargs
-    ):
+    def __init__(self, address=0x0000, and_mask=0xffff, or_mask=0x0000, **kwargs):
         """ Initializes a new instance
 
         :param address: The mask pointer address (0x0000 to 0xffff)
@@ -394,14 +394,14 @@ class MaskWriteRegisterResponse(ModbusResponse):
 
         :returns: The byte encoded message
         """
-        return struct.pack('>HHH', self.address, self.and_mask, self.or_mask)
+        return struct.pack(">HHH", self.address, self.and_mask, self.or_mask)
 
     def decode(self, data):
         """ Decodes a the response
 
         :param data: The packet data to decode
         """
-        self.address, self.and_mask, self.or_mask = struct.unpack('>HHH', data)
+        self.address, self.and_mask, self.or_mask = struct.unpack(">HHH", data)
 
 
 class ReadFifoQueueRequest(ModbusRequest):
@@ -416,6 +416,7 @@ class ReadFifoQueueRequest(ModbusRequest):
     registers.  The function reads the queue contents, but does not clear
     them.
     """
+
     function_code = 0x18
     _rtu_frame_size = 6
 
@@ -433,14 +434,14 @@ class ReadFifoQueueRequest(ModbusRequest):
 
         :returns: The byte encoded packet
         """
-        return struct.pack('>H', self.address)
+        return struct.pack(">H", self.address)
 
     def decode(self, data):
         """ Decodes the incoming request
 
         :param data: The data to decode into the address
         """
-        self.address = struct.unpack('>H', data)[0]
+        self.address = struct.unpack(">H", data)[0]
 
     def execute(self, context):
         """ Run a read exception status request against the store
@@ -466,6 +467,7 @@ class ReadFifoQueueResponse(ModbusResponse):
     If the queue count exceeds 31, an exception response is returned with an
     error code of 03 (Illegal Data Value).
     """
+
     function_code = 0x18
 
     @classmethod
@@ -493,9 +495,9 @@ class ReadFifoQueueResponse(ModbusResponse):
         :returns: The byte encoded message
         """
         length = len(self.values) * 2
-        packet = struct.pack('>HH', 2 + length, length)
+        packet = struct.pack(">HH", 2 + length, length)
         for value in self.values:
-            packet += struct.pack('>H', value)
+            packet += struct.pack(">H", value)
         return packet
 
     def decode(self, data):
@@ -504,21 +506,21 @@ class ReadFifoQueueResponse(ModbusResponse):
         :param data: The packet data to decode
         """
         self.values = []
-        _, count = struct.unpack('>HH', data[0:4])
+        _, count = struct.unpack(">HH", data[0:4])
         for index in range(0, count - 4):
             idx = 4 + index * 2
-            self.values.append(struct.unpack('>H', data[idx:idx + 2])[0])
+            self.values.append(struct.unpack(">H", data[idx : idx + 2])[0])
 
 
 # Exported symbols
 __all__ = [
-    'FileRecord',
-    'ReadFileRecordRequest',
-    'ReadFileRecordResponse',
-    'WriteFileRecordRequest',
-    'WriteFileRecordResponse',
-    'MaskWriteRegisterRequest',
-    'MaskWriteRegisterResponse',
-    'ReadFifoQueueRequest',
-    'ReadFifoQueueResponse',
+    "FileRecord",
+    "ReadFileRecordRequest",
+    "ReadFileRecordResponse",
+    "WriteFileRecordRequest",
+    "WriteFileRecordResponse",
+    "MaskWriteRegisterRequest",
+    "MaskWriteRegisterResponse",
+    "ReadFifoQueueRequest",
+    "ReadFifoQueueResponse",
 ]

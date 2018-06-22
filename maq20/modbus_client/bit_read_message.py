@@ -32,21 +32,21 @@ class ReadBitsRequestBase(ModbusRequest):
 
         :returns: The encoded pdu
         """
-        return struct.pack('>HH', self.address, self.count)
+        return struct.pack(">HH", self.address, self.count)
 
     def decode(self, data):
         """ Decodes a request pdu
 
         :param data: The packet data to decode
         """
-        self.address, self.count = struct.unpack('>HH', data)
+        self.address, self.count = struct.unpack(">HH", data)
 
     def __str__(self):
         """ Returns a string representation of the instance
 
         :returns: A string representation of the instance
         """
-        return 'ReadBitRequest({0},{1})'.format(self.address, self.count)
+        return "ReadBitRequest({0},{1})".format(self.address, self.count)
 
 
 class ReadBitsResponseBase(ModbusResponse):
@@ -69,7 +69,7 @@ class ReadBitsResponseBase(ModbusResponse):
         :returns: The encoded packet message
         """
         result = pack_bitstring(self.bits)
-        packet = struct.pack('>B', len(result)) + result
+        packet = struct.pack(">B", len(result)) + result
         return packet
 
     def decode(self, data):
@@ -86,7 +86,7 @@ class ReadBitsResponseBase(ModbusResponse):
         :param address: The bit to set
         :param value: The value to set the bit to
         """
-        self.bits[address] = (value != 0)
+        self.bits[address] = value != 0
 
     def reset_bit(self, address):
         """ Helper function to set the specified bit to 0
@@ -108,7 +108,7 @@ class ReadBitsResponseBase(ModbusResponse):
 
         :returns: A string representation of the instance
         """
-        return 'ReadBitResponse({0})'.format(len(self.bits))
+        return "ReadBitResponse({0})".format(len(self.bits))
 
 
 class ReadCoilsRequest(ReadBitsRequestBase):
@@ -119,6 +119,7 @@ class ReadCoilsRequest(ReadBitsRequestBase):
     coils. In the PDU Coils are addressed starting at zero. Therefore coils
     numbered 1-16 are addressed as 0-15.
     """
+
     function_code = 1
 
     def __init__(self, address=None, count=None, **kwargs):
@@ -143,9 +144,7 @@ class ReadCoilsRequest(ReadBitsRequestBase):
             return self.do_exception(ModbusExceptions.IllegalValue)
         if not context.validate(self.function_code, self.address, self.count):
             return self.do_exception(ModbusExceptions.IllegalAddress)
-        values = context.get_values(
-            self.function_code, self.address, self.count
-        )
+        values = context.get_values(self.function_code, self.address, self.count)
         return ReadCoilsResponse(values)
 
 
@@ -162,6 +161,7 @@ class ReadCoilsResponse(ReadBitsResponseBase):
     (toward the high order end of the byte). The Byte Count field specifies
     the quantity of complete bytes of data.
     """
+
     function_code = 1
 
     def __init__(self, values=None, **kwargs):
@@ -180,6 +180,7 @@ class ReadDiscreteInputsRequest(ReadBitsRequestBase):
     number of inputs. In the PDU Discrete Inputs are addressed starting at
     zero. Therefore Discrete inputs numbered 1-16 are addressed as 0-15.
     """
+
     function_code = 2
 
     def __init__(self, address=None, count=None, **kwargs):
@@ -202,13 +203,9 @@ class ReadDiscreteInputsRequest(ReadBitsRequestBase):
         """
         if not (1 <= self.count <= 0x7d0):
             return self.do_exception(ModbusExceptions.IllegalValue)
-        if not context.validate(
-                self.function_code, self.address, self.count
-        ):
+        if not context.validate(self.function_code, self.address, self.count):
             return self.do_exception(ModbusExceptions.IllegalAddress)
-        values = context.get_values(
-            self.function_code, self.address, self.count
-        )
+        values = context.get_values(self.function_code, self.address, self.count)
         return ReadDiscreteInputsResponse(values)
 
 
@@ -225,6 +222,7 @@ class ReadDiscreteInputsResponse(ReadBitsResponseBase):
     (toward the high order end of the byte). The Byte Count field specifies
     the quantity of complete bytes of data.
     """
+
     function_code = 2
 
     def __init__(self, values=None, **kwargs):
@@ -237,8 +235,8 @@ class ReadDiscreteInputsResponse(ReadBitsResponseBase):
 
 # Exported symbols
 __all__ = [
-    'ReadCoilsRequest',
-    'ReadCoilsResponse',
-    'ReadDiscreteInputsRequest',
-    'ReadDiscreteInputsResponse',
+    "ReadCoilsRequest",
+    "ReadCoilsResponse",
+    "ReadDiscreteInputsRequest",
+    "ReadDiscreteInputsResponse",
 ]

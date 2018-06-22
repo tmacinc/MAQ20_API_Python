@@ -13,7 +13,6 @@ from maq20.modbus_client.utilities import pack_bitstring, unpack_bitstring
 
 
 class ModbusEvent(object):
-
     def encode(self):
         """ Encodes the status bits to an event message
 
@@ -52,9 +51,9 @@ class RemoteReceiveEvent(ModbusEvent):
     def __init__(self, **kwargs):
         """ Initialize a new event instance
         """
-        self.overrun = kwargs.get('overrun', False)
-        self.listen = kwargs.get('listen', False)
-        self.broadcast = kwargs.get('broadcast', False)
+        self.overrun = kwargs.get("overrun", False)
+        self.listen = kwargs.get("listen", False)
+        self.broadcast = kwargs.get("broadcast", False)
 
     def encode(self):
         """ Encodes the status bits to an event message
@@ -103,24 +102,26 @@ class RemoteSendEvent(ModbusEvent):
     def __init__(self, **kwargs):
         """ Initialize a new event instance
         """
-        self.read = kwargs.get('read', False)
-        self.slave_abort = kwargs.get('slave_abort', False)
-        self.slave_busy = kwargs.get('slave_busy', False)
-        self.slave_nak = kwargs.get('slave_nak', False)
-        self.write_timeout = kwargs.get('write_timeout', False)
-        self.listen = kwargs.get('listen', False)
+        self.read = kwargs.get("read", False)
+        self.slave_abort = kwargs.get("slave_abort", False)
+        self.slave_busy = kwargs.get("slave_busy", False)
+        self.slave_nak = kwargs.get("slave_nak", False)
+        self.write_timeout = kwargs.get("write_timeout", False)
+        self.listen = kwargs.get("listen", False)
 
     def encode(self):
         """ Encodes the status bits to an event message
 
         :returns: The encoded event message
         """
-        bits = [self.read,
-                self.slave_abort,
-                self.slave_busy,
-                self.slave_nak,
-                self.write_timeout,
-                self.listen]
+        bits = [
+            self.read,
+            self.slave_abort,
+            self.slave_busy,
+            self.slave_nak,
+            self.write_timeout,
+            self.listen,
+        ]
         bits += [True, False]
         packet = pack_bitstring(bits)
         return packet
@@ -148,7 +149,7 @@ class EnteredListenModeEvent(ModbusEvent):
     """
 
     value = 0x04
-    __encoded = b'\x04'
+    __encoded = b"\x04"
 
     def encode(self):
         """ Encodes the status bits to an event message
@@ -163,7 +164,7 @@ class EnteredListenModeEvent(ModbusEvent):
         :param event: The event to decode
         """
         if event != self.__encoded:
-            raise ParameterException('Invalid decoded value')
+            raise ParameterException("Invalid decoded value")
 
 
 class CommunicationRestartEvent(ModbusEvent):
@@ -184,7 +185,7 @@ class CommunicationRestartEvent(ModbusEvent):
     """
 
     value = 0x00
-    __encoded = b'\x00'
+    __encoded = b"\x00"
 
     def encode(self):
         """ Encodes the status bits to an event message
@@ -199,4 +200,4 @@ class CommunicationRestartEvent(ModbusEvent):
         :param event: The event to decode
         """
         if event != self.__encoded:
-            raise ParameterException('Invalid decoded value')
+            raise ParameterException("Invalid decoded value")

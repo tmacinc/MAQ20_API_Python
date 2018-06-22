@@ -29,6 +29,7 @@ import maq20.modbus_client.register_write_message as reg_write_msg
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -37,6 +38,7 @@ class ServerDecoder(IModbusDecoder):
 
     To add more implemented functions, simply add them to the list
     """
+
     __function_table = [
         reg_read_msg.ReadHoldingRegistersRequest,
         bit_read_msg.ReadDiscreteInputsRequest,
@@ -47,19 +49,15 @@ class ServerDecoder(IModbusDecoder):
         reg_write_msg.WriteSingleRegisterRequest,
         bit_write_msg.WriteSingleCoilRequest,
         reg_read_msg.ReadWriteMultipleRegistersRequest,
-
         diag_msg.DiagnosticStatusRequest,
-
         other_msg.ReadExceptionStatusRequest,
         other_msg.GetCommEventCounterRequest,
         other_msg.GetCommEventLogRequest,
         other_msg.ReportSlaveIdRequest,
-
         file_msg.ReadFileRecordRequest,
         file_msg.WriteFileRecordRequest,
         file_msg.MaskWriteRegisterRequest,
         file_msg.ReadFifoQueueRequest,
-
         mei_msg.ReadDeviceInformationRequest,
     ]
     __sub_function_table = [
@@ -80,7 +78,6 @@ class ServerDecoder(IModbusDecoder):
         diag_msg.ReturnIopOverrunCountRequest,
         diag_msg.ClearOverrunCountRequest,
         diag_msg.GetClearModbusPlusRequest,
-
         mei_msg.ReadDeviceInformationRequest,
     ]
 
@@ -104,7 +101,7 @@ class ServerDecoder(IModbusDecoder):
         try:
             return self._helper(message)
         except ModbusException as er:
-            _logger.warn('Unable to decode request ' + str(er))
+            _logger.warn("Unable to decode request " + str(er))
         return None
 
     def lookup_pdu_class(self, function_code):
@@ -125,13 +122,13 @@ class ServerDecoder(IModbusDecoder):
         :returns: The decoded request or illegal function request object
         """
         function_code = data[0]
-        _logger.debug('Factory Request[{0}]'.format(function_code))
+        _logger.debug("Factory Request[{0}]".format(function_code))
         request = self.__lookup.get(function_code, lambda: None)()
         if not request:
             request = IllegalFunctionRequest(function_code)
         request.decode(data[1:])
 
-        if hasattr(request, 'sub_function_code'):
+        if hasattr(request, "sub_function_code"):
             lookup = self.__sub_lookup.get(request.function_code, {})
             subtype = lookup.get(request.sub_function_code, None)
             if subtype:
@@ -145,6 +142,7 @@ class ClientDecoder(IModbusDecoder):
 
     To add more implemented functions, simply add them to the list
     """
+
     __function_table = [
         reg_read_msg.ReadHoldingRegistersResponse,
         bit_read_msg.ReadDiscreteInputsResponse,
@@ -155,19 +153,15 @@ class ClientDecoder(IModbusDecoder):
         reg_write_msg.WriteSingleRegisterResponse,
         bit_write_msg.WriteSingleCoilResponse,
         reg_read_msg.ReadWriteMultipleRegistersResponse,
-
         diag_msg.DiagnosticStatusResponse,
-
         other_msg.ReadExceptionStatusResponse,
         other_msg.GetCommEventCounterResponse,
         other_msg.GetCommEventLogResponse,
         other_msg.ReportSlaveIdResponse,
-
         file_msg.ReadFileRecordResponse,
         file_msg.WriteFileRecordResponse,
         file_msg.MaskWriteRegisterResponse,
         file_msg.ReadFifoQueueResponse,
-
         mei_msg.ReadDeviceInformationResponse,
     ]
     __sub_function_table = [
@@ -219,7 +213,7 @@ class ClientDecoder(IModbusDecoder):
         try:
             return self._helper(message)
         except ModbusException as er:
-            _logger.error('Unable to decode response ' + str(er))
+            _logger.error("Unable to decode response " + str(er))
         return None
 
     def _helper(self, data):
@@ -232,18 +226,16 @@ class ClientDecoder(IModbusDecoder):
         :returns: The decoded request or an exception response object
         """
         function_code = data[0]
-        _logger.debug('Factory Response[{0}]'.format(function_code))
+        _logger.debug("Factory Response[{0}]".format(function_code))
         response = self.__lookup.get(function_code, lambda: None)()
         if function_code > 0x80:
             code = function_code & 0x7f  # strip error portion
-            response = ExceptionResponse(
-                code, ModbusExceptions.IllegalFunction
-            )
+            response = ExceptionResponse(code, ModbusExceptions.IllegalFunction)
         if not response:
-            raise ModbusException('Unknown response ' + str(function_code))
+            raise ModbusException("Unknown response " + str(function_code))
         response.decode(data[1:])
 
-        if hasattr(response, 'sub_function_code'):
+        if hasattr(response, "sub_function_code"):
             lookup = self.__sub_lookup.get(response.function_code, {})
             subtype = lookup.get(response.sub_function_code, None)
             if subtype:
@@ -253,4 +245,4 @@ class ClientDecoder(IModbusDecoder):
 
 
 # Exported symbols
-__all__ = ['ServerDecoder', 'ClientDecoder']
+__all__ = ["ServerDecoder", "ClientDecoder"]

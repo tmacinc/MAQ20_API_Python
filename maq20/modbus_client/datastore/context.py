@@ -7,6 +7,7 @@ from maq20.modbus_client.constants import Defaults
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -28,10 +29,10 @@ class ModbusSlaveContext(IModbusSlaveContext):
             'ir' - Input Registers initializer
         """
         self.store = dict()
-        self.store['d'] = kwargs.get('di', ModbusSequentialDataBlock.create())
-        self.store['c'] = kwargs.get('co', ModbusSequentialDataBlock.create())
-        self.store['i'] = kwargs.get('ir', ModbusSequentialDataBlock.create())
-        self.store['h'] = kwargs.get('hr', ModbusSequentialDataBlock.create())
+        self.store["d"] = kwargs.get("di", ModbusSequentialDataBlock.create())
+        self.store["c"] = kwargs.get("co", ModbusSequentialDataBlock.create())
+        self.store["i"] = kwargs.get("ir", ModbusSequentialDataBlock.create())
+        self.store["h"] = kwargs.get("hr", ModbusSequentialDataBlock.create())
 
     def __str__(self):
         """ Returns a string representation of the context
@@ -54,7 +55,7 @@ class ModbusSlaveContext(IModbusSlaveContext):
         :returns: True if the request in within range, False otherwise
         """
         address += 1  # section 4.4 of specification
-        _logger.debug('validate[{0}] {1}:{2}'.format(fx, address, count))
+        _logger.debug("validate[{0}] {1}:{2}".format(fx, address, count))
         return self.store[self.decode(fx)].validate(address, count)
 
     def get_values(self, fx, address, count=1):
@@ -66,7 +67,7 @@ class ModbusSlaveContext(IModbusSlaveContext):
         :returns: The requested values from a:a+c
         """
         address += 1  # section 4.4 of specification
-        _logger.debug('get_values[{0}] {1}:{2}'.format(fx, address, count))
+        _logger.debug("get_values[{0}] {1}:{2}".format(fx, address, count))
         return self.store[self.decode(fx)].get_values(address, count)
 
     def set_values(self, fx, address, values):
@@ -77,9 +78,7 @@ class ModbusSlaveContext(IModbusSlaveContext):
         :param values: The new values to be set
         """
         address += 1  # section 4.4 of specification
-        _logger.debug('set_values[{0}] {1}:{2}'.format(
-            fx, address, len(values)
-        ))
+        _logger.debug("set_values[{0}] {1}:{2}".format(fx, address, len(values)))
         self.store[self.decode(fx)].set_values(address, values)
 
 
@@ -129,7 +128,7 @@ class ModbusServerContext(object):
         if 0xf7 >= slave >= 0x00:
             self.__slaves[slave] = context
         else:
-            raise ParameterException('slave index out of range')
+            raise ParameterException("slave index out of range")
 
     def __delitem__(self, slave):
         """ Wrapper used to access the slave context
@@ -139,7 +138,7 @@ class ModbusServerContext(object):
         if not self.single and (0xf7 >= slave >= 0x00):
             del self.__slaves[slave]
         else:
-            raise ParameterException('slave index out of range')
+            raise ParameterException("slave index out of range")
 
     def __getitem__(self, slave):
         """ Used to get access to a slave context
@@ -152,6 +151,4 @@ class ModbusServerContext(object):
         if slave in self.__slaves:
             return self.__slaves.get(slave)
         else:
-            raise ParameterException(
-                'slave does not exist, or is out of range'
-            )
+            raise ParameterException("slave does not exist, or is out of range")

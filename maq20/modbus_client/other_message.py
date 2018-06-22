@@ -22,6 +22,7 @@ class ReadExceptionStatusRequest(ModbusRequest):
     accessing this information, because the Exception Output references are
     known (no output reference is needed in the function).
     """
+
     function_code = 0x07
     _rtu_frame_size = 4
 
@@ -33,7 +34,7 @@ class ReadExceptionStatusRequest(ModbusRequest):
     def encode(self):
         """ Encodes the message
         """
-        return b''
+        return b""
 
     def decode(self, data):
         """ Decodes data part of the message.
@@ -55,7 +56,7 @@ class ReadExceptionStatusRequest(ModbusRequest):
 
         :returns: The string representation of the request
         """
-        return 'ReadExceptionStatusRequest({0})'.format(self.function_code)
+        return "ReadExceptionStatusRequest({0})".format(self.function_code)
 
 
 class ReadExceptionStatusResponse(ModbusResponse):
@@ -66,6 +67,7 @@ class ReadExceptionStatusResponse(ModbusResponse):
     in the least significant bit of the byte.  The contents of the eight
     Exception Status outputs are device specific.
     """
+
     function_code = 0x07
     _rtu_frame_size = 5
 
@@ -82,7 +84,7 @@ class ReadExceptionStatusResponse(ModbusResponse):
 
         :returns: The byte encoded message
         """
-        return struct.pack('>B', self.status)
+        return struct.pack(">B", self.status)
 
     def decode(self, data):
         """ Decodes the response
@@ -96,9 +98,10 @@ class ReadExceptionStatusResponse(ModbusResponse):
 
         :returns: The string representation of the response
         """
-        return 'ReadExceptionStatusResponse({0}, {1})'.format(
+        return "ReadExceptionStatusResponse({0}, {1})".format(
             self.function_code, self.status
         )
+
 
 # Encapsulate interface transport 43, 14
 # CANopen general reference 43, 13
@@ -122,6 +125,7 @@ class GetCommEventCounterRequest(ModbusRequest):
     (code 08), with a subfunction of Restart Communications Option
     (code 00 01) or Clear Counters and Diagnostic Register (code 00 0A).
     """
+
     function_code = 0x0b
     _rtu_frame_size = 4
 
@@ -133,7 +137,7 @@ class GetCommEventCounterRequest(ModbusRequest):
     def encode(self):
         """ Encodes the message
         """
-        return b''
+        return b""
 
     def decode(self, data):
         """ Decodes data part of the message.
@@ -155,7 +159,7 @@ class GetCommEventCounterRequest(ModbusRequest):
 
         :returns: The string representation of the request
         """
-        return 'GetCommEventCounterRequest({0})'.format(self.function_code)
+        return "GetCommEventCounterRequest({0})".format(self.function_code)
 
 
 class GetCommEventCounterResponse(ModbusResponse):
@@ -166,6 +170,7 @@ class GetCommEventCounterResponse(ModbusResponse):
     remote device (a busy condition exists). Otherwise, the status word
     will be all zeros.
     """
+
     function_code = 0x0b
     _rtu_frame_size = 8
 
@@ -187,22 +192,22 @@ class GetCommEventCounterResponse(ModbusResponse):
             ready = ModbusStatus.Ready
         else:
             ready = ModbusStatus.Waiting
-        return struct.pack('>HH', ready, self.count)
+        return struct.pack(">HH", ready, self.count)
 
     def decode(self, data):
         """ Decodes a the response
 
         :param data: The packet data to decode
         """
-        ready, self.count = struct.unpack('>HH', data)
-        self.status = (ready == ModbusStatus.Ready)
+        ready, self.count = struct.unpack(">HH", data)
+        self.status = ready == ModbusStatus.Ready
 
     def __str__(self):
         """ Builds a representation of the response
 
         :returns: The string representation of the response
         """
-        return 'GetCommEventCounterResponse({0}, {1}, {2})'.format(
+        return "GetCommEventCounterResponse({0}, {1}, {2})".format(
             self.function_code, self.count, self.status
         )
 
@@ -228,6 +233,7 @@ class GetCommEventLogRequest(ModbusRequest):
     chronological order.  Byte 0 is the most recent event. Each new byte
     flushes the oldest byte from the field.
     """
+
     function_code = 0x0c
     _rtu_frame_size = 4
 
@@ -239,7 +245,7 @@ class GetCommEventLogRequest(ModbusRequest):
     def encode(self):
         """ Encodes the message
         """
-        return b''
+        return b""
 
     def decode(self, data):
         """ Decodes data part of the message.
@@ -254,10 +260,10 @@ class GetCommEventLogRequest(ModbusRequest):
         :returns: The populated response
         """
         results = {
-            'status': True,
-            'message_count': _MCB.Counter.BusMessage,
-            'event_count': _MCB.Counter.Event,
-            'events': _MCB.get_event(),
+            "status": True,
+            "message_count": _MCB.Counter.BusMessage,
+            "event_count": _MCB.Counter.Event,
+            "events": _MCB.get_event(),
         }
         return GetCommEventLogResponse(**results)
 
@@ -266,7 +272,7 @@ class GetCommEventLogRequest(ModbusRequest):
 
         :returns: The string representation of the request
         """
-        return 'GetCommEventLogRequest({0})'.format(self.function_code)
+        return "GetCommEventLogRequest({0})".format(self.function_code)
 
 
 class GetCommEventLogResponse(ModbusResponse):
@@ -276,6 +282,7 @@ class GetCommEventLogResponse(ModbusResponse):
     and a field containing 0-64 bytes of events. A byte count
     field defines the total length of the data in these four field
     """
+
     function_code = 0x0c
     _rtu_byte_count_pos = 3
 
@@ -288,10 +295,10 @@ class GetCommEventLogResponse(ModbusResponse):
         :param events: The collection of events to send
         """
         ModbusResponse.__init__(self, **kwargs)
-        self.status = kwargs.get('status', True)
-        self.message_count = kwargs.get('message_count', 0)
-        self.event_count = kwargs.get('event_count', 0)
-        self.events = kwargs.get('events', [])
+        self.status = kwargs.get("status", True)
+        self.message_count = kwargs.get("message_count", 0)
+        self.event_count = kwargs.get("event_count", 0)
+        self.events = kwargs.get("events", [])
 
     def encode(self):
         """ Encodes the response
@@ -302,10 +309,10 @@ class GetCommEventLogResponse(ModbusResponse):
             ready = ModbusStatus.Ready
         else:
             ready = ModbusStatus.Waiting
-        packet = struct.pack('>B', 6 + len(self.events))
-        packet += struct.pack('>H', ready)
-        packet += struct.pack('>HH', self.event_count, self.message_count)
-        packet += b''.join(struct.pack('>B', e) for e in self.events)
+        packet = struct.pack(">B", 6 + len(self.events))
+        packet += struct.pack(">H", ready)
+        packet += struct.pack(">HH", self.event_count, self.message_count)
+        packet += b"".join(struct.pack(">B", e) for e in self.events)
         return packet
 
     def decode(self, data):
@@ -314,10 +321,10 @@ class GetCommEventLogResponse(ModbusResponse):
         :param data: The packet data to decode
         """
         length = data[0]
-        status = struct.unpack('>H', data[1:3])[0]
-        self.status = (status == ModbusStatus.Ready)
-        self.event_count = struct.unpack('>H', data[3:5])[0]
-        self.message_count = struct.unpack('>H', data[5:7])[0]
+        status = struct.unpack(">H", data[1:3])[0]
+        self.status = status == ModbusStatus.Ready
+        self.event_count = struct.unpack(">H", data[3:5])[0]
+        self.message_count = struct.unpack(">H", data[5:7])[0]
 
         self.events = []
         for e in range(7, length + 1):
@@ -328,11 +335,8 @@ class GetCommEventLogResponse(ModbusResponse):
 
         :returns: The string representation of the response
         """
-        return 'GetCommEventLogResponse({0}, {1}, {2}, {3})'.format(
-            self.function_code,
-            self.status,
-            self.message_count,
-            self.event_count
+        return "GetCommEventLogResponse({0}, {1}, {2}, {3})".format(
+            self.function_code, self.status, self.message_count, self.event_count
         )
 
 
@@ -342,6 +346,7 @@ class ReportSlaveIdRequest(ModbusRequest):
     This function code is used to read the description of the type, the
     current status, and other information specific to a remote device.
     """
+
     function_code = 0x11
     _rtu_frame_size = 4
 
@@ -353,7 +358,7 @@ class ReportSlaveIdRequest(ModbusRequest):
     def encode(self):
         """ Encodes the message
         """
-        return b''
+        return b""
 
     def decode(self, data):
         """ Decodes data part of the message.
@@ -367,7 +372,7 @@ class ReportSlaveIdRequest(ModbusRequest):
 
         :returns: The populated response
         """
-        identifier = b'\x70\x79\x6d\x6f\x64\x62\x75\x73'
+        identifier = b"\x70\x79\x6d\x6f\x64\x62\x75\x73"
         return ReportSlaveIdResponse(identifier)
 
     def __str__(self):
@@ -375,7 +380,7 @@ class ReportSlaveIdRequest(ModbusRequest):
 
         :returns: The string representation of the request
         """
-        return 'ReportSlaveIdRequest({0})'.format(self.function_code)
+        return "ReportSlaveIdRequest({0})".format(self.function_code)
 
 
 class ReportSlaveIdResponse(ModbusResponse):
@@ -383,10 +388,11 @@ class ReportSlaveIdResponse(ModbusResponse):
     The format of a normal response is shown in the following example.
     The data contents are specific to each type of device.
     """
+
     function_code = 0x11
     _rtu_byte_count_pos = 2
 
-    def __init__(self, identifier=b'\x00', status=True, **kwargs):
+    def __init__(self, identifier=b"\x00", status=True, **kwargs):
         """ Initializes a new instance
 
         :param identifier: The identifier of the slave
@@ -406,9 +412,9 @@ class ReportSlaveIdResponse(ModbusResponse):
         else:
             status = ModbusStatus.SlaveOff
         length = len(self.identifier) + 2
-        packet = struct.pack('B', length)
+        packet = struct.pack("B", length)
         packet += self.identifier  # we assume it is already encoded
-        packet += struct.pack('B', status)
+        packet += struct.pack("B", status)
         return packet
 
     def decode(self, data):
@@ -420,7 +426,7 @@ class ReportSlaveIdResponse(ModbusResponse):
         :param data: The packet data to decode
         """
         length = data[0]
-        self.identifier = data[1:length + 1]
+        self.identifier = data[1 : length + 1]
         status = data[-1]
         self.status = status == ModbusStatus.SlaveOn
 
@@ -429,9 +435,10 @@ class ReportSlaveIdResponse(ModbusResponse):
 
         :returns: The string representation of the response
         """
-        return 'ReportSlaveIdResponse({0}, {1}, {2})'.format(
+        return "ReportSlaveIdResponse({0}, {1}, {2})".format(
             self.function_code, self.identifier, self.status
         )
+
 
 # TODO Make these only work on serial
 # report device identification 43, 14
@@ -439,12 +446,12 @@ class ReportSlaveIdResponse(ModbusResponse):
 
 # Exported symbols
 __all__ = [
-    'ReadExceptionStatusRequest',
-    'ReadExceptionStatusResponse',
-    'GetCommEventCounterRequest',
-    'GetCommEventCounterResponse',
-    'GetCommEventLogRequest',
-    'GetCommEventLogResponse',
-    'ReportSlaveIdRequest',
-    'ReportSlaveIdResponse',
+    "ReadExceptionStatusRequest",
+    "ReadExceptionStatusResponse",
+    "GetCommEventCounterRequest",
+    "GetCommEventCounterResponse",
+    "GetCommEventLogRequest",
+    "GetCommEventLogResponse",
+    "ReportSlaveIdRequest",
+    "ReportSlaveIdResponse",
 ]

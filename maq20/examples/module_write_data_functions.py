@@ -11,11 +11,9 @@ if vo is None:  # check if module was found
     raise TypeError("Module was not found")
 
 initial_value = vo.read_channel_data(3)  # Read initial value
-print('Initial output value: {}'.format(initial_value))
+print("Initial output value: {}".format(initial_value))
 
 vo.write_channel_data(channel=3, data=3.3)  # write using write_data()
-print('Output value after writing: {}'.format(vo.read_channel_data(3)))
+print("Output value after writing: {}".format(vo.read_channel_data(3)))
 
 vo.write_channel_data(channel=3, data=initial_value)  # write back initial value.
-
-

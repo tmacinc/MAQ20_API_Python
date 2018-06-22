@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -35,7 +36,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.label_23, 0, QtCore.Qt.AlignHCenter)
         self.led_bar_control_checkbox = QtWidgets.QCheckBox(self.centralwidget)
         self.led_bar_control_checkbox.setObjectName("led_bar_control_checkbox")
-        self.horizontalLayout_5.addWidget(self.led_bar_control_checkbox, 0, QtCore.Qt.AlignHCenter)
+        self.horizontalLayout_5.addWidget(
+            self.led_bar_control_checkbox, 0, QtCore.Qt.AlignHCenter
+        )
         self.verticalLayout_11.addLayout(self.horizontalLayout_5)
         self.line_7 = QtWidgets.QFrame(self.centralwidget)
         self.line_7.setFrameShape(QtWidgets.QFrame.HLine)
@@ -48,7 +51,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setObjectName("verticalLayout_9")
         self.label_10 = QtWidgets.QLabel(self.centralwidget)
         self.label_10.setObjectName("label_10")
-        self.verticalLayout_9.addWidget(self.label_10, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.verticalLayout_9.addWidget(
+            self.label_10, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom
+        )
         self.tc_heat_1_spinbox = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.tc_heat_1_spinbox.setDecimals(1)
         self.tc_heat_1_spinbox.setMinimum(-10.0)
@@ -58,7 +63,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.addWidget(self.tc_heat_1_spinbox)
         self.label_11 = QtWidgets.QLabel(self.centralwidget)
         self.label_11.setObjectName("label_11")
-        self.verticalLayout_9.addWidget(self.label_11, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.verticalLayout_9.addWidget(
+            self.label_11, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom
+        )
         self.tc_heat_2_spinbox = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.tc_heat_2_spinbox.setDecimals(1)
         self.tc_heat_2_spinbox.setMinimum(-10.0)
@@ -68,10 +75,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.addWidget(self.tc_heat_2_spinbox, 0, QtCore.Qt.AlignTop)
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
         self.label_9.setObjectName("label_9")
-        self.verticalLayout_9.addWidget(self.label_9, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.verticalLayout_9.addWidget(
+            self.label_9, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom
+        )
         self.int_tc_spinbox_indicator = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.int_tc_spinbox_indicator.setReadOnly(True)
-        self.int_tc_spinbox_indicator.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.int_tc_spinbox_indicator.setButtonSymbols(
+            QtWidgets.QAbstractSpinBox.NoButtons
+        )
         self.int_tc_spinbox_indicator.setMinimum(-5000.0)
         self.int_tc_spinbox_indicator.setMaximum(1000.0)
         self.int_tc_spinbox_indicator.setObjectName("int_tc_spinbox_indicator")
@@ -80,12 +91,18 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setObjectName("label_7")
-        self.verticalLayout_12.addWidget(self.label_7, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.verticalLayout_12.addWidget(
+            self.label_7, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom
+        )
         self.tc_touch_line_edit = QtWidgets.QLineEdit(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tc_touch_line_edit.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.tc_touch_line_edit.sizePolicy().hasHeightForWidth()
+        )
         self.tc_touch_line_edit.setSizePolicy(sizePolicy)
         self.tc_touch_line_edit.setMaximumSize(QtCore.QSize(90, 16777215))
         self.tc_touch_line_edit.setObjectName("tc_touch_line_edit")
@@ -103,68 +120,72 @@ class Ui_MainWindow(object):
         self.label_16.setObjectName("label_16")
         self.verticalLayout_5.addWidget(self.label_16, 0, QtCore.Qt.AlignHCenter)
         self.freq_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.freq_slider.sizePolicy().hasHeightForWidth())
         self.freq_slider.setSizePolicy(sizePolicy)
-        self.freq_slider.setStyleSheet("Slider::groove:vertical {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical {\n"
-"background: #fff;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical {\n"
-"background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"stop: 0 rgb(255, 200, 200), stop: 1 rgb(255, 0, 40));\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}\n"
-"")
+        self.freq_slider.setStyleSheet(
+            "Slider::groove:vertical {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical {\n"
+            "background: #fff;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical {\n"
+            "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+            "stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "stop: 0 rgb(255, 200, 200), stop: 1 rgb(255, 0, 40));\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            ""
+        )
         self.freq_slider.setMinimum(0)
         self.freq_slider.setMaximum(10000)
         self.freq_slider.setSingleStep(500)
@@ -206,69 +227,73 @@ class Ui_MainWindow(object):
         self.label_17.setObjectName("label_17")
         self.verticalLayout_6.addWidget(self.label_17, 0, QtCore.Qt.AlignHCenter)
         self.vout1_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.vout1_slider.sizePolicy().hasHeightForWidth())
         self.vout1_slider.setSizePolicy(sizePolicy)
-        self.vout1_slider.setStyleSheet("Slider::groove:vertical {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical {\n"
-"background: #fff;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical {\n"
-"background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"stop: 0 rgb(255, 220, 220), stop: 1 rgb(255, 170, 0));\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"")
+        self.vout1_slider.setStyleSheet(
+            "Slider::groove:vertical {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical {\n"
+            "background: #fff;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical {\n"
+            "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+            "stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "stop: 0 rgb(255, 220, 220), stop: 1 rgb(255, 170, 0));\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            ""
+        )
         self.vout1_slider.setMinimum(-10)
         self.vout1_slider.setMaximum(10)
         self.vout1_slider.setSingleStep(1)
@@ -312,68 +337,72 @@ class Ui_MainWindow(object):
         self.sw1.setObjectName("sw1")
         self.horizontalLayout_6.addWidget(self.sw1)
         self.sw1_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sw1_slider.sizePolicy().hasHeightForWidth())
         self.sw1_slider.setSizePolicy(sizePolicy)
         self.sw1_slider.setMaximumSize(QtCore.QSize(1677215, 16777215))
-        self.sw1_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.sw1_slider.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.sw1_slider.setMaximum(1)
         self.sw1_slider.setPageStep(1)
         self.sw1_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -387,68 +416,72 @@ class Ui_MainWindow(object):
         self.sw2.setObjectName("sw2")
         self.horizontalLayout_7.addWidget(self.sw2)
         self.sw2_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sw2_slider.sizePolicy().hasHeightForWidth())
         self.sw2_slider.setSizePolicy(sizePolicy)
         self.sw2_slider.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.sw2_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.sw2_slider.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.sw2_slider.setMaximum(1)
         self.sw2_slider.setPageStep(1)
         self.sw2_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -462,68 +495,72 @@ class Ui_MainWindow(object):
         self.sw3.setObjectName("sw3")
         self.horizontalLayout_8.addWidget(self.sw3)
         self.sw3_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sw3_slider.sizePolicy().hasHeightForWidth())
         self.sw3_slider.setSizePolicy(sizePolicy)
         self.sw3_slider.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.sw3_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.sw3_slider.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.sw3_slider.setMaximum(1)
         self.sw3_slider.setPageStep(1)
         self.sw3_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -537,68 +574,72 @@ class Ui_MainWindow(object):
         self.sw4.setObjectName("sw4")
         self.horizontalLayout_9.addWidget(self.sw4)
         self.sw4_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sw4_slider.sizePolicy().hasHeightForWidth())
         self.sw4_slider.setSizePolicy(sizePolicy)
         self.sw4_slider.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.sw4_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.sw4_slider.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.sw4_slider.setMaximum(1)
         self.sw4_slider.setPageStep(1)
         self.sw4_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -612,68 +653,72 @@ class Ui_MainWindow(object):
         self.sw5.setObjectName("sw5")
         self.horizontalLayout_10.addWidget(self.sw5)
         self.sw5_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sw5_slider.sizePolicy().hasHeightForWidth())
         self.sw5_slider.setSizePolicy(sizePolicy)
         self.sw5_slider.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.sw5_slider.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.sw5_slider.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.sw5_slider.setMaximum(1)
         self.sw5_slider.setPageStep(1)
         self.sw5_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -693,70 +738,74 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.label_18, 0, QtCore.Qt.AlignHCenter)
         self.vout2_slider = QtWidgets.QSlider(self.centralwidget)
         self.vout2_slider.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.vout2_slider.sizePolicy().hasHeightForWidth())
         self.vout2_slider.setSizePolicy(sizePolicy)
         self.vout2_slider.setAutoFillBackground(False)
-        self.vout2_slider.setStyleSheet("Slider::groove:vertical {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical {\n"
-"background: #fff;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical {\n"
-"background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"stop: 0 rgb(180, 220, 220), stop: 1 rgb(85, 255, 0));\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"")
+        self.vout2_slider.setStyleSheet(
+            "Slider::groove:vertical {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical {\n"
+            "background: #fff;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical {\n"
+            "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+            "stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "stop: 0 rgb(180, 220, 220), stop: 1 rgb(85, 255, 0));\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            ""
+        )
         self.vout2_slider.setMinimum(-10)
         self.vout2_slider.setMaximum(10)
         self.vout2_slider.setPageStep(1)
@@ -793,69 +842,73 @@ class Ui_MainWindow(object):
         self.label_19.setObjectName("label_19")
         self.verticalLayout_8.addWidget(self.label_19, 0, QtCore.Qt.AlignHCenter)
         self.vout3_slider = QtWidgets.QSlider(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.vout3_slider.sizePolicy().hasHeightForWidth())
         self.vout3_slider.setSizePolicy(sizePolicy)
-        self.vout3_slider.setStyleSheet("Slider::groove:vertical {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical {\n"
-"background: #fff;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical {\n"
-"background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"stop: 0 #bbf, stop: 1 #55f);\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:vertical:disabled {\n"
-"background: #bbb;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:vertical:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:vertical:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"")
+        self.vout3_slider.setStyleSheet(
+            "Slider::groove:vertical {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical {\n"
+            "background: #fff;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical {\n"
+            "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+            "stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "stop: 0 #bbf, stop: 1 #55f);\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:vertical:disabled {\n"
+            "background: #bbb;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:vertical:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            ""
+        )
         self.vout3_slider.setMinimum(-10)
         self.vout3_slider.setMaximum(10)
         self.vout3_slider.setPageStep(1)
@@ -890,7 +943,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.motor_pot_1 = QtWidgets.QDial(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.motor_pot_1.sizePolicy().hasHeightForWidth())
@@ -901,7 +956,9 @@ class Ui_MainWindow(object):
         self.motor_pot_1.setObjectName("motor_pot_1")
         self.verticalLayout_2.addWidget(self.motor_pot_1)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
@@ -913,9 +970,13 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setScaledContents(False)
         self.label.setObjectName("label")
-        self.verticalLayout_2.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.verticalLayout_2.addWidget(
+            self.label, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
+        )
         self.motor_pot_2 = QtWidgets.QDial(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.motor_pot_2.sizePolicy().hasHeightForWidth())
@@ -927,7 +988,9 @@ class Ui_MainWindow(object):
         self.motor_pot_2.setObjectName("motor_pot_2")
         self.verticalLayout_2.addWidget(self.motor_pot_2)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
@@ -938,7 +1001,9 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.verticalLayout_2.addWidget(self.label_2, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.verticalLayout_2.addWidget(
+            self.label_2, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
+        )
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         self.verticalLayout_11.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -988,68 +1053,74 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.addWidget(self.status_line)
         self.connection_switch = QtWidgets.QSlider(self.centralwidget)
         self.connection_switch.setEnabled(False)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.connection_switch.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.connection_switch.sizePolicy().hasHeightForWidth()
+        )
         self.connection_switch.setSizePolicy(sizePolicy)
         self.connection_switch.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.connection_switch.setStyleSheet("QSlider::groove:horizontal {\n"
-"border: 1px solid #bbb;\n"
-"background: white;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal {\n"
-"background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
-"    stop: 0 #66e, stop: 1 #bbf);\n"
-"background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
-"    stop: 0  rgb(200,255,200), stop: 1 rgb(0,255,0));\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal {\n"
-"background: #aaa;\n"
-"border: 1px solid #777;\n"
-"height: 10px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #eee, stop:1 #ccc);\n"
-"border: 1px solid #777;\n"
-"width: 13px;\n"
-"margin-top: -2px;\n"
-"margin-bottom: -2px;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover {\n"
-"background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
-"    stop:0 #fff, stop:1 #ddd);\n"
-"border: 1px solid #444;\n"
-"border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::sub-page:horizontal:disabled {\n"
-"background:  rgb(0,255,0);\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::add-page:horizontal:disabled {\n"
-"background: #eee;\n"
-"border-color: #999;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:disabled {\n"
-"background: #eee;\n"
-"border: 1px solid #aaa;\n"
-"border-radius: 4px;\n"
-"}")
+        self.connection_switch.setStyleSheet(
+            "QSlider::groove:horizontal {\n"
+            "border: 1px solid #bbb;\n"
+            "background: white;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal {\n"
+            "background: qlineargradient(x1: 0, y1: 0,    x2: 0, y2: 1,\n"
+            "    stop: 0 #66e, stop: 1 #bbf);\n"
+            "background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+            "    stop: 0  rgb(200,255,200), stop: 1 rgb(0,255,0));\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal {\n"
+            "background: #aaa;\n"
+            "border: 1px solid #777;\n"
+            "height: 10px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #eee, stop:1 #ccc);\n"
+            "border: 1px solid #777;\n"
+            "width: 13px;\n"
+            "margin-top: -2px;\n"
+            "margin-bottom: -2px;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:hover {\n"
+            "background: qlineargradient(x1:0, y1:0, x2:1, y2:1,\n"
+            "    stop:0 #fff, stop:1 #ddd);\n"
+            "border: 1px solid #444;\n"
+            "border-radius: 4px;\n"
+            "}\n"
+            "\n"
+            "QSlider::sub-page:horizontal:disabled {\n"
+            "background:  rgb(0,255,0);\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::add-page:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border-color: #999;\n"
+            "}\n"
+            "\n"
+            "QSlider::handle:horizontal:disabled {\n"
+            "background: #eee;\n"
+            "border: 1px solid #aaa;\n"
+            "border-radius: 4px;\n"
+            "}"
+        )
         self.connection_switch.setMaximum(1)
         self.connection_switch.setPageStep(1)
         self.connection_switch.setProperty("value", 0)
@@ -1059,12 +1130,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addLayout(self.horizontalLayout_11)
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.horizontalLayout_12.addItem(spacerItem)
         self.connect_button = QtWidgets.QPushButton(self.centralwidget)
         self.connect_button.setObjectName("connect_button")
         self.horizontalLayout_12.addWidget(self.connect_button)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+        )
         self.horizontalLayout_12.addItem(spacerItem1)
         self.verticalLayout_11.addLayout(self.horizontalLayout_12)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -1099,91 +1174,363 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MAQ20 Demo Suitcase"))
-        MainWindow.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">MAQ20 Process Simulator Demonstration System</span></p><p><span style=\" font-weight:600;\"/></p><p>The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </p><p/><p>MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </p><p>MAQ20-JTC 8 Channel J Type Thermocouple Input Module </p><p>MAQ20-VO 8 Channel Voltage Output Module </p><p>MAQ20-VDN 8 Channel Differential Voltage Input </p><p>MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </p></body></html>"))
-        self.label_23.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-weight:600; color:#cc7832;\">from </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6;\">maq20 </span><span style=\" font-family:\'Courier New\'; font-weight:600; color:#cc7832;\">import </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6;\">MAQ20</span><span style=\" font-family:\'Courier New\'; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6;\">MAQ20Module<br/></span><span style=\" font-family:\'Courier New\'; font-weight:600; color:#cc7832;\">from </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6;\">maq20.modules </span><span style=\" font-family:\'Courier New\'; font-weight:600; color:#cc7832;\">import </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6;\">outputmodule</span><span style=\" font-family:\'Courier New\'; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; color:#a9b7c6; background-color:#344134;\">diol</span></pre></body></html>"))
-        self.label_23.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">MAQ20 Process Simulator Demonstration System</span><span style=\" font-size:12pt;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\"/><span style=\" font-size:12pt; font-weight:400;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\">The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </span></p><p><span style=\" font-size:12pt; font-weight:400;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-JTC 8 Channel J Type Thermocouple Input Module </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-VO 8 Channel Voltage Output Module </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-VDN 8 Channel Differential Voltage Input </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </span></p></body></html>"))
+        MainWindow.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">MAQ20 Process Simulator Demonstration System</span></p><p><span style=" font-weight:600;"/></p><p>The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </p><p/><p>MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </p><p>MAQ20-JTC 8 Channel J Type Thermocouple Input Module </p><p>MAQ20-VO 8 Channel Voltage Output Module </p><p>MAQ20-VDN 8 Channel Differential Voltage Input </p><p>MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </p></body></html>',
+            )
+        )
+        self.label_23.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-weight:600; color:#cc7832;">from </span><span style=" font-family:\'Courier New\'; color:#a9b7c6;">maq20 </span><span style=" font-family:\'Courier New\'; font-weight:600; color:#cc7832;">import </span><span style=" font-family:\'Courier New\'; color:#a9b7c6;">MAQ20</span><span style=" font-family:\'Courier New\'; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; color:#a9b7c6;">MAQ20Module<br/></span><span style=" font-family:\'Courier New\'; font-weight:600; color:#cc7832;">from </span><span style=" font-family:\'Courier New\'; color:#a9b7c6;">maq20.modules </span><span style=" font-family:\'Courier New\'; font-weight:600; color:#cc7832;">import </span><span style=" font-family:\'Courier New\'; color:#a9b7c6;">outputmodule</span><span style=" font-family:\'Courier New\'; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; color:#a9b7c6; background-color:#344134;">diol</span></pre></body></html>',
+            )
+        )
+        self.label_23.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-size:12pt;">MAQ20 Process Simulator Demonstration System</span><span style=" font-size:12pt;"/></p><p><span style=" font-size:12pt; font-weight:400;"/><span style=" font-size:12pt; font-weight:400;"/></p><p><span style=" font-size:12pt; font-weight:400;">The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </span></p><p><span style=" font-size:12pt; font-weight:400;"/></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-JTC 8 Channel J Type Thermocouple Input Module </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-VO 8 Channel Voltage Output Module </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-VDN 8 Channel Differential Voltage Input </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </span></p></body></html>',
+            )
+        )
         self.label_23.setText(_translate("MainWindow", "API imports"))
-        self.led_bar_control_checkbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">if </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">p_bool:<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">10</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">else</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">:<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=-</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">10</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.led_bar_control_checkbox.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>"))
-        self.led_bar_control_checkbox.setText(_translate("MainWindow", "LED BAR CONTROL"))
+        self.led_bar_control_checkbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">if </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">p_bool:<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">10</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">else</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">:<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=-</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">10</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.led_bar_control_checkbox.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>',
+            )
+        )
+        self.led_bar_control_checkbox.setText(
+            _translate("MainWindow", "LED BAR CONTROL")
+        )
         self.label_10.setText(_translate("MainWindow", "INT. TC HEAT 1"))
-        self.tc_heat_1_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=p_double)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">tc_heat_1 = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_channel_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.tc_heat_1_spinbox.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>"))
+        self.tc_heat_1_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=p_double)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">tc_heat_1 = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_channel_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.tc_heat_1_spinbox.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>',
+            )
+        )
         self.label_11.setText(_translate("MainWindow", "INT. TC HEAT 2"))
-        self.tc_heat_2_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=p_double)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">tc_heat_2 = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_channel_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.tc_heat_2_spinbox.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>"))
+        self.tc_heat_2_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=p_double)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">tc_heat_2 = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_channel_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.tc_heat_2_spinbox.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>',
+            )
+        )
         self.label_9.setText(_translate("MainWindow", "INT_TC"))
-        self.int_tc_spinbox_indicator.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.int_tc_spinbox_indicator.setValue(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.jtc.read_channel_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">6</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">))</span></pre></body></html>"))
-        self.int_tc_spinbox_indicator.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>"))
+        self.int_tc_spinbox_indicator.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.int_tc_spinbox_indicator.setValue(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.jtc.read_channel_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">6</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">))</span></pre></body></html>',
+            )
+        )
+        self.int_tc_spinbox_indicator.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Internal Heater Control 1 &amp; 2 and Internal TC</span></p><p>Two internal heating elements bonded to an internal thermocouple. When the heater controls are enabled using channels VO Channels 4 &amp; 5 the temperature of the internal thermocouple is raised, the voltage at the heating elements can be read back on channels VDN 5 &amp; 6. The internal thermocouple is wired to JTC Channel 6. </p></body></html>',
+            )
+        )
         self.label_7.setText(_translate("MainWindow", "EXT. TC TOUCH"))
-        self.tc_touch_line_edit.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">module_channel = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">7<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">ext_temperature = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.jtc.read_channel_data(module_channel)</span></pre></body></html>"))
-        self.tc_touch_line_edit.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">External Touch TC</span></p><p>J type thermocouple with touch pad interfaced to JTC CH 7. </p></body></html>"))
+        self.tc_touch_line_edit.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">module_channel = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">7<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">ext_temperature = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.jtc.read_channel_data(module_channel)</span></pre></body></html>',
+            )
+        )
+        self.tc_touch_line_edit.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">External Touch TC</span></p><p>J type thermocouple with touch pad interfaced to JTC CH 7. </p></body></html>',
+            )
+        )
         self.label_16.setText(_translate("MainWindow", "+FS"))
-        self.freq_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.write_special_function_5_frequency_generator(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">timer</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">frequency</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=p_int)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">frequency = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_register(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1105</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.freq_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Frequency Output Control &amp; LED Bar 1</span></p><p>Frequency output control uses the DIOL modules special function for generating a square waveform up to 10 kHz, the DIOL output is wired to the input of a frequency to voltage converter which is used as an input to LED Bar 1 (red), this value can read back within the system on VDN CH 4. Each DIOL modules features 2 timers that can be used to provide timed special functions such as PWM output, Pulse Counter, Event Timer and more. In this case of the frequency generator used here timer 0 is used to produce the special function behaviour and is output on CH OUT 0. </p></body></html>"))
+        self.freq_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.write_special_function_5_frequency_generator(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">timer</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">frequency</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=p_int)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">frequency = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_register(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1105</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.freq_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Frequency Output Control &amp; LED Bar 1</span></p><p>Frequency output control uses the DIOL modules special function for generating a square waveform up to 10 kHz, the DIOL output is wired to the input of a frequency to voltage converter which is used as an input to LED Bar 1 (red), this value can read back within the system on VDN CH 4. Each DIOL modules features 2 timers that can be used to provide timed special functions such as PWM output, Pulse Counter, Event Timer and more. In this case of the frequency generator used here timer 0 is used to produce the special function behaviour and is output on CH OUT 0. </p></body></html>',
+            )
+        )
         self.label_15.setText(_translate("MainWindow", "0"))
         self.label_3.setText(_translate("MainWindow", "FREQ"))
-        self.freq_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">frequency = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_register(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1105</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.freq_spinbox.setValue(frequency/</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1000.0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
+        self.freq_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">frequency = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_register(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1105</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.freq_spinbox.setValue(frequency/</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1000.0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
         self.label_17.setText(_translate("MainWindow", "+FS"))
-        self.vout1_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">voltages = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vout1_slider.setValue(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;\">round</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(voltages[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">]))</span></pre></body></html>"))
-        self.vout1_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">LED Bar 2</span></p><p>LED Bar 2 is controlled directly by VO CH 0. </p></body></html>"))
+        self.vout1_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">voltages = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vout1_slider.setValue(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;">round</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(voltages[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">]))</span></pre></body></html>',
+            )
+        )
+        self.vout1_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">LED Bar 2</span></p><p>LED Bar 2 is controlled directly by VO CH 0. </p></body></html>',
+            )
+        )
         self.label_20.setText(_translate("MainWindow", "-FS"))
         self.label_4.setText(_translate("MainWindow", "VOUT1"))
-        self.vout1_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">voltages = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vout1_spinbox.setValue(voltages[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">])</span></pre></body></html>"))
-        self.sw1.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw1.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.vout1_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">voltages = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vout1_spinbox.setValue(voltages[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">])</span></pre></body></html>',
+            )
+        )
+        self.sw1.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw1.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.sw1.setText(_translate("MainWindow", "SW1"))
-        self.sw1_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw1_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p><p><br/></p></body></html>"))
-        self.sw2.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw2.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.sw1_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw1_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p><p><br/></p></body></html>',
+            )
+        )
+        self.sw2.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw2.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.sw2.setText(_translate("MainWindow", "SW2"))
-        self.sw2_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw2_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
-        self.sw3.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw3.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.sw2_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw2_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
+        self.sw3.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw3.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.sw3.setText(_translate("MainWindow", "SW3"))
-        self.sw3_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw3_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
-        self.sw4.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw4.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.sw3_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw3_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
+        self.sw4.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw4.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.sw4.setText(_translate("MainWindow", "SW4"))
-        self.sw4_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw4_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
-        self.sw5.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw5.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.sw4_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw4_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
+        self.sw5.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw5.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.sw5.setText(_translate("MainWindow", "SW5"))
-        self.sw5_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">_update_switches</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">):<br/>    values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">5</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw1_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw2_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw3_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw4_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5.setChecked(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.sw5_slider.setValue(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">] ^ </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre></body></html>"))
-        self.sw5_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>"))
+        self.sw5_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">_update_switches</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">):<br/>    values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">5</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw1_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw2_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw3_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw4_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5.setChecked(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.sw5_slider.setValue(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">] ^ </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre></body></html>',
+            )
+        )
+        self.sw5_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">SW1-5 Digital Inputs</span></p><p>Switch inputs use TTL logic levels and are active low, LEDs light when the input to the MAQ20 DIOL modules is low. Switches are interfaced to DIOL CH 0-4. </p></body></html>',
+            )
+        )
         self.label_18.setText(_translate("MainWindow", "+FS"))
-        self.vout2_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">vout2_slider_val</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">p_int):<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">if not </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.led_bar_control_checkbox.isChecked():<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.led_bar_control_checkbox.toggle()<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">try</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">:<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=p_int)</span></pre></body></html>"))
-        self.vout2_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>"))
+        self.vout2_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">vout2_slider_val</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">p_int):<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">if not </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.led_bar_control_checkbox.isChecked():<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.led_bar_control_checkbox.toggle()<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">try</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">:<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=p_int)</span></pre></body></html>',
+            )
+        )
+        self.vout2_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>',
+            )
+        )
         self.label_21.setText(_translate("MainWindow", "-FS"))
         self.label_5.setText(_translate("MainWindow", "VOUT2"))
-        self.vout2_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">voltages = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vout2_spinbox.setValue(voltages[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">])</span></pre></body></html>"))
+        self.vout2_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">voltages = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vout2_spinbox.setValue(voltages[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">])</span></pre></body></html>',
+            )
+        )
         self.label_19.setText(_translate("MainWindow", "+FS"))
-        self.vout3_slider.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">def </span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;\">vout3_slider_val</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">p_int):<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">if not </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.led_bar_control_checkbox.isChecked():<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.led_bar_control_checkbox.toggle()<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;\">try</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">:<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.write_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">data</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=p_int)</span></pre></body></html>"))
-        self.vout3_slider.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>"))
+        self.vout3_slider.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">def </span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#a9b7c6;">vout3_slider_val</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">p_int):<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">if not </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.led_bar_control_checkbox.isChecked():<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.led_bar_control_checkbox.toggle()<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; font-weight:600; color:#cc7832;">try</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">:<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.write_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">data</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=p_int)</span></pre></body></html>',
+            )
+        )
+        self.vout3_slider.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">LED Bar 3, 4 &amp; LED Bar Control</span></p><p>LED Bars 3 &amp; 4 can be operated via two methods controlled by the LED Bard Control input, wired to VO CH 1. When LED Bar Control is set to its lowest value (-10V) LED Bars 3 &amp; 4 are controlled by VO CH 2 &amp; 3 respectively. When the LED Bar Control is set to its highest value (+10V) LED Bar 3 &amp; 4 are controlled by Motor Pot 1 &amp; 2 respectively. </p></body></html>',
+            )
+        )
         self.label_22.setText(_translate("MainWindow", "-FS"))
         self.label_6.setText(_translate("MainWindow", "VOUT3"))
-        self.vout3_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">voltages = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">4</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">).</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vout3_spinbox.setValue(voltages[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">])</span></pre></body></html>"))
-        self.motor_pot_1.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;\">values = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vdn.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">start_channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">number_of_channels</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#344134;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.motor_pot_1.setValue(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;\">round</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">]*(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">20.0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">/</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3.3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)))</span></pre></body></html>"))
-        self.motor_pot_1.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Motor Pots 1 &amp; 2</span></p><p>Rotation of Motor Pots 1 &amp; 2 is controlled by CH 1-4 of the DIOL module outputs. Each pot has a forward and reverse control and is interlocked in logic to provide the truth table show below: </p><p/><p align=\"center\"><br/></p><table border=\"1\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\"><tr><td width=\"57\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Action</span></p></td><td width=\"66\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt; font-weight:600;\">OUT 1</span></p></td><td width=\"68\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt; font-weight:600;\">OUT 2</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Stop</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Forward</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Reverse</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Stop</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td></tr><tr><td colspan=\"3\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-style:italic;\">Figure 3: Motor Pot Truth Table</span></p></td></tr></table><p/><p>When the LED Bar Control is set high (+10V) motor pot position are displayed on LED Bar 3 &amp; 4 on the process simulator panel. Each motor pot is wired to two inputs of the VDN module, the first inputs is full scale 0 to +10V, the second inputs level shifted to 0 to +3V. Finally the rotational speed of each motor pot can be modified using VO Channels 6 &amp; 7, setting the output to &lt;=0 means the motor pots will not rotate when the digital control signals are asserted. Setting the output to &gt;0 will increase the rotation speed the maximum value is +10V this will rotate the motor pots at their maximum rate. </p></body></html>"))
+        self.vout3_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">voltages = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">4</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">).</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vout3_spinbox.setValue(voltages[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">])</span></pre></body></html>',
+            )
+        )
+        self.motor_pot_1.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#2b2b2b;">values = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vdn.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">start_channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">number_of_channels</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#344134;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.motor_pot_1.setValue(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;">round</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">]*(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">20.0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">/</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3.3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)))</span></pre></body></html>',
+            )
+        )
+        self.motor_pot_1.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Motor Pots 1 &amp; 2</span></p><p>Rotation of Motor Pots 1 &amp; 2 is controlled by CH 1-4 of the DIOL module outputs. Each pot has a forward and reverse control and is interlocked in logic to provide the truth table show below: </p><p/><p align="center"><br/></p><table border="1" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;" align="center" cellspacing="0" cellpadding="0"><tr><td width="57" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Action</span></p></td><td width="66" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt; font-weight:600;">OUT 1</span></p></td><td width="68" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt; font-weight:600;">OUT 2</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Stop</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Forward</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Reverse</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Stop</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td></tr><tr><td colspan="3" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-style:italic;">Figure 3: Motor Pot Truth Table</span></p></td></tr></table><p/><p>When the LED Bar Control is set high (+10V) motor pot position are displayed on LED Bar 3 &amp; 4 on the process simulator panel. Each motor pot is wired to two inputs of the VDN module, the first inputs is full scale 0 to +10V, the second inputs level shifted to 0 to +3V. Finally the rotational speed of each motor pot can be modified using VO Channels 6 &amp; 7, setting the output to &lt;=0 means the motor pots will not rotate when the digital control signals are asserted. Setting the output to &gt;0 will increase the rotation speed the maximum value is +10V this will rotate the motor pots at their maximum rate. </p></body></html>',
+            )
+        )
         self.label.setText(_translate("MainWindow", "MOTOR POT 1"))
-        self.motor_pot_2.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#40332b;\">values</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\"> = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vdn.read_data(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">start_channel</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">number_of_channels</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">2</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)</span></pre><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#344134;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.motor_pot_2.setValue(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;\">round</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">(values[</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">1</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">]*(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">20.0</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">/</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;\">3.3</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)))</span></pre></body></html>"))
-        self.motor_pot_2.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Motor Pots 1 &amp; 2</span></p><p>Rotation of Motor Pots 1 &amp; 2 is controlled by CH 1-4 of the DIOL module outputs. Each pot has a forward and reverse control and is interlocked in logic to provide the truth table show below: </p><p/><p align=\"center\"><br/></p><table border=\"1\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\"><tr><td width=\"57\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Action</span></p></td><td width=\"66\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt; font-weight:600;\">OUT 1</span></p></td><td width=\"68\" bgcolor=\"#d9d9d9\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt; font-weight:600;\">OUT 2</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Stop</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Forward</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Reverse</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">0</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td></tr><tr><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p><span style=\" font-size:8pt; font-weight:600;\">Stop</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td><td style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-size:8pt;\">1</span></p></td></tr><tr><td colspan=\"3\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\"><p align=\"center\"><span style=\" font-style:italic;\">Figure 3: Motor Pot Truth Table</span></p></td></tr></table><p/><p>When the LED Bar Control is set high (+10V) motor pot position are displayed on LED Bar 3 &amp; 4 on the process simulator panel. Each motor pot is wired to two inputs of the VDN module, the first inputs is full scale 0 to +10V, the second inputs level shifted to 0 to +3V. Finally the rotational speed of each motor pot can be modified using VO Channels 6 &amp; 7, setting the output to &lt;=0 means the motor pots will not rotate when the digital control signals are asserted. Setting the output to &gt;0 will increase the rotation speed the maximum value is +10V this will rotate the motor pots at their maximum rate. </p></body></html>"))
+        self.motor_pot_2.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#40332b;">values</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;"> = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vdn.read_data(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">start_channel</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">number_of_channels</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">2</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)</span></pre><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6; background-color:#344134;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.motor_pot_2.setValue(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#8888c6;">round</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">(values[</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">1</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">]*(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">20.0</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">/</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#6897bb;">3.3</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)))</span></pre></body></html>',
+            )
+        )
+        self.motor_pot_2.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">Motor Pots 1 &amp; 2</span></p><p>Rotation of Motor Pots 1 &amp; 2 is controlled by CH 1-4 of the DIOL module outputs. Each pot has a forward and reverse control and is interlocked in logic to provide the truth table show below: </p><p/><p align="center"><br/></p><table border="1" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;" align="center" cellspacing="0" cellpadding="0"><tr><td width="57" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Action</span></p></td><td width="66" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt; font-weight:600;">OUT 1</span></p></td><td width="68" bgcolor="#d9d9d9" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt; font-weight:600;">OUT 2</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Stop</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Forward</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Reverse</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">0</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td></tr><tr><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p><span style=" font-size:8pt; font-weight:600;">Stop</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td><td style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-size:8pt;">1</span></p></td></tr><tr><td colspan="3" style=" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;"><p align="center"><span style=" font-style:italic;">Figure 3: Motor Pot Truth Table</span></p></td></tr></table><p/><p>When the LED Bar Control is set high (+10V) motor pot position are displayed on LED Bar 3 &amp; 4 on the process simulator panel. Each motor pot is wired to two inputs of the VDN module, the first inputs is full scale 0 to +10V, the second inputs level shifted to 0 to +3V. Finally the rotational speed of each motor pot can be modified using VO Channels 6 &amp; 7, setting the output to &lt;=0 means the motor pots will not rotate when the digital control signals are asserted. Setting the output to &gt;0 will increase the rotation speed the maximum value is +10V this will rotate the motor pots at their maximum rate. </p></body></html>',
+            )
+        )
         self.label_2.setText(_translate("MainWindow", "MOTOR POT 2"))
-        self.label_8.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">MAQ20 Process Simulator Demonstration System</span><span style=\" font-size:12pt;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\"/><span style=\" font-size:12pt; font-weight:400;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\">The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </span></p><p><span style=\" font-size:12pt; font-weight:400;\"/></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-JTC 8 Channel J Type Thermocouple Input Module </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-VO 8 Channel Voltage Output Module </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-VDN 8 Channel Differential Voltage Input </span></p><p><span style=\" font-size:12pt; font-weight:400;\">MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </span></p></body></html>"))
+        self.label_8.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-size:12pt;">MAQ20 Process Simulator Demonstration System</span><span style=" font-size:12pt;"/></p><p><span style=" font-size:12pt; font-weight:400;"/><span style=" font-size:12pt; font-weight:400;"/></p><p><span style=" font-size:12pt; font-weight:400;">The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </span></p><p><span style=" font-size:12pt; font-weight:400;"/></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-JTC 8 Channel J Type Thermocouple Input Module </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-VO 8 Channel Voltage Output Module </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-VDN 8 Channel Differential Voltage Input </span></p><p><span style=" font-size:12pt; font-weight:400;">MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </span></p></body></html>',
+            )
+        )
         self.label_8.setText(_translate("MainWindow", "PROCESS SIMULATOR"))
         self.label_12.setText(_translate("MainWindow", "IP Address:"))
-        self.ip_address_line.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20 = MAQ20(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">ip_address</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.ip_address_line.displayText()</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">port</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.port_spinbox.value())</span></pre></body></html>"))
+        self.ip_address_line.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20 = MAQ20(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">ip_address</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.ip_address_line.displayText()</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">port</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.port_spinbox.value())</span></pre></body></html>',
+            )
+        )
         self.ip_address_line.setText(_translate("MainWindow", "192.168.128.100"))
         self.label_13.setText(_translate("MainWindow", "Port"))
-        self.port_spinbox.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20 = MAQ20(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">ip_address</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.ip_address_line.displayText()</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">port</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.port_spinbox.value())</span></pre></body></html>"))
+        self.port_spinbox.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20 = MAQ20(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">ip_address</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.ip_address_line.displayText()</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">port</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.port_spinbox.value())</span></pre></body></html>',
+            )
+        )
         self.label_14.setText(_translate("MainWindow", "Status:"))
         self.status_line.setText(_translate("MainWindow", "No Connection"))
-        self.connect_button.setToolTip(_translate("MainWindow", "<html><head/><body><pre style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;\"><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20 = MAQ20(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">ip_address</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.ip_address_line.displayText()</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;\">, </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;\">port</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">=</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.port_spinbox.value())<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.jtc = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20.find(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#008080;\">&quot;JTC&quot;</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vdn = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20.find(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#008080;\">&quot;VDN&quot;</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/>vo = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20.find(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#008080;\">&quot;VO&quot;</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/>dio = </span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.maq20.find(</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#008080;\">&quot;DIOL&quot;</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.vo = outputmodule.OutputModule(vo)<br/></span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#94558d;\">self</span><span style=\" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;\">.diol = diol.DIOL(dio)</span></pre></body></html>"))
-        self.connect_button.setWhatsThis(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">MAQ20 Process Simulator Demonstration System</span></p><p><span style=\" font-weight:600;\"/></p><p>The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </p><p/><p>MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </p><p>MAQ20-JTC 8 Channel J Type Thermocouple Input Module </p><p>MAQ20-VO 8 Channel Voltage Output Module </p><p>MAQ20-VDN 8 Channel Differential Voltage Input </p><p>MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </p></body></html>"))
+        self.connect_button.setToolTip(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><pre style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#2b2b2b;"><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20 = MAQ20(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">ip_address</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.ip_address_line.displayText()</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#cc7832;">, </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#aa4926;">port</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">=</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.port_spinbox.value())<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.jtc = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20.find(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#008080;">&quot;JTC&quot;</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vdn = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20.find(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#008080;">&quot;VDN&quot;</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/>vo = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20.find(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#008080;">&quot;VO&quot;</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/>dio = </span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.maq20.find(</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#008080;">&quot;DIOL&quot;</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.vo = outputmodule.OutputModule(vo)<br/></span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#94558d;">self</span><span style=" font-family:\'Courier New\'; font-size:12pt; color:#a9b7c6;">.diol = diol.DIOL(dio)</span></pre></body></html>',
+            )
+        )
+        self.connect_button.setWhatsThis(
+            _translate(
+                "MainWindow",
+                '<html><head/><body><p><span style=" font-weight:600;">MAQ20 Process Simulator Demonstration System</span></p><p><span style=" font-weight:600;"/></p><p>The MAQ20 Process Simulator Demonstration System was developed by Dataforth in order to showcase the operation of the MAQ20 system. The demonstration consists of the minimum size MAQ20-BKPL4 backbone having 4 IO modules slots. Modules within the system cover the basic functionality of a data acquisition and control system, modules include: </p><p/><p>MAQ20-COM4 Communication Module Supporting RS485, Ethernet and USB connectivity </p><p>MAQ20-JTC 8 Channel J Type Thermocouple Input Module </p><p>MAQ20-VO 8 Channel Voltage Output Module </p><p>MAQ20-VDN 8 Channel Differential Voltage Input </p><p>MAQ20-DIOL 10 Channel (5 In 5 Out) Digital IO Module With Special Functions </p></body></html>',
+            )
+        )
         self.connect_button.setText(_translate("MainWindow", "Connect"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
@@ -1194,10 +1541,10 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-

@@ -17,8 +17,8 @@ from collections import Iterable
 
 # Local Constants
 # These are defined in the spec to turn a coil on/off
-_turn_coil_on = struct.pack('>H', ModbusStatus.On)
-_turn_coil_off = struct.pack('>H', ModbusStatus.Off)
+_turn_coil_on = struct.pack(">H", ModbusStatus.On)
+_turn_coil_off = struct.pack(">H", ModbusStatus.Off)
 
 
 class WriteSingleCoilRequest(ModbusRequest):
@@ -38,6 +38,7 @@ class WriteSingleCoilRequest(ModbusRequest):
     0X0000 requests the coil to be off. All other values are illegal and
     will not affect the coil.
     """
+
     function_code = 5
     _rtu_frame_size = 8
 
@@ -56,7 +57,7 @@ class WriteSingleCoilRequest(ModbusRequest):
 
         :returns: The byte encoded message
         """
-        result = struct.pack('>H', self.address)
+        result = struct.pack(">H", self.address)
         if self.value:
             result += _turn_coil_on
         else:
@@ -68,8 +69,8 @@ class WriteSingleCoilRequest(ModbusRequest):
 
         :param data: The packet data to decode
         """
-        self.address, value = struct.unpack('>HH', data)
-        self.value = (value == ModbusStatus.On)
+        self.address, value = struct.unpack(">HH", data)
+        self.value = value == ModbusStatus.On
 
     def execute(self, context):
         """ Run a write coil request against a datastore
@@ -77,8 +78,8 @@ class WriteSingleCoilRequest(ModbusRequest):
         :param context: The datastore to request from
         :returns: The populated response or exception message
         """
-        '''if self.value not in [ModbusStatus.Off, ModbusStatus.On]:
-            return self.do_exception(ModbusExceptions.IllegalValue)'''
+        """if self.value not in [ModbusStatus.Off, ModbusStatus.On]:
+            return self.do_exception(ModbusExceptions.IllegalValue)"""
         if not context.validate(self.function_code, self.address, 1):
             return self.do_exception(ModbusExceptions.IllegalAddress)
 
@@ -91,9 +92,7 @@ class WriteSingleCoilRequest(ModbusRequest):
 
         :return: A string representation of the instance
         """
-        return 'WriteCoilRequest({0}, {1}) => '.format(
-            self.address, self.value
-        )
+        return "WriteCoilRequest({0}, {1}) => ".format(self.address, self.value)
 
 
 class WriteSingleCoilResponse(ModbusResponse):
@@ -101,6 +100,7 @@ class WriteSingleCoilResponse(ModbusResponse):
     The normal response is an echo of the request, returned after the coil
     state has been written.
     """
+
     function_code = 5
     _rtu_frame_size = 8
 
@@ -119,7 +119,7 @@ class WriteSingleCoilResponse(ModbusResponse):
 
         :return: The byte encoded message
         """
-        result = struct.pack('>H', self.address)
+        result = struct.pack(">H", self.address)
         if self.value:
             result += _turn_coil_on
         else:
@@ -131,15 +131,15 @@ class WriteSingleCoilResponse(ModbusResponse):
 
         :param data: The packet data to decode
         """
-        self.address, value = struct.unpack('>HH', data)
-        self.value = (value == ModbusStatus.On)
+        self.address, value = struct.unpack(">HH", data)
+        self.value = value == ModbusStatus.On
 
     def __str__(self):
         """ Returns a string representation of the instance
 
         :returns: A string representation of the instance
         """
-        return 'WriteCoilResponse({0}) => {1}'.format(self.address, self.value)
+        return "WriteCoilResponse({0}) => {1}".format(self.address, self.value)
 
 
 class WriteMultipleCoilsRequest(ModbusRequest):
@@ -153,6 +153,7 @@ class WriteMultipleCoilsRequest(ModbusRequest):
     data field. A logical '1' in a bit position of the field requests the
     corresponding output to be ON. A logical '0' requests it to be OFF."
     """
+
     function_code = 15
     _rtu_byte_count_pos = 6
 
@@ -178,7 +179,7 @@ class WriteMultipleCoilsRequest(ModbusRequest):
         """
         count = len(self.values)
         self.byte_count = (count + 7) // 8
-        packet = struct.pack('>HHB', self.address, count, self.byte_count)
+        packet = struct.pack(">HHB", self.address, count, self.byte_count)
         packet += pack_bitstring(self.values)
         return packet
 
@@ -187,7 +188,7 @@ class WriteMultipleCoilsRequest(ModbusRequest):
 
         :param data: The packet data to decode
         """
-        self.address, count, self.byte_count = struct.unpack('>HHB', data[0:5])
+        self.address, count, self.byte_count = struct.unpack(">HHB", data[0:5])
         values = unpack_bitstring(data[5:])
         self.values = values[:count]
 
@@ -213,7 +214,7 @@ class WriteMultipleCoilsRequest(ModbusRequest):
 
         :returns: A string representation of the instance
         """
-        return 'WriteMultipleCoilRequest ({0}) => {1} '.format(
+        return "WriteMultipleCoilRequest ({0}) => {1} ".format(
             self.address, len(self.values)
         )
 
@@ -223,6 +224,7 @@ class WriteMultipleCoilsResponse(ModbusResponse):
     The normal response returns the function code, starting address, and
     quantity of coils forced.
     """
+
     function_code = 15
     _rtu_frame_size = 8
 
@@ -241,29 +243,27 @@ class WriteMultipleCoilsResponse(ModbusResponse):
 
         :returns: The byte encoded message
         """
-        return struct.pack('>HH', self.address, self.count)
+        return struct.pack(">HH", self.address, self.count)
 
     def decode(self, data):
         """ Decodes a write coils response
 
         :param data: The packet data to decode
         """
-        self.address, self.count = struct.unpack('>HH', data)
+        self.address, self.count = struct.unpack(">HH", data)
 
     def __str__(self):
         """ Returns a string representation of the instance
 
         :returns: A string representation of the instance
         """
-        return 'WriteMultipleCoilResponse({0}, {1})'.format(
-            self.address, self.count
-        )
+        return "WriteMultipleCoilResponse({0}, {1})".format(self.address, self.count)
 
 
 # Exported symbols
 __all__ = [
-    'WriteSingleCoilRequest',
-    'WriteSingleCoilResponse',
-    'WriteMultipleCoilsRequest',
-    'WriteMultipleCoilsResponse',
+    "WriteSingleCoilRequest",
+    "WriteSingleCoilResponse",
+    "WriteMultipleCoilsRequest",
+    "WriteMultipleCoilsResponse",
 ]

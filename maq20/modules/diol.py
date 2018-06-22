@@ -12,10 +12,12 @@ class DIOL(MAQ20Module):
         :param maq20_module: pass in the module returned by MAQ20.get_module_list()
         """
         if isinstance(maq20_module, MAQ20Module):
-            super(DIOL, self).__init__(com=maq20_module.get_com_module(),
-                                       registration_number=maq20_module.get_registration_number())
+            super(DIOL, self).__init__(
+                com=maq20_module.get_com_module(),
+                registration_number=maq20_module.get_registration_number(),
+            )
         else:
-            raise RuntimeError('Passed in object is not MAQ20 object.')
+            raise RuntimeError("Passed in object is not MAQ20 object.")
 
     ######################
     # Module Configuration
@@ -27,7 +29,7 @@ class DIOL(MAQ20Module):
         :param channel: channel requested.
         :return: integer
         """
-        return self.read_register(100+channel)
+        return self.read_register(100 + channel)
 
     def read_default_output_configuration(self, channel=0):
         """
@@ -38,7 +40,7 @@ class DIOL(MAQ20Module):
         :param channel: channel requested
         :return: integer
         """
-        return self.read_register(110+channel)
+        return self.read_register(110 + channel)
 
     def write_default_output_configuration(self, channel=0, input_val=1):
         """
@@ -50,7 +52,7 @@ class DIOL(MAQ20Module):
         :param input_val: integer
         :return: modbus response
         """
-        return self.write_register(110+channel, input_val)
+        return self.write_register(110 + channel, input_val)
 
     def write_save_to_eeprom(self):
         """
@@ -64,7 +66,7 @@ class DIOL(MAQ20Module):
     ###################################################
 
     def read_dio_state(self, channel=0):
-        return self.read_register(1000+channel)
+        return self.read_register(1000 + channel)
 
     def read_dio_states_binary(self):
         return self.read_registers(1000, self._number_of_channels)
@@ -89,19 +91,16 @@ class DIOL(MAQ20Module):
     def write_special_function_0_none(self, timer):
         function = 0
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-        ])
+        self.write_registers(start_address, [function])  # 0
 
-    def write_special_function_1_pulse_frequency_counter(self,
-                                                         timer,
-                                                         pulses_per_revolution=1,
-                                                         internal_trigger=0,
-                                                         external_enable=0,
-                                                         ):
+    def write_special_function_1_pulse_frequency_counter(
+        self, timer, pulses_per_revolution=1, internal_trigger=0, external_enable=0
+    ):
         """
         The Pulse Counter function uses discrete input channel DI0 if Timer 0 is used to implement the
         function or discrete input channel DI2 if Timer 1 is used to implement the function. Pulses on the
@@ -122,28 +121,33 @@ class DIOL(MAQ20Module):
         """
         function = 1
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            0,
-            0,
-            0,  # 5
-            0,
-            0,
-            0,
-            pulses_per_revolution,
-            internal_trigger,  # 10
-            external_enable,
-            0,
-        ])
+        self.write_registers(
+            start_address,
+            [
+                function,  # 0
+                0,
+                0,
+                0,
+                0,
+                0,  # 5
+                0,
+                0,
+                0,
+                pulses_per_revolution,
+                internal_trigger,  # 10
+                external_enable,
+                0,
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
-        status = self.read_register(start_address+2)
+        status = self.read_register(start_address + 2)
 
         # if not status:  # No errors.
         #     self.write_register(start_address+90, 0)  # Save settings to EEPROM.
@@ -159,25 +163,28 @@ class DIOL(MAQ20Module):
         response = self.read_registers({0: 1100, 1: 1200}[timer], 13)
         pulse_count = utils.int16_to_int32(response[4:6])
         frequency = utils.int16_to_int32(response[6:8])
-        return "Function              : 1 = Pulse/Frequency Counter\n" \
-               "Arm/Disarm            : {0[1]}\n" \
-               "Function Status       : {0[2]}\n" \
-               "Alarm Status          : {0[3]}\n" \
-               "Pulse Count           : {1}\n" \
-               "Frequency             : {2}\n" \
-               "RPM                   : {0[8]}\n" \
-               "Pulses Per Revolution : {0[9]}\n" \
-               "Internal Trigger      : {0[10]}\n" \
-               "External Enable       : {0[11]}\n" \
-               "External Enable Status: {0[12]}\n".format(response, pulse_count, frequency)
+        return (
+            "Function              : 1 = Pulse/Frequency Counter\n"
+            "Arm/Disarm            : {0[1]}\n"
+            "Function Status       : {0[2]}\n"
+            "Alarm Status          : {0[3]}\n"
+            "Pulse Count           : {1}\n"
+            "Frequency             : {2}\n"
+            "RPM                   : {0[8]}\n"
+            "Pulses Per Revolution : {0[9]}\n"
+            "Internal Trigger      : {0[10]}\n"
+            "External Enable       : {0[11]}\n"
+            "External Enable Status: {0[12]}\n".format(response, pulse_count, frequency)
+        )
 
-    def write_special_function_2_pulse_frequency_counter_with_debounce(self,
-                                                                       timer,
-                                                                       internal_trigger=0,
-                                                                       debounce_output_enable=0,
-                                                                       low_time=100,
-                                                                       high_time=100,
-                                                                       ):
+    def write_special_function_2_pulse_frequency_counter_with_debounce(
+        self,
+        timer,
+        internal_trigger=0,
+        debounce_output_enable=0,
+        low_time=100,
+        high_time=100,
+    ):
         """
         The Pulse Counter with Debounce function uses discrete input channel DI0 if Timer 0 is used to
         implement the function or discrete input channel DI2 if Timer 1 is used to implement the function.
@@ -200,23 +207,28 @@ class DIOL(MAQ20Module):
         """
         function = 2
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            0,
-            0,
-            0,  # 5
-            0,
-            0,
-            internal_trigger,
-            debounce_output_enable,
-            low_time,  # 10
-            high_time,
-        ])
+        self.write_registers(
+            start_address,
+            [
+                function,  # 0
+                0,
+                0,
+                0,
+                0,
+                0,  # 5
+                0,
+                0,
+                internal_trigger,
+                debounce_output_enable,
+                low_time,  # 10
+                high_time,
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -236,46 +248,48 @@ class DIOL(MAQ20Module):
         response = self.read_registers({0: 1100, 1: 1200}[timer], 12)
         pulse_count = utils.int16_to_int32(response[4:6])
         frequency = utils.int16_to_int32(response[6:8])
-        return "Function              : 2 = Pulse/Frequency Counter w/ Debounce\n" \
-               "Arm/Disarm            : {0[1]}\n" \
-               "Function Status       : {0[2]}\n" \
-               "Alarm Status          : {0[3]}\n" \
-               "Pulse Count           : {1}\n" \
-               "Frequency             : {2}\n" \
-               "Internal Trigger      : {0[8]}\n" \
-               "Debounce Output Enable: {0[9]}\n" \
-               "Low Time (x 100us)    : {0[10]}\n" \
-               "High Time (x 100us)   : {0[11]}\n".format(response, pulse_count, frequency)
+        return (
+            "Function              : 2 = Pulse/Frequency Counter w/ Debounce\n"
+            "Arm/Disarm            : {0[1]}\n"
+            "Function Status       : {0[2]}\n"
+            "Alarm Status          : {0[3]}\n"
+            "Pulse Count           : {1}\n"
+            "Frequency             : {2}\n"
+            "Internal Trigger      : {0[8]}\n"
+            "Debounce Output Enable: {0[9]}\n"
+            "Low Time (x 100us)    : {0[10]}\n"
+            "High Time (x 100us)   : {0[11]}\n".format(response, pulse_count, frequency)
+        )
 
-    def write_special_function_3_waveform_measurement(self,
-                                                      timer,
-                                                      timebase=1,
-                                                      internal_trigger=0,
-                                                      events_to_measure=0,
-                                                      average_weight=4,
-                                                      ):
+    def write_special_function_3_waveform_measurement(
+        self,
+        timer,
+        timebase=1,
+        internal_trigger=0,
+        events_to_measure=0,
+        average_weight=4,
+    ):
         function = 3
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
         events_to_measure = utils.int32_to_int16s(events_to_measure)
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            0,
-            0,
-        ])
+        self.write_registers(start_address, [function, 0, 0, 0, 0])  # 0
 
         # Special Function Continuation.
-        self.write_registers(start_address+30, [
-            timebase,
-            internal_trigger,
-            events_to_measure[0],
-            events_to_measure[1],
-            average_weight,
-        ])
+        self.write_registers(
+            start_address + 30,
+            [
+                timebase,
+                internal_trigger,
+                events_to_measure[0],
+                events_to_measure[1],
+                average_weight,
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -305,67 +319,87 @@ class DIOL(MAQ20Module):
         max_high_time = utils.int16_to_int32(response[24:26])
         min_high_time = utils.int16_to_int32(response[26:28])
         events_to_measure = utils.int16_to_int32(response[32:34])
-        return "Function         : 3 = Waveform Measurement\n" \
-               "Arm/Disarm       : {0[1]}\n" \
-               "Function Status  : {0[2]}\n" \
-               "Alarm Status     : {0[3]}\n" \
-               "Events Measured  : {1}\n" \
-               "Frequency        : {2}\n" \
-               "Duty Cycle       : {0[8]}\n" \
-               "Period           : {3}\n" \
-               "Low Time         : {4}\n" \
-               "High Time        : {5}\n" \
-               "Avg Low Time     : {6}\n" \
-               "Avg High Time    : {7}\n" \
-               "Max Low Time     : {8}\n" \
-               "Min Low Time     : {9}\n" \
-               "Max High Time    : {10}\n" \
-               "Min High Time    : {11}\n" \
-               "Timebase         : {0[30]}\n" \
-               "Internal Trigger : {0[31]}\n" \
-               "Events To Measure: {12}\n" \
-               "Average Weight   : {0[34]}\n".format(response, events_measured, frequency, period, low_time,
-                                                     high_time, avg_low_time, avg_high_time, max_low_time,
-                                                     min_low_time, max_high_time, min_high_time, events_to_measure)
+        return (
+            "Function         : 3 = Waveform Measurement\n"
+            "Arm/Disarm       : {0[1]}\n"
+            "Function Status  : {0[2]}\n"
+            "Alarm Status     : {0[3]}\n"
+            "Events Measured  : {1}\n"
+            "Frequency        : {2}\n"
+            "Duty Cycle       : {0[8]}\n"
+            "Period           : {3}\n"
+            "Low Time         : {4}\n"
+            "High Time        : {5}\n"
+            "Avg Low Time     : {6}\n"
+            "Avg High Time    : {7}\n"
+            "Max Low Time     : {8}\n"
+            "Min Low Time     : {9}\n"
+            "Max High Time    : {10}\n"
+            "Min High Time    : {11}\n"
+            "Timebase         : {0[30]}\n"
+            "Internal Trigger : {0[31]}\n"
+            "Events To Measure: {12}\n"
+            "Average Weight   : {0[34]}\n".format(
+                response,
+                events_measured,
+                frequency,
+                period,
+                low_time,
+                high_time,
+                avg_low_time,
+                avg_high_time,
+                max_low_time,
+                min_low_time,
+                max_high_time,
+                min_high_time,
+                events_to_measure,
+            )
+        )
 
-    def write_special_function_4_time_between_events(self,
-                                                     timer,
-                                                     timebase=1,
-                                                     event_1_internal_trigger=0,
-                                                     event_2_internal_trigger=0,
-                                                     average_weight=4,
-                                                     events_to_measure=0,
-                                                     ):
+    def write_special_function_4_time_between_events(
+        self,
+        timer,
+        timebase=1,
+        event_1_internal_trigger=0,
+        event_2_internal_trigger=0,
+        average_weight=4,
+        events_to_measure=0,
+    ):
         function = 4
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
         events_to_measure = utils.int32_to_int16s(events_to_measure)
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            0,
-            0,
-            0,  # 5
-            0,
-            0,
-            0,
-            0,
-            0,  # 10
-            0,
-            0,
-            0,
-            0,
-            0,  # 15
-            timebase,
-            event_1_internal_trigger,
-            event_2_internal_trigger,
-            average_weight,
-            events_to_measure[0],  # 20
-            events_to_measure[1],
-        ])
+        self.write_registers(
+            start_address,
+            [
+                function,  # 0
+                0,
+                0,
+                0,
+                0,
+                0,  # 5
+                0,
+                0,
+                0,
+                0,
+                0,  # 10
+                0,
+                0,
+                0,
+                0,
+                0,  # 15
+                timebase,
+                event_1_internal_trigger,
+                event_2_internal_trigger,
+                average_weight,
+                events_to_measure[0],  # 20
+                events_to_measure[1],
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -390,43 +424,45 @@ class DIOL(MAQ20Module):
         time_between_events_min = utils.int16_to_int32(response[12:14])
         time_between_events_average = utils.int16_to_int32(response[14:16])
         events_to_measure = utils.int16_to_int32(response[20:22])
-        return "Function                    : 4 = Time Between Events\n" \
-               "Arm/Disarm                  : {0[1]}\n" \
-               "Function Status             : {0[2]}\n" \
-               "Alarm Status                : {0[3]}\n" \
-               "Events Measured             : {1}\n" \
-               "Frequency                   : {2}\n" \
-               "Time Between Events, current: {3}\n" \
-               "Time Between Events, max    : {4}\n" \
-               "Time Between Events, min    : {5}\n" \
-               "Time Between Events, average: {6}\n" \
-               "Timebase                    : {0[16]}\n" \
-               "Event 1 Internal Trigger    : {0[17]}\n" \
-               "Event 2 Internal Trigger    : {0[18]}\n" \
-               "Average Weight              : {0[19]}\n" \
-               "Events to measure           : {7}\n".format(response, events_measured, frequency,
-                                                            time_between_events_curr,
-                                                            time_between_events_max, time_between_events_min,
-                                                            time_between_events_average, events_to_measure)
+        return (
+            "Function                    : 4 = Time Between Events\n"
+            "Arm/Disarm                  : {0[1]}\n"
+            "Function Status             : {0[2]}\n"
+            "Alarm Status                : {0[3]}\n"
+            "Events Measured             : {1}\n"
+            "Frequency                   : {2}\n"
+            "Time Between Events, current: {3}\n"
+            "Time Between Events, max    : {4}\n"
+            "Time Between Events, min    : {5}\n"
+            "Time Between Events, average: {6}\n"
+            "Timebase                    : {0[16]}\n"
+            "Event 1 Internal Trigger    : {0[17]}\n"
+            "Event 2 Internal Trigger    : {0[18]}\n"
+            "Average Weight              : {0[19]}\n"
+            "Events to measure           : {7}\n".format(
+                response,
+                events_measured,
+                frequency,
+                time_between_events_curr,
+                time_between_events_max,
+                time_between_events_min,
+                time_between_events_average,
+                events_to_measure,
+            )
+        )
 
-    def write_special_function_5_frequency_generator(self,
-                                                     timer,
-                                                     frequency,
-                                                     ):
+    def write_special_function_5_frequency_generator(self, timer, frequency):
         function = 5
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
         frequency_16 = utils.int32_to_int16s(frequency)
 
         # Special Function Configuration [0,12]
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            0,
-            frequency_16[0],
-            frequency_16[1],
-        ])
+        self.write_registers(
+            start_address, [function, 0, 0, 0, frequency_16[0], frequency_16[1]]  # 0
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -445,18 +481,21 @@ class DIOL(MAQ20Module):
         """
         response = self.read_registers({0: 1100, 1: 1200}[timer], 22)
         frequency = utils.int16_to_int32(response[4:6])
-        return "Function                    : 5 = Frequency Generator\n" \
-               "Arm/Disarm                  : {0[1]}\n" \
-               "Frequency                   : {1}\n".format(response, frequency)
+        return (
+            "Function                    : 5 = Frequency Generator\n"
+            "Arm/Disarm                  : {0[1]}\n"
+            "Frequency                   : {1}\n".format(response, frequency)
+        )
 
-    def write_special_function_6_pwm_generator(self,
-                                               timer,
-                                               timebase=1,
-                                               output_2_enable=0,
-                                               period=500,
-                                               output_1_low_time=250,
-                                               output_2_low_time=250,
-                                               ):
+    def write_special_function_6_pwm_generator(
+        self,
+        timer,
+        timebase=1,
+        output_2_enable=0,
+        period=500,
+        output_1_low_time=250,
+        output_2_low_time=250,
+    ):
         """
         The Pulse Width Modulation Generator function uses discrete output channels DO0 and DO1 if
         Timer 0 is used to implement the function or discrete output channels DO2 and DO3 if Timer 1 is
@@ -481,24 +520,29 @@ class DIOL(MAQ20Module):
         """
         function = 6
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
         period = utils.int32_to_int16s(period)
         output_1_low_time = utils.int32_to_int16s(output_1_low_time)
         output_2_low_time = utils.int32_to_int16s(output_2_low_time)
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            timebase,
-            output_2_enable,
-            0,  # 5
-            period[0],
-            period[1],
-            output_1_low_time[0],
-            output_1_low_time[1],
-            output_2_low_time[0],  # 10
-            output_2_low_time[1],
-        ])
+        self.write_registers(
+            start_address,
+            [
+                function,  # 0
+                0,
+                0,
+                timebase,
+                output_2_enable,
+                0,  # 5
+                period[0],
+                period[1],
+                output_1_low_time[0],
+                output_1_low_time[1],
+                output_2_low_time[0],  # 10
+                output_2_low_time[1],
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -519,49 +563,59 @@ class DIOL(MAQ20Module):
         period = utils.int16_to_int32(response[6:8])
         output_1_low_time = utils.int16_to_int32(response[8:10])
         output_2_low_time = utils.int16_to_int32(response[10:12])
-        return "Function         : 6 = PWM Generator\n" \
-               "Arm/Disarm       : {0[1]}\n" \
-               "Timebase         : {0[3]}\n" \
-               "Output 2 Enable  : {0[4]}\n" \
-               "Period           : {1}\n" \
-               "Output 1 Low Time: {2}\n" \
-               "Output 2 Low Time: {3}\n".format(response, period, output_1_low_time, output_2_low_time)
+        return (
+            "Function         : 6 = PWM Generator\n"
+            "Arm/Disarm       : {0[1]}\n"
+            "Timebase         : {0[3]}\n"
+            "Output 2 Enable  : {0[4]}\n"
+            "Period           : {1}\n"
+            "Output 1 Low Time: {2}\n"
+            "Output 2 Low Time: {3}\n".format(
+                response, period, output_1_low_time, output_2_low_time
+            )
+        )
 
-    def write_special_function_7_one_shot_pulse_generator(self,
-                                                          timer,
-                                                          timebase=1,
-                                                          pulse_count_limit=0,
-                                                          output_pulse_polarity=0,
-                                                          trigger=0,
-                                                          pulse_width=500,
-                                                          pre_delay=100,
-                                                          post_delay=100,
-                                                          ):
+    def write_special_function_7_one_shot_pulse_generator(
+        self,
+        timer,
+        timebase=1,
+        pulse_count_limit=0,
+        output_pulse_polarity=0,
+        trigger=0,
+        pulse_width=500,
+        pre_delay=100,
+        post_delay=100,
+    ):
         function = 7
         start_address = {0: 1100, 1: 1200}[timer]
-        self.write_register(start_address + 1, 0)  # disarm previous special function to enable this one.
+        self.write_register(
+            start_address + 1, 0
+        )  # disarm previous special function to enable this one.
         pulse_count_limit = utils.int32_to_int16s(pulse_count_limit)
         pulse_width = utils.int32_to_int16s(pulse_width)
         pre_delay = utils.int32_to_int16s(pre_delay)
         post_delay = utils.int32_to_int16s(post_delay)
-        self.write_registers(start_address, [
-            function,  # 0
-            0,
-            0,
-            timebase,
-            0,
-            0,  # 5
-            pulse_count_limit[0],
-            pulse_count_limit[1],
-            output_pulse_polarity,
-            trigger,
-            pulse_width[0],  # 10
-            pulse_width[1],
-            pre_delay[0],
-            pre_delay[1],
-            post_delay[0],
-            post_delay[1],  # 15
-        ])
+        self.write_registers(
+            start_address,
+            [
+                function,  # 0
+                0,
+                0,
+                timebase,
+                0,
+                0,  # 5
+                pulse_count_limit[0],
+                pulse_count_limit[1],
+                output_pulse_polarity,
+                trigger,
+                pulse_width[0],  # 10
+                pulse_width[1],
+                pre_delay[0],
+                pre_delay[1],
+                post_delay[0],
+                post_delay[1],  # 15
+            ],
+        )
 
         self.write_register(start_address + 1, 1)  # Enable/arm special function.
 
@@ -584,21 +638,29 @@ class DIOL(MAQ20Module):
         pulse_width = utils.int16_to_int32(response[10:12])
         pre_delay = utils.int16_to_int32(response[12:14])
         post_delay = utils.int16_to_int32(response[14:16])
-        return "Function             : 7 = One-Shot Pulse Generator\n" \
-               "Arm/Disarm           : {0[1]}\n" \
-               "Timebase             : {0[3]}\n" \
-               "Pulse Count          : {1}\n" \
-               "Pulse Count Limit    : {2}\n" \
-               "Output Pulse Polarity: {0[8]}\n" \
-               "Trigger              : {0[9]}\n" \
-               "Pulse Width          : {3}\n" \
-               "Pre-delay            : {4}\n" \
-               "Post-delay           : {5}\n".format(response, pulse_count, pulse_count_limit, pulse_width,
-                                                     pre_delay, post_delay)
+        return (
+            "Function             : 7 = One-Shot Pulse Generator\n"
+            "Arm/Disarm           : {0[1]}\n"
+            "Timebase             : {0[3]}\n"
+            "Pulse Count          : {1}\n"
+            "Pulse Count Limit    : {2}\n"
+            "Output Pulse Polarity: {0[8]}\n"
+            "Trigger              : {0[9]}\n"
+            "Pulse Width          : {3}\n"
+            "Pre-delay            : {4}\n"
+            "Post-delay           : {5}\n".format(
+                response,
+                pulse_count,
+                pulse_count_limit,
+                pulse_width,
+                pre_delay,
+                post_delay,
+            )
+        )
 
     def write_special_function_7_software_trigger(self, timer):
         start_address = {0: 1100, 1: 1200}[timer]
-        return self.write_register(start_address+20, 0)
+        return self.write_register(start_address + 20, 0)
 
     def read_special_function_information(self, timer):
         start_address = {0: 1100, 1: 1200}[timer]
@@ -606,7 +668,9 @@ class DIOL(MAQ20Module):
         if current_function == 1:
             result = self.read_special_function_1_pulse_frequency_counter(timer)
         elif current_function == 2:
-            result = self.read_special_function_2_pulse_frequency_counter_with_debounce(timer)
+            result = self.read_special_function_2_pulse_frequency_counter_with_debounce(
+                timer
+            )
         elif current_function == 3:
             result = self.read_special_function_3_waveform_measurement(timer)
         elif current_function == 4:
@@ -622,7 +686,7 @@ class DIOL(MAQ20Module):
         return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from maq20 import MAQ20
 
     maq20 = MAQ20()

@@ -11,10 +11,12 @@ from collections import Callable
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
 # region Base PDU's
+
 
 class ModbusPDU(object):
     """
@@ -53,10 +55,10 @@ class ModbusPDU(object):
 
     def __init__(self, **kwargs):
         """ Initializes the base data for a modbus request """
-        self.transaction_id = kwargs.get('transaction', Defaults.TransactionId)
-        self.protocol_id = kwargs.get('protocol', Defaults.ProtocolId)
-        self.unit_id = kwargs.get('unit', Defaults.UnitId)
-        self.skip_encode = kwargs.get('skip_encode', False)
+        self.transaction_id = kwargs.get("transaction", Defaults.TransactionId)
+        self.protocol_id = kwargs.get("protocol", Defaults.ProtocolId)
+        self.unit_id = kwargs.get("unit", Defaults.UnitId)
+        self.skip_encode = kwargs.get("skip_encode", False)
         self.check = 0x0000
 
     def encode(self):
@@ -81,13 +83,13 @@ class ModbusPDU(object):
         :param buffer: A buffer containing the data that have been received.
         :returns: The number of bytes in the PDU.
         """
-        if hasattr(cls, '_rtu_frame_size'):
+        if hasattr(cls, "_rtu_frame_size"):
             return cls._rtu_frame_size
-        elif hasattr(cls, '_rtu_byte_count_pos'):
+        elif hasattr(cls, "_rtu_byte_count_pos"):
             return rtu_frame_size(buffer, cls._rtu_byte_count_pos)
         else:
             raise NotImplementedError(
-                'Cannot determine RTU frame size for '.format(cls.__name__)
+                "Cannot determine RTU frame size for ".format(cls.__name__)
             )
 
 
@@ -104,9 +106,9 @@ class ModbusRequest(ModbusPDU):
         :param exception: The exception to return
         :raises: An exception response
         """
-        _logger.error('Exception Response F({0}) E({1})'.format(
-            self.function_code, exception
-        ))
+        _logger.error(
+            "Exception Response F({0}) E({1})".format(self.function_code, exception)
+        )
         return ExceptionResponse(self.function_code, exception)
 
 
@@ -130,15 +132,18 @@ class ModbusResponse(ModbusPDU):
         """ Proxy to the lower level initializer """
         ModbusPDU.__init__(self, **kwargs)
 
+
 # endregion
 
 
 # region Exception PDU's
 
+
 class ModbusExceptions(Singleton):
     """
     An enumeration of the valid modbus exceptions
     """
+
     IllegalFunction = 0x01
     IllegalAddress = 0x02
     IllegalValue = 0x03
@@ -158,7 +163,7 @@ class ModbusExceptions(Singleton):
         """
         values = dict()
         for k, v in cls.__dict__.items():
-            if k.startswith('__') or isinstance(v, Callable):
+            if k.startswith("__") or isinstance(v, Callable):
                 continue
             values[v] = k
         return values.get(code, None)
@@ -166,6 +171,7 @@ class ModbusExceptions(Singleton):
 
 class ExceptionResponse(ModbusResponse):
     """ Base class for a modbus exception PDU """
+
     ExceptionOffset = 0x80
     _rtu_frame_size = 5
 
@@ -185,7 +191,7 @@ class ExceptionResponse(ModbusResponse):
 
         :returns: The encoded exception packet
         """
-        return struct.pack('B', self.exception_code)
+        return struct.pack("B", self.exception_code)
 
     def decode(self, data):
         """ Decodes a modbus exception response
@@ -200,7 +206,7 @@ class ExceptionResponse(ModbusResponse):
         :returns: The string representation of an exception response
         """
         message = ModbusExceptions.decode(self.exception_code)
-        return 'Exception Response({0}, {1}, {2})'.format(
+        return "Exception Response({0}, {1}, {2})".format(
             self.function_code, self.original_code, message
         )
 
@@ -213,6 +219,7 @@ class IllegalFunctionRequest(ModbusRequest):
         - does not implement the function code **or**
         - is not in a state that allows it to process the function
     """
+
     ErrorCode = 1
 
     def __init__(self, function_code, **kwargs):
@@ -238,14 +245,15 @@ class IllegalFunctionRequest(ModbusRequest):
         """
         return ExceptionResponse(self.function_code, self.ErrorCode)
 
+
 # endregion
 
 
 # Exported symbols
 __all__ = [
-    'ModbusRequest',
-    'ModbusResponse',
-    'ModbusExceptions',
-    'ExceptionResponse',
-    'IllegalFunctionRequest',
+    "ModbusRequest",
+    "ModbusResponse",
+    "ModbusExceptions",
+    "ExceptionResponse",
+    "IllegalFunctionRequest",
 ]

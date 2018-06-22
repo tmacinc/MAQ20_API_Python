@@ -19,10 +19,10 @@ class MAQ20:
         :param port: default is 502
         """
         self._com = None  # type: COMx
-        self._ip_address = ''
+        self._ip_address = ""
         self._port = 0
-        self._username = ''
-        self._password = ''
+        self._username = ""
+        self._password = ""
         if com is None:
             self._ip_address = ip_address
             self._port = port
@@ -115,8 +115,12 @@ class MAQ20:
         """
         result = []
         for a_module in self._module_list[1:]:
-            result.append(a_module.read_data(start_channel=0,
-                                             number_of_channels=a_module.get_number_of_channels()))
+            result.append(
+                a_module.read_data(
+                    start_channel=0,
+                    number_of_channels=a_module.get_number_of_channels(),
+                )
+            )
         return result
 
     def print_system_data(self):
@@ -127,7 +131,13 @@ class MAQ20:
         data = self.read_system_data()
         i = 0
         for a_module in self._module_list[1:]:
-            print(str(a_module .get_registration_number()) + ": " + a_module .get_name() + "= " + str(data[i]))
+            print(
+                str(a_module.get_registration_number())
+                + ": "
+                + a_module.get_name()
+                + "= "
+                + str(data[i])
+            )
             i += 1
 
     def get_com(self):
@@ -143,9 +153,11 @@ class MAQ20:
         :param channel: int, 0 and greater.
         :return: list
         """
-        return self._module_list[a_module].read_data(start_channel=channel, number_of_channels=1)
+        return self._module_list[a_module].read_data(
+            start_channel=channel, number_of_channels=1
+        )
 
-    def find(self, name_or_sn: str=None):
+    def find(self, name_or_sn: str = None):
         """
         Attempts to find a MAmodule by name or serial number.
         :param name_or_sn: a string that contains a partial name or full serial number.
@@ -155,8 +167,8 @@ class MAQ20:
         result = None
         if type(name_or_sn) is str:
             for a_module in self._module_list:
-                module_name = a_module .get_name()
-                sn = a_module .get_serial_number()
+                module_name = a_module.get_name()
+                sn = a_module.get_serial_number()
                 if module_name.find(name_or_sn) > -1 or name_or_sn == sn:
                     result = a_module
                     break
@@ -168,13 +180,22 @@ class MAQ20:
         :return: str
         """
         time_info = self._com.read_registers(1200, 7)
-        return "20{0[6]}/{0[5]}/{0[4]} - {1} - {0[2]:02}.{0[1]:02}.{0[0]:02}".format(time_info, {
-            1: "Sunday", 2: "Monday", 3: "Tuesday", 4: "Wednesday", 5: "Thursday", 6: "Friday", 7: "Saturday",
-        }[time_info[3]])
+        return "20{0[6]}/{0[5]}/{0[4]} - {1} - {0[2]:02}.{0[1]:02}.{0[0]:02}".format(
+            time_info,
+            {
+                1: "Sunday",
+                2: "Monday",
+                3: "Tuesday",
+                4: "Wednesday",
+                5: "Thursday",
+                6: "Friday",
+                7: "Saturday",
+            }[time_info[3]],
+        )
 
     # FTP functions.
 
-    def ftp_login(self, username='maq20', password='1234'):
+    def ftp_login(self, username="maq20", password="1234"):
         self._username = username
         self._password = password
 
@@ -187,18 +208,20 @@ class MAQ20:
                 ftp.dir(result.append)
             return result
         else:
-            return 'SD card not inserted.'
+            return "SD card not inserted."
 
     def ftp_get(self, filename: str):
         if self._com.read_card_available():
             with FTP(self._ip_address) as ftp:
                 ftp.login(user=self._username, passwd=self._password)
                 # ftp.set_pasv(False)
-                with open(filename, 'wb') as local_file:
-                    result = ftp.retrbinary('RETR {}'.format(filename.upper()), local_file.write)
+                with open(filename, "wb") as local_file:
+                    result = ftp.retrbinary(
+                        "RETR {}".format(filename.upper()), local_file.write
+                    )
             return result
         else:
-            return 'SD card not inserted.'
+            return "SD card not inserted."
 
     def ftp_del(self, filename: str):
         if self._com.read_card_available():
@@ -207,30 +230,32 @@ class MAQ20:
                 result = ftp.delete(filename)
             return result
         else:
-            return 'SD card not inserted.'
+            return "SD card not inserted."
 
     def ftp_filenames(self):
         result = []
         response = self.ftp_dir()
         for line in response:
-            line_sections = line.split(' ')
-            if len(line_sections[-1]) > 0 and line_sections[-1].endswith('.TXT'):  # Check that line is not empty
+            line_sections = line.split(" ")
+            if len(line_sections[-1]) > 0 and line_sections[-1].endswith(
+                ".TXT"
+            ):  # Check that line is not empty
                 result.append(line_sections[-1])
         return result
 
     def setup_sd_card_logging(
-            self,
-            filename,
-            start_address1=3000,
-            num_of_registers1=8,
-            start_address2=5000,
-            num_of_registers2=0,
-            start_address3=7000,
-            num_of_registers3=0,
-            start_address4=9000,
-            num_of_registers4=0,
-            interval_ms=100,
-            number_of_samples=100,
+        self,
+        filename,
+        start_address1=3000,
+        num_of_registers1=8,
+        start_address2=5000,
+        num_of_registers2=0,
+        start_address3=7000,
+        num_of_registers3=0,
+        start_address4=9000,
+        num_of_registers4=0,
+        interval_ms=100,
+        number_of_samples=100,
     ):
         if not self._com.read_card_available():
             raise AttributeError("No SD card is inserted in COM module.")
@@ -248,7 +273,9 @@ class MAQ20:
         self._com.write_log_interval(interval_ms)
         self._com.write_log_number_of_samples(number_of_samples)
         self._com.write_log_enable(1)
-        return interval_ms*number_of_samples/1000  # return how long this will take in seconds
+        return (
+            interval_ms * number_of_samples / 1000
+        )  # return how long this will take in seconds
 
     # Magic Methods Override.
 

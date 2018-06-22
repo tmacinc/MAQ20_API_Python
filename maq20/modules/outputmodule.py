@@ -3,13 +3,14 @@ import maq20.utilities as utils
 
 
 class OutputModule(MAQ20Module):
-
     def __init__(self, maq20_module):
         if isinstance(maq20_module, MAQ20Module):
-            super(OutputModule, self).__init__(com=maq20_module.get_com_module(),
-                                               registration_number=maq20_module.get_registration_number())
+            super(OutputModule, self).__init__(
+                com=maq20_module.get_com_module(),
+                registration_number=maq20_module.get_registration_number(),
+            )
         else:
-            raise RuntimeError('Passed in object is not MAQ20 object.')
+            raise RuntimeError("Passed in object is not MAQ20 object.")
 
     ################################
     # Module Configuration [100,499]
@@ -21,7 +22,7 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be read.
         :return: integer.
         """
-        return self.read_register(100+channel)
+        return self.read_register(100 + channel)
 
     def write_output_range(self, channel, value):
         """
@@ -30,7 +31,7 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be used
         :return: modbus response
         """
-        return self.write_register(100+channel, value)
+        return self.write_register(100 + channel, value)
 
     def read_default_output(self, channel=0):
         """
@@ -38,7 +39,7 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be read.
         :return: int
         """
-        return self.read_register(110+channel)
+        return self.read_register(110 + channel)
 
     def write_default_output(self, channel, value):
         """
@@ -47,7 +48,7 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be used.
         :return: modbus response.
         """
-        return self.write_register(110+channel, value)
+        return self.write_register(110 + channel, value)
 
     def write_save_module_configuration_to_eeprom(self, value):
         """
@@ -95,7 +96,11 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be read.
         :return: integer.
         """
-        return self.read_register(610+channel) if channel < self._number_of_channels else None
+        return (
+            self.read_register(610 + channel)
+            if channel < self._number_of_channels
+            else None
+        )
 
     def write_save_burst_data_to_eeprom(self, channel=0):
         """
@@ -103,7 +108,11 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be saved.
         :return: modbus response.
         """
-        return self.write_register(619, channel) if channel < self._number_of_channels else None
+        return (
+            self.write_register(619, channel)
+            if channel < self._number_of_channels
+            else None
+        )
 
     def read_burst_data(self, channel=0):
         """
@@ -115,4 +124,4 @@ class OutputModule(MAQ20Module):
         :param channel: channel to be read.
         :return: integer.
         """
-        return self.read_registers(620+(channel*10), 10)
+        return self.read_registers(620 + (channel * 10), 10)

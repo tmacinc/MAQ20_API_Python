@@ -7,8 +7,6 @@ class MAQ20Module:
     This contains every functionality that is shared between all modules.
     """
 
-    no_ranges_error = AttributeError('Converting to Engineering units not available for this module')
-
     def __init__(self, com=None, registration_number=0):
         """
         Reads general information about the MAQ20 module to registers.
@@ -22,15 +20,23 @@ class MAQ20Module:
 
         module_information = self.read_registers(0, 42)
 
-        self._name = utils.response_to_string(module_information[0:15])  # self.read_name()
+        self._name = utils.response_to_string(
+            module_information[0:15]
+        )  # self.read_name()
         self._inputs = module_information[40]  # self.read_input_channels()
         self._outputs = module_information[41]  # self.read_output_channels()
         self._number_of_channels = self._inputs + self._outputs
         if self._number_of_channels < 0:
             self._number_of_channels = 0
-        self._serialNumber = utils.response_to_string(module_information[19:30])  # self.read_serial_number()
-        self._dateCode = utils.response_to_string(module_information[30:35])  # self.read_date_code()
-        self._firmwareVersion = utils.response_to_string(module_information[35:40])  # self.read_firmware_revision()
+        self._serialNumber = utils.response_to_string(
+            module_information[19:30]
+        )  # self.read_serial_number()
+        self._dateCode = utils.response_to_string(
+            module_information[30:35]
+        )  # self.read_date_code()
+        self._firmwareVersion = utils.response_to_string(
+            module_information[35:40]
+        )  # self.read_firmware_revision()
         self._iter_index = 0
 
         # This variable stores the number of ranges that have range information available,
@@ -67,8 +73,14 @@ class MAQ20Module:
         :param number_of_registers: number of registers to be read in sequence.
         :return: list(int) [-32767, 32767]
         """
-        if 0 <= address < 2000 and 0 < number_of_registers <= 250 and (address + number_of_registers) < 2000:
-            return self._com.read_registers(address + self._starting_address, number_of_registers)
+        if (
+            0 <= address < 2000
+            and 0 < number_of_registers <= 250
+            and (address + number_of_registers) < 2000
+        ):
+            return self._com.read_registers(
+                address + self._starting_address, number_of_registers
+            )
         else:
             return False
 
@@ -155,10 +167,16 @@ class MAQ20Module:
         return self.read_register(1700)
 
     def read_range(self, a_range=0):
-        return self.read_registers(1710 + (a_range * 20), 11) if a_range < self._number_of_ranges else None
+        return (
+            self.read_registers(1710 + (a_range * 20), 11)
+            if a_range < self._number_of_ranges
+            else None
+        )
 
     def _load_number_of_ranges(self):
-        self._number_of_ranges = self.read_range_count() if self._number_of_channels > 0 else None
+        self._number_of_ranges = (
+            self.read_range_count() if self._number_of_channels > 0 else None
+        )
 
     def load_ranges_information(self):
         """
@@ -177,13 +195,16 @@ class MAQ20Module:
                 self._ranges_information = []
                 for range_num in range(self._number_of_ranges):
                     range_info = self.read_range(range_num)  # type: list
-                    self._ranges_information.append({
-                        "Engineering-FS": range_info[0] * 10 ** range_info[4],
-                        "Engineering+FS": range_info[2] * 10 ** range_info[4],
-                        "EngineeringUnits": str(chr(range_info[5])) + str(chr(range_info[6])),
-                        "CountValue-FS": utils.int16_to_int32(range_info[7:9]),
-                        "CountValue+FS": utils.int16_to_int32(range_info[9:11]),
-                    })
+                    self._ranges_information.append(
+                        {
+                            "Engineering-FS": range_info[0] * 10 ** range_info[4],
+                            "Engineering+FS": range_info[2] * 10 ** range_info[4],
+                            "EngineeringUnits": str(chr(range_info[5]))
+                            + str(chr(range_info[6])),
+                            "CountValue-FS": utils.int16_to_int32(range_info[7:9]),
+                            "CountValue+FS": utils.int16_to_int32(range_info[9:11]),
+                        }
+                    )
                     check = self._ranges_information[-1]
                     passed = self._check_range_validity(check)
                     if not passed:
@@ -195,14 +216,25 @@ class MAQ20Module:
                             """
                             del self._ranges_information[-1]
                             for a_range in range(1, self._number_of_ranges):
-                                range_info = self.read_registers(1710+(a_range*11), 11)
-                                self._ranges_information.append({
-                                    "Engineering-FS": range_info[0] * 10 ** range_info[4],
-                                    "Engineering+FS": range_info[2] * 10 ** range_info[4],
-                                    "EngineeringUnits": str(chr(range_info[5])) + str(chr(range_info[6])),
-                                    "CountValue-FS": utils.int16_to_int32(range_info[7:9]),
-                                    "CountValue+FS": utils.int16_to_int32(range_info[9:11]),
-                                })
+                                range_info = self.read_registers(
+                                    1710 + (a_range * 11), 11
+                                )
+                                self._ranges_information.append(
+                                    {
+                                        "Engineering-FS": range_info[0]
+                                        * 10 ** range_info[4],
+                                        "Engineering+FS": range_info[2]
+                                        * 10 ** range_info[4],
+                                        "EngineeringUnits": str(chr(range_info[5]))
+                                        + str(chr(range_info[6])),
+                                        "CountValue-FS": utils.int16_to_int32(
+                                            range_info[7:9]
+                                        ),
+                                        "CountValue+FS": utils.int16_to_int32(
+                                            range_info[9:11]
+                                        ),
+                                    }
+                                )
                                 check = self._ranges_information[-1]
                                 passed = self._check_range_validity(check)
                                 if not passed:
@@ -229,36 +261,52 @@ class MAQ20Module:
             passed = False
         if -10000 > a_range["Engineering+FS"] or a_range["Engineering+FS"] > 10000:
             passed = False
-        if -2147483648 > a_range["CountValue-FS"] or a_range["CountValue-FS"] > 2147483648:
+        if (
+            -2147483648 > a_range["CountValue-FS"]
+            or a_range["CountValue-FS"] > 2147483648
+        ):
             passed = False
-        if -2147483648 > a_range["CountValue+FS"] or a_range["CountValue+FS"] > 2147483648:
+        if (
+            -2147483648 > a_range["CountValue+FS"]
+            or a_range["CountValue+FS"] > 2147483648
+        ):
             passed = False
         return passed
 
     def get_engineering_full_scale_positive(self, channel):
         if channel > self._number_of_channels:
             return None
-        return self._ranges_information[self._channel_active_ranges[channel]]["Engineering+FS"]
+        return self._ranges_information[self._channel_active_ranges[channel]][
+            "Engineering+FS"
+        ]
 
     def get_engineering_full_scale_negative(self, channel):
         if channel > self._number_of_channels:
             return None
-        return self._ranges_information[self._channel_active_ranges[channel]]["Engineering-FS"]
+        return self._ranges_information[self._channel_active_ranges[channel]][
+            "Engineering-FS"
+        ]
 
     def get_counts_full_scale_positive(self, channel):
         if channel > self._number_of_channels:
             return None
-        return self._ranges_information[self._channel_active_ranges[channel]]["CountValue+FS"]
+        return self._ranges_information[self._channel_active_ranges[channel]][
+            "CountValue+FS"
+        ]
 
     def get_counts_full_scale_negative(self, channel):
         if channel > self._number_of_channels:
             return None
-        return self._ranges_information[self._channel_active_ranges[channel]]["CountValue-FS"]
+        return self._ranges_information[self._channel_active_ranges[channel]][
+            "CountValue-FS"
+        ]
 
     def get_engineering_units(self, channel):
         if channel > self._number_of_channels:
             return None
-        return self._ranges_information[self._channel_active_ranges[channel]]["EngineeringUnits"]
+        return self._ranges_information[self._channel_active_ranges[channel]][
+            "EngineeringUnits"
+        ]
 
     def load_channel_active_ranges(self):
         """
@@ -266,7 +314,9 @@ class MAQ20Module:
         :return: the list saved.
         """
         if self.get_number_of_channels() > 0:
-            self._channel_active_ranges = self.read_registers(100, self.get_number_of_channels())
+            self._channel_active_ranges = self.read_registers(
+                100, self.get_number_of_channels()
+            )
         else:
             pass
         return self._channel_active_ranges
@@ -276,7 +326,11 @@ class MAQ20Module:
         :param channel: channel requested.
         :return: integer of the active channel range.
         """
-        return self._channel_active_ranges[channel] if channel < self._number_of_channels else False
+        return (
+            self._channel_active_ranges[channel]
+            if channel < self._number_of_channels
+            else False
+        )
 
     def get_ranges_information(self):
         """
@@ -295,7 +349,7 @@ class MAQ20Module:
         """
         if not self.has_range_information():
             return False
-        info_str = ''
+        info_str = ""
         range_num = 0
         for range_info in self._ranges_information:
             info_str += "Range: {}\n".format(range_num)
@@ -311,7 +365,7 @@ class MAQ20Module:
             result.append(
                 utils.counts_to_engineering_units_dict_input(
                     data,
-                    self._ranges_information[self._channel_active_ranges[channel + i]]
+                    self._ranges_information[self._channel_active_ranges[channel + i]],
                 )
             )
         return result
@@ -355,35 +409,50 @@ class MAQ20Module:
         self._check_channel_inputs(channel)
         return self.read_register(address + channel)
 
-    def _read_data_counts_address_input(self, address, start_channel, number_of_channels):
+    def _read_data_counts_address_input(
+        self, address, start_channel, number_of_channels
+    ):
         self._check_channel_inputs(start_channel, number_of_channels)
         return self.read_registers(address + start_channel, number_of_channels)
 
     def _read_channel_data_address_input(self, address, channel):
         counts = self._read_channel_data_counts_address_input(address, channel)
         if self.has_range_information():
-            return utils.counts_to_engineering_units_dict_input(counts, self.get_channel_ranges_information(channel))
-        elif self._name.find('DIO') != -1:  # Check if the module is a digital module.
+            return utils.counts_to_engineering_units_dict_input(
+                counts, self.get_channel_ranges_information(channel)
+            )
+        elif self._name.find("DIO") != -1:  # Check if the module is a digital module.
             return counts  # same as counts.
         else:
-            raise AttributeError('This module does not have Range information available. Try reading counts instead.')
+            raise AttributeError(
+                "This module does not have Range information available. Try reading counts instead."
+            )
 
     def _read_data_address_input(self, address, start_channel, number_of_channels):
-        counts = self._read_data_counts_address_input(address, start_channel, number_of_channels)
+        counts = self._read_data_counts_address_input(
+            address, start_channel, number_of_channels
+        )
         if self.has_range_information():
             return self.counts_to_eng_units_list(counts, start_channel)
-        elif self._name.find('DIO') != -1:  # Check if the module is a digital module.
+        elif self._name.find("DIO") != -1:  # Check if the module is a digital module.
             return counts  # same as counts.
         else:
-            raise AttributeError('This module does not have Range information available. Try reading counts instead.')
+            raise AttributeError(
+                "This module does not have Range information available. Try reading counts instead."
+            )
 
     def _check_channel_inputs(self, channel, number_of_channels=1):
         if number_of_channels < 0:
-            raise AttributeError('Number of channels cannot be negative.')
-        if 0 <= channel < self._number_of_channels and channel + number_of_channels <= self._number_of_channels:
+            raise AttributeError("Number of channels cannot be negative.")
+        if (
+            0 <= channel < self._number_of_channels
+            and channel + number_of_channels <= self._number_of_channels
+        ):
             return True
         else:
-            raise AttributeError('Outside number of channels range: {}'.format(self._number_of_channels))
+            raise AttributeError(
+                "Outside number of channels range: {}".format(self._number_of_channels)
+            )
 
     # Counts:
 
@@ -400,9 +469,13 @@ class MAQ20Module:
         p_fs_c = self.get_counts_full_scale_positive(channel)
         n_fs_c = self.get_counts_full_scale_negative(channel)
         if n_fs_c <= data <= p_fs_c:
-            self.write_register(1000+channel, data)
+            self.write_register(1000 + channel, data)
         else:
-            raise AttributeError('Outside available Range values in counts: {} to {}'.format(n_fs_c, p_fs_c))
+            raise AttributeError(
+                "Outside available Range values in counts: {} to {}".format(
+                    n_fs_c, p_fs_c
+                )
+            )
 
     def read_data_counts(self, start_channel=0, number_of_channels=1):
         """
@@ -411,12 +484,14 @@ class MAQ20Module:
         :param number_of_channels: number of channels to be read.
         :return: list(int)
         """
-        return self._read_data_counts_address_input(1000, start_channel, number_of_channels)
+        return self._read_data_counts_address_input(
+            1000, start_channel, number_of_channels
+        )
 
     def write_data_counts(self, start_channel, data_set):
         self._check_channel_inputs(start_channel, len(data_set))
         for i in range(len(data_set)):
-            self.write_data_counts(i+start_channel, data_set[i])
+            self.write_data_counts(i + start_channel, data_set[i])
 
     # Engineering values:
 
@@ -439,15 +514,21 @@ class MAQ20Module:
             p_fs = self.get_engineering_full_scale_positive(channel)
             n_fs = self.get_engineering_full_scale_negative(channel)
             if n_fs >= data >= p_fs:
-                raise AttributeError('Outside available Range values: {} to {}'.format(n_fs, p_fs))
-            return self.write_register(1000 + channel,
-                                       utils.engineering_units_to_counts_dict_input(data,
-                                                                                    self.get_channel_ranges_information(
-                                                                                        channel)))
-        elif self._name.find('DIO') != -1:  # Check if the module is a digital module.
-            return self.write_register(1000+channel, data)
+                raise AttributeError(
+                    "Outside available Range values: {} to {}".format(n_fs, p_fs)
+                )
+            return self.write_register(
+                1000 + channel,
+                utils.engineering_units_to_counts_dict_input(
+                    data, self.get_channel_ranges_information(channel)
+                ),
+            )
+        elif self._name.find("DIO") != -1:  # Check if the module is a digital module.
+            return self.write_register(1000 + channel, data)
         else:
-            raise AttributeError('This module does not have Range information available. Try reading counts instead.')
+            raise AttributeError(
+                "This module does not have Range information available. Try reading counts instead."
+            )
 
     def read_data(self, start_channel=0, number_of_channels=1):
         """
@@ -466,7 +547,7 @@ class MAQ20Module:
         :return: 
         """
         for i in range(len(data_set)):
-            self.write_data_counts(i+start_channel, data_set[i])
+            self.write_data_counts(i + start_channel, data_set[i])
 
     #########################
     # Magic Methods Override.
@@ -511,7 +592,7 @@ class MAQ20Module:
         if isinstance(key, slice):
             m_slice = list(range(self._number_of_channels))[key]
             if len(m_slice) != len(value):
-                raise AssertionError('key and value are not the same length.')
+                raise AssertionError("key and value are not the same length.")
             for i in range(len(m_slice)):
                 m_slice[i] = self.write_channel_data(m_slice[i], value[i])
         else:

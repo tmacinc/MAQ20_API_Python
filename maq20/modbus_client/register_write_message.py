@@ -20,6 +20,7 @@ class WriteSingleRegisterRequest(ModbusRequest):
     be written. Registers are addressed starting at zero. Therefore register
     numbered 1 is addressed as 0.
     """
+
     function_code = 6
     _rtu_frame_size = 8
 
@@ -40,14 +41,14 @@ class WriteSingleRegisterRequest(ModbusRequest):
         """
         if self.skip_encode:
             return self.value
-        return struct.pack('>HH', self.address, self.value)
+        return struct.pack(">HH", self.address, self.value)
 
     def decode(self, data):
         """ Decode a write single register packet packet request
 
         :param data: The request to decode
         """
-        self.address, self.value = struct.unpack('>HH', data)
+        self.address, self.value = struct.unpack(">HH", data)
 
     def execute(self, context):
         """ Run a write single register request against a datastore
@@ -69,9 +70,7 @@ class WriteSingleRegisterRequest(ModbusRequest):
 
         :returns: A string representation of the instance
         """
-        return 'WriteRegisterRequest {0} => {1}'.format(
-            self.address, self.value
-        )
+        return "WriteRegisterRequest {0} => {1}".format(self.address, self.value)
 
 
 class WriteSingleRegisterResponse(ModbusResponse):
@@ -79,6 +78,7 @@ class WriteSingleRegisterResponse(ModbusResponse):
     The normal response is an echo of the request, returned after the
     register contents have been written.
     """
+
     function_code = 6
     _rtu_frame_size = 8
 
@@ -97,23 +97,21 @@ class WriteSingleRegisterResponse(ModbusResponse):
 
         :returns: The encoded packet
         """
-        return struct.pack('>HH', self.address, self.value)
+        return struct.pack(">HH", self.address, self.value)
 
     def decode(self, data):
         """ Decode a write single register packet packet request
 
         :param data: The request to decode
         """
-        self.address, self.value = struct.unpack('>HH', data)
+        self.address, self.value = struct.unpack(">HH", data)
 
     def __str__(self):
         """ Returns a string representation of the instance
 
         :returns: A string representation of the instance
         """
-        return 'WriteRegisterResponse {0} => {1}'.format(
-            self.address, self.value
-        )
+        return "WriteRegisterResponse {0} => {1}".format(self.address, self.value)
 
 
 class WriteMultipleRegistersRequest(ModbusRequest):
@@ -124,6 +122,7 @@ class WriteMultipleRegistersRequest(ModbusRequest):
     The requested written values are specified in the request data field.
     Data is packed as two bytes per register.
     """
+
     function_code = 16
     _rtu_byte_count_pos = 6
 
@@ -148,12 +147,12 @@ class WriteMultipleRegistersRequest(ModbusRequest):
 
         :returns: The encoded packet
         """
-        packet = struct.pack('>HHB', self.address, self.count, self.byte_count)
+        packet = struct.pack(">HHB", self.address, self.count, self.byte_count)
         if self.skip_encode:
-            return packet + b''.join(self.values)
+            return packet + b"".join(self.values)
 
         for value in self.values:
-            packet += struct.pack('>H', value)
+            packet += struct.pack(">H", value)
 
         return packet
 
@@ -162,11 +161,10 @@ class WriteMultipleRegistersRequest(ModbusRequest):
 
         :param data: The request to decode
         """
-        self.address, self.count, self.byte_count =\
-            struct.unpack('>HHB', data[:5])
+        self.address, self.count, self.byte_count = struct.unpack(">HHB", data[:5])
         self.values = []  # reset
         for idx in range(5, (self.count * 2) + 5, 2):
-            self.values.append(struct.unpack('>H', data[idx:idx + 2])[0])
+            self.values.append(struct.unpack(">H", data[idx : idx + 2])[0])
 
     def execute(self, context):
         """ Run a write single register request against a datastore
@@ -189,7 +187,7 @@ class WriteMultipleRegistersRequest(ModbusRequest):
 
         :returns: A string representation of the instance
         """
-        return 'WriteMultipleRegisterRequest {0} => {1}'.format(
+        return "WriteMultipleRegisterRequest {0} => {1}".format(
             self.address, self.count
         )
 
@@ -199,6 +197,7 @@ class WriteMultipleRegistersResponse(ModbusResponse):
     "The normal response returns the function code, starting address, and
     quantity of registers written.
     """
+
     function_code = 16
     _rtu_frame_size = 8
 
@@ -217,29 +216,29 @@ class WriteMultipleRegistersResponse(ModbusResponse):
 
         :returns: The encoded packet
         """
-        return struct.pack('>HH', self.address, self.count)
+        return struct.pack(">HH", self.address, self.count)
 
     def decode(self, data):
         """ Decode a write single register packet packet request
 
         :param data: The request to decode
         """
-        self.address, self.count = struct.unpack('>HH', data)
+        self.address, self.count = struct.unpack(">HH", data)
 
     def __str__(self):
         """ Returns a string representation of the instance
 
         :returns: A string representation of the instance
         """
-        return 'WriteMultipleRegisterResponse ({0},{1})'.format(
+        return "WriteMultipleRegisterResponse ({0},{1})".format(
             self.address, self.count
         )
 
 
 # Exported symbols
 __all__ = [
-    'WriteSingleRegisterRequest',
-    'WriteSingleRegisterResponse',
-    'WriteMultipleRegistersRequest',
-    'WriteMultipleRegistersResponse',
+    "WriteSingleRegisterRequest",
+    "WriteSingleRegisterResponse",
+    "WriteMultipleRegistersRequest",
+    "WriteMultipleRegistersResponse",
 ]

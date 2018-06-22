@@ -3,13 +3,14 @@ import maq20.utilities as utils
 
 
 class InputModule(MAQ20Module):
-
     def __init__(self, maq20_module):
         if isinstance(maq20_module, MAQ20Module):
-            super(InputModule, self).__init__(com=maq20_module.get_com_module(),
-                                              registration_number=maq20_module.get_registration_number())
+            super(InputModule, self).__init__(
+                com=maq20_module.get_com_module(),
+                registration_number=maq20_module.get_registration_number(),
+            )
         else:
-            raise RuntimeError('Passed in object is not MAQ20 object.')
+            raise RuntimeError("Passed in object is not MAQ20 object.")
 
     ###############
     # Data minimum.
@@ -21,7 +22,9 @@ class InputModule(MAQ20Module):
         return self._read_channel_data_counts_address_input(1030, channel)
 
     def read_data_minimum_counts(self, start_channel=0, number_of_channels=1):
-        return self._read_data_counts_address_input(1030, start_channel, number_of_channels)
+        return self._read_data_counts_address_input(
+            1030, start_channel, number_of_channels
+        )
 
     # Engineering values:
 
@@ -50,7 +53,9 @@ class InputModule(MAQ20Module):
         return self._read_channel_data_counts_address_input(1050, channel)
 
     def read_data_maximum_counts(self, start_channel=0, number_of_channels=1):
-        return self._read_data_counts_address_input(1050, start_channel, number_of_channels)
+        return self._read_data_counts_address_input(
+            1050, start_channel, number_of_channels
+        )
 
     # Engineering values:
 
@@ -79,7 +84,9 @@ class InputModule(MAQ20Module):
         return self._read_channel_data_counts_address_input(1070, channel)
 
     def read_data_average_counts(self, start_channel=0, number_of_channels=1):
-        return self._read_data_counts_address_input(1070, start_channel, number_of_channels)
+        return self._read_data_counts_address_input(
+            1070, start_channel, number_of_channels
+        )
 
     # Engineering values:
 
@@ -108,7 +115,11 @@ class InputModule(MAQ20Module):
 
     def read_data_history(self, channel):
         counts = self.read_data_history_counts(channel)
-        return [utils.counts_to_engineering_units_dict_input(counts, self.get_channel_ranges_information(channel))]
+        return [
+            utils.counts_to_engineering_units_dict_input(
+                counts, self.get_channel_ranges_information(channel)
+            )
+        ]
 
     #######################
     # Module Configuration.
@@ -129,7 +140,10 @@ class InputModule(MAQ20Module):
         :param new_range: int
         :return: modbus response
         """
-        if 0 <= channel < self._number_of_channels and new_range < self._number_of_ranges:
+        if (
+            0 <= channel < self._number_of_channels
+            and new_range < self._number_of_ranges
+        ):
             self._channel_active_ranges[channel] = new_range
             return self.write_register(100 + channel, new_range)
         else:

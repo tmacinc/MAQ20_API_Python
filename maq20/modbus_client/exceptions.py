@@ -18,7 +18,7 @@ class ModbusException(Exception):
         self.string = string
 
     def __str__(self):
-        return 'Modbus Error: ' + str(self.string)
+        return "Modbus Error: " + str(self.string)
 
 
 class ModbusIOException(ModbusException):
@@ -28,7 +28,7 @@ class ModbusIOException(ModbusException):
         """ Initialize the exception
         :param string: The message to append to the error
         """
-        message = '[Input/Output] ' + str(string)
+        message = "[Input/Output] " + str(string)
         ModbusException.__init__(self, message)
 
 
@@ -39,7 +39,7 @@ class ParameterException(ModbusException):
         """ Initialize the exception
         :param string: The message to append to the error
         """
-        message = '[Invalid Parameter] ' + str(string)
+        message = "[Invalid Parameter] " + str(string)
         ModbusException.__init__(self, message)
 
 
@@ -50,14 +50,14 @@ class ConnectionException(ModbusException):
         """ Initialize the exception
         :param string: The message to append to the error
         """
-        message = '[Connection] ' + str(string)
+        message = "[Connection] " + str(string)
         ModbusException.__init__(self, message)
 
 
 # Exported symbols
 __all__ = [
-    'ModbusException',
-    'ModbusIOException',
-    'ParameterException',
-    'ConnectionException',
+    "ModbusException",
+    "ModbusIOException",
+    "ParameterException",
+    "ConnectionException",
 ]

@@ -13,6 +13,7 @@ from maq20.modbus_client.client.common import ModbusClientMixin
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -42,7 +43,7 @@ class BaseModbusClient(ModbusClientMixin):
 
         :returns: True if connection succeeded, False otherwise
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     def close(self):
         """ Closes the underlying socket connection
@@ -55,7 +56,7 @@ class BaseModbusClient(ModbusClientMixin):
         :param request: The encoded request to send
         :return: The number of bytes written
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     def receive(self, size):
         """ Reads data from the underlying descriptor
@@ -63,7 +64,7 @@ class BaseModbusClient(ModbusClientMixin):
         :param size: The number of bytes to read
         :return: The bytes read
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     # endregion
 
@@ -75,9 +76,7 @@ class BaseModbusClient(ModbusClientMixin):
         :returns: The result of the request execution
         """
         if not self.connect():
-            raise ConnectionException(
-                'Failed to connect[{0}]'.format(self.__str__())
-            )
+            raise ConnectionException("Failed to connect[{0}]".format(self.__str__()))
         return self.transaction.execute(request)
 
     # endregion
@@ -90,9 +89,7 @@ class BaseModbusClient(ModbusClientMixin):
         :returns: The current instance of the client
         """
         if not self.connect():
-            raise ConnectionException(
-                'Failed to connect[{0}]'.format(self.__str__())
-            )
+            raise ConnectionException("Failed to connect[{0}]".format(self.__str__()))
         return self
 
     def __exit__(self, cls, value, traceback):
@@ -104,7 +101,7 @@ class BaseModbusClient(ModbusClientMixin):
 
         :returns: The string representation
         """
-        return 'Null Transport'
+        return "Null Transport"
 
     # endregion
 
@@ -116,10 +113,7 @@ class ModbusTcpClient(BaseModbusClient):
     """
 
     def __init__(
-            self,
-            host='127.0.0.1', port=Defaults.Port,
-            framer=ModbusSocketFramer,
-            **kwargs
+        self, host="127.0.0.1", port=Defaults.Port, framer=ModbusSocketFramer, **kwargs
     ):
         """ Initialize a client instance
 
@@ -133,7 +127,7 @@ class ModbusTcpClient(BaseModbusClient):
         """
         self.host = host
         self.port = port
-        self.source_address = kwargs.get('source_address', ('', 0))
+        self.source_address = kwargs.get("source_address", ("", 0))
         self.socket = None
         BaseModbusClient.__init__(self, framer(ClientDecoder()), **kwargs)
 
@@ -147,14 +141,12 @@ class ModbusTcpClient(BaseModbusClient):
         try:
             address = (self.host, self.port)
             self.socket = socket.create_connection(
-                address,
-                timeout=Defaults.Timeout,
-                source_address=self.source_address
+                address, timeout=Defaults.Timeout, source_address=self.source_address
             )
         except socket.error as msg:
-            _logger.error('Connection to ({0}, {1}) failed: {2}'.format(
-                self.host, self.port, msg
-            ))
+            _logger.error(
+                "Connection to ({0}, {1}) failed: {2}".format(self.host, self.port, msg)
+            )
             self.close()
         return self.socket is not None
 
@@ -192,7 +184,7 @@ class ModbusTcpClient(BaseModbusClient):
 
         :returns: The string representation
         """
-        return '{0}:{1}'.format(self.host, self.port)
+        return "{0}:{1}".format(self.host, self.port)
 
 
 class ModbusUdpClient(BaseModbusClient):
@@ -200,10 +192,7 @@ class ModbusUdpClient(BaseModbusClient):
     """
 
     def __init__(
-            self,
-            host='127.0.0.1', port=Defaults.Port,
-            framer=ModbusSocketFramer,
-            **kwargs
+        self, host="127.0.0.1", port=Defaults.Port, framer=ModbusSocketFramer, **kwargs
     ):
         """ Initialize a client instance
 
@@ -241,7 +230,7 @@ class ModbusUdpClient(BaseModbusClient):
             family = ModbusUdpClient._get_address_family(self.host)
             self.socket = socket.socket(family, socket.SOCK_DGRAM)
         except socket.error as ex:
-            _logger.error('Unable to create udp socket ' + str(ex))
+            _logger.error("Unable to create udp socket " + str(ex))
             self.close()
         return self.socket is not None
 
@@ -277,14 +266,14 @@ class ModbusUdpClient(BaseModbusClient):
 
         :returns: The string representation
         """
-        return '{0}:{1}'.format(self.host, self.port)
+        return "{0}:{1}".format(self.host, self.port)
 
 
 class ModbusSerialClient(BaseModbusClient):
     """ Implementation of a modbus serial client
     """
 
-    def __init__(self, method='ascii', **kwargs):
+    def __init__(self, method="ascii", **kwargs):
         """ Initialize a serial client instance
 
         The methods to connect are::
@@ -303,16 +292,14 @@ class ModbusSerialClient(BaseModbusClient):
         """
         self.method = method
         self.socket = None
-        BaseModbusClient.__init__(
-            self, self.__implementation(method), **kwargs
-        )
+        BaseModbusClient.__init__(self, self.__implementation(method), **kwargs)
 
-        self.port = kwargs.get('port', 0)
-        self.stopbits = kwargs.get('stopbits', Defaults.Stopbits)
-        self.bytesize = kwargs.get('bytesize', Defaults.Bytesize)
-        self.parity = kwargs.get('parity',   Defaults.Parity)
-        self.baudrate = kwargs.get('baudrate', Defaults.Baudrate)
-        self.timeout = kwargs.get('timeout',  Defaults.Timeout)
+        self.port = kwargs.get("port", 0)
+        self.stopbits = kwargs.get("stopbits", Defaults.Stopbits)
+        self.bytesize = kwargs.get("bytesize", Defaults.Bytesize)
+        self.parity = kwargs.get("parity", Defaults.Parity)
+        self.baudrate = kwargs.get("baudrate", Defaults.Baudrate)
+        self.timeout = kwargs.get("timeout", Defaults.Timeout)
 
     @staticmethod
     def __implementation(method):
@@ -322,15 +309,15 @@ class ModbusSerialClient(BaseModbusClient):
         :returns: The requested serial framer
         """
         method = method.lower()
-        if method == 'ascii':
+        if method == "ascii":
             return ModbusAsciiFramer(ClientDecoder())
-        elif method == 'rtu':
+        elif method == "rtu":
             return ModbusRtuFramer(ClientDecoder())
-        elif method == 'binary':
+        elif method == "binary":
             return ModbusBinaryFramer(ClientDecoder())
-        elif method == 'socket':
+        elif method == "socket":
             return ModbusSocketFramer(ClientDecoder())
-        raise ParameterException('Invalid framer method requested')
+        raise ParameterException("Invalid framer method requested")
 
     def connect(self):
         """ Connect to the modbus serial server
@@ -373,12 +360,8 @@ class ModbusSerialClient(BaseModbusClient):
 
         :returns: The string representation
         """
-        return '{0} baud[{1}]'.format(self.method, self.baudrate)
+        return "{0} baud[{1}]".format(self.method, self.baudrate)
 
 
 # Exported symbols
-__all__ = [
-    'ModbusTcpClient',
-    'ModbusUdpClient',
-    'ModbusSerialClient'
-]
+__all__ = ["ModbusTcpClient", "ModbusUdpClient", "ModbusSerialClient"]

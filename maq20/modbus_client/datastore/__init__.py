@@ -8,8 +8,8 @@ from maq20.modbus_client.datastore.context import ModbusServerContext
 
 # Exported symbols
 __all__ = [
-    'ModbusSequentialDataBlock',
-    'ModbusSparseDataBlock',
-    'ModbusSlaveContext',
-    'ModbusServerContext',
+    "ModbusSequentialDataBlock",
+    "ModbusSparseDataBlock",
+    "ModbusSlaveContext",
+    "ModbusServerContext",
 ]

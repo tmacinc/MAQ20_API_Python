@@ -78,6 +78,7 @@ class Defaults(Singleton):
        The number of bits sent after each character in a message to
        indicate the end of the byte. This defaults to 1.
     """
+
     Port = 502
     Retries = 3
     RetryOnEmpty = False
@@ -87,7 +88,7 @@ class Defaults(Singleton):
     ProtocolId = 0
     UnitId = 0x00
     Baudrate = 19200
-    Parity = 'N'
+    Parity = "N"
     Bytesize = 8
     Stopbits = 1
 
@@ -123,6 +124,7 @@ class ModbusStatus(Singleton):
 
        This indicates that the given modbus slave is not running
     """
+
     Waiting = 0xffff
     Ready = 0x0000
     On = 0xff00
@@ -150,9 +152,10 @@ class Endian(Singleton):
     .. note:: I am simply borrowing the format strings from the
        python struct module for my convenience.
     """
-    Auto = '@'
-    Big = '>'
-    Little = '<'
+
+    Auto = "@"
+    Big = ">"
+    Little = "<"
 
 
 class ModbusPlusOperation(Singleton):
@@ -168,6 +171,7 @@ class ModbusPlusOperation(Singleton):
        Operation requesting that the current modbus plus statistics
        be cleared and not returned in the response.
     """
+
     GetStatistics = 0x0003
     ClearStatistics = 0x0004
 
@@ -198,6 +202,7 @@ class DeviceInformation(Singleton):
 
        Request to return a single data object.
     """
+
     Basic = 0x01
     Regular = 0x02
     Extended = 0x03
@@ -215,6 +220,7 @@ class MoreData(Singleton):
 
        This indicates that there are more objects to be returned.
     """
+
     Nothing = 0x00
     KeepReading = 0xFF
 
@@ -247,6 +253,7 @@ class FramerState(Singleton):
        This indicates that there is an error in the current
        frame and that it should be discarded.
     """
+
     Initializing = 1
     ReadingHeader = 2
     ReadingContent = 3
@@ -256,10 +263,10 @@ class FramerState(Singleton):
 
 # Exported Identifiers
 __all__ = [
-    'Defaults',
-    'ModbusStatus',
-    'Endian',
-    'ModbusPlusOperation',
-    'DeviceInformation',
-    'MoreData',
+    "Defaults",
+    "ModbusStatus",
+    "Endian",
+    "ModbusPlusOperation",
+    "DeviceInformation",
+    "MoreData",
 ]

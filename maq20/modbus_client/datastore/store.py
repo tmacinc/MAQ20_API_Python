@@ -53,6 +53,7 @@ from collections import Iterable
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -92,7 +93,7 @@ class BaseModbusDataBlock(object):
         :param count: The number of values to test for
         :returns: True if the request in within range, False otherwise
         """
-        raise NotImplementedError('Datastore Address Check')
+        raise NotImplementedError("Datastore Address Check")
 
     def get_values(self, address, count=1):
         """ Returns the requested values from the datastore
@@ -101,7 +102,7 @@ class BaseModbusDataBlock(object):
         :param count: The number of values to retrieve
         :returns: The requested values from a:a+c
         """
-        raise NotImplementedError('Datastore Value Retrieve')
+        raise NotImplementedError("Datastore Value Retrieve")
 
     def set_values(self, address, values):
         """ Returns the requested values from the datastore
@@ -109,16 +110,14 @@ class BaseModbusDataBlock(object):
         :param address: The starting address
         :param values: The values to store
         """
-        raise NotImplementedError('Datastore Value Retrieve')
+        raise NotImplementedError("Datastore Value Retrieve")
 
     def __str__(self):
         """ Build a representation of the datastore
 
         :returns: A string representation of the datastore
         """
-        return 'DataStore({0}, {1})'.format(
-            len(self.values), self.default_value
-        )
+        return "DataStore({0}, {1})".format(len(self.values), self.default_value)
 
     def __iter__(self):
         """ Iterate over the data block data
@@ -162,8 +161,8 @@ class ModbusSequentialDataBlock(BaseModbusDataBlock):
         :param count: The number of values to test for
         :returns: True if the request in within range, False otherwise
         """
-        result = (self.address <= address)
-        result &= ((self.address + len(self.values)) >= (address + count))
+        result = self.address <= address
+        result &= (self.address + len(self.values)) >= (address + count)
         return result
 
     def get_values(self, address, count=1):
@@ -174,7 +173,7 @@ class ModbusSequentialDataBlock(BaseModbusDataBlock):
         :returns: The requested values from a:a+c
         """
         start = address - self.address
-        return self.values[start:start + count]
+        return self.values[start : start + count]
 
     def set_values(self, address, values):
         """ Sets the requested values of the datastore
@@ -185,7 +184,7 @@ class ModbusSequentialDataBlock(BaseModbusDataBlock):
         if not isinstance(values, list):
             values = [values]
         start = address - self.address
-        self.values[start:start + len(values)] = values
+        self.values[start : start + len(values)] = values
 
 
 class ModbusSparseDataBlock(BaseModbusDataBlock):
@@ -205,7 +204,7 @@ class ModbusSparseDataBlock(BaseModbusDataBlock):
             self.values = dict(enumerate(values))
         else:
             raise ParameterException(
-                'Values for datastore must be a list or dictionary'
+                "Values for datastore must be a list or dictionary"
             )
         self.default_value = self.values.values().__next__().__class__()
         self.address = self.values.keys().__next__()

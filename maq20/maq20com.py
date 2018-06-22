@@ -1,5 +1,5 @@
+import maq20.utilities as utils
 from maq20.maq20module import MAQ20Module
-from maq20.utilities import *
 from maq20.modbus_client.client.sync import ModbusTcpClient
 
 
@@ -11,6 +11,7 @@ class COMx(MAQ20Module):
 
     def __init__(self, ip_address, port=502, timeout=3):
         from maq20.modbus_client.constants import Defaults
+
         Defaults.Timeout = timeout
         if ip_address is not None or port is not None:
             self._client = ModbusTcpClient(ip_address, port=port)
@@ -33,10 +34,12 @@ class COMx(MAQ20Module):
         :param number_of_registers: number of registers to be read in sequence.
         :return: list(int) [-32767, 32767]
         """
-        result = self._client.read_holding_registers(address=address, count=number_of_registers)
+        result = self._client.read_holding_registers(
+            address=address, count=number_of_registers
+        )
         # converts the returned values to signed.
         try:
-            return [unsigned16_to_signed16(value) for value in result.registers]
+            return [utils.unsigned16_to_signed16(value) for value in result.registers]
         except AttributeError:
             return None
 
@@ -50,7 +53,7 @@ class COMx(MAQ20Module):
         """
         if type(value) is str:
             value = ord(value[0])
-        value = signed16_to_unsigned16(value)
+        value = utils.signed16_to_unsigned16(value)
         return self._client.write_register(address, value)
 
     def write_registers(self, address, values=None):
@@ -66,7 +69,7 @@ class COMx(MAQ20Module):
             for c in values:
                 ints.append(ord(c))
         else:
-            ints = [signed16_to_unsigned16(x) for x in values]
+            ints = [utils.signed16_to_unsigned16(x) for x in values]
         return self._client.write_registers(address, ints)
 
     def read_ip_address(self):
@@ -74,9 +77,9 @@ class COMx(MAQ20Module):
 
     def write_ip_address(self, ip_address):
         if type(ip_address) is str:
-            first = ip_address.partition('.')
-            second = first[2].partition('.')
-            third = second[2].partition('.')
+            first = ip_address.partition(".")
+            second = first[2].partition(".")
+            third = second[2].partition(".")
             numbers = [first[0], second[0], third[0], third[2]]
             numbers = [int(number) for number in numbers]
             return self.write_registers(50, numbers)
@@ -89,9 +92,9 @@ class COMx(MAQ20Module):
 
     def write_ethernet_subnet_mask(self, mask):
         if type(mask) is str:
-            first = mask.partition('.')
-            second = first[2].partition('.')
-            third = second[2].partition('.')
+            first = mask.partition(".")
+            second = first[2].partition(".")
+            third = second[2].partition(".")
             numbers = [first[0], second[0], third[0], third[2]]
             numbers = [int(number) for number in numbers]
             return self.write_registers(55, numbers)
@@ -100,36 +103,54 @@ class COMx(MAQ20Module):
         return None
 
     def read_serial_port_baud(self) -> int:
-        return{0: 1200, 1: 2400, 2: 4800, 3: 9600, 4: 19200, 5: 38400, 6: 57600, 7: 115200, 8: 230400, 9: 460800,
-               10: 921600}[self._com.read_register(60)]
+        return {
+            0: 1200,
+            1: 2400,
+            2: 4800,
+            3: 9600,
+            4: 19200,
+            5: 38400,
+            6: 57600,
+            7: 115200,
+            8: 230400,
+            9: 460800,
+            10: 921600,
+        }[self._com.read_register(60)]
 
     def write_serial_port_baud(self, baud):
         if baud > 10:
-            baud = {1200: 0, 2400: 1, 4800: 2, 9600: 3, 19200: 4, 38400: 5, 57600: 6, 115200: 7, 230400: 8,
-                    460800: 9, 921600: 10}[baud]
+            baud = {
+                1200: 0,
+                2400: 1,
+                4800: 2,
+                9600: 3,
+                19200: 4,
+                38400: 5,
+                57600: 6,
+                115200: 7,
+                230400: 8,
+                460800: 9,
+                921600: 10,
+            }[baud]
         return self.write_register(60, baud)
 
     def read_serial_port_parity(self) -> str:
-        return{
-            0: 'None',
-            1: 'Odd',
-            2: 'Even'
-        }[self._com.read_register(65)]
+        return {0: "None", 1: "Odd", 2: "Even"}[self._com.read_register(65)]
 
     def write_serial_port_parity(self, parity):
         if type(parity) is str:
             parity = parity.lower()
-            parity = {'none': 0, 'odd': 1, 'even': 2}[parity]
+            parity = {"none": 0, "odd": 1, "even": 2}[parity]
         self.write_register(65, parity)
 
     def read_rs485_type(self):
-        return {0: '4-wire', 1: '2-wire'}[self.read_register(66)]
+        return {0: "4-wire", 1: "2-wire"}[self.read_register(66)]
 
     def write_rs485_type(self, rs485_type):
         if type(rs485_type) is str:
-            if rs485_type[0] == '4':
+            if rs485_type[0] == "4":
                 rs485_type = 0
-            elif rs485_type[1] == '2':
+            elif rs485_type[1] == "2":
                 rs485_type = 1
             else:
                 return None
@@ -140,9 +161,9 @@ class COMx(MAQ20Module):
 
     def write_termination(self, termination):
         if type(termination) is str:
-            if termination[0] == 'D' or termination[0] == 'd':
+            if termination[0] == "D" or termination[0] == "d":
                 termination = 0
-            elif termination[0] == 'E' or termination[0] == 'e':
+            elif termination[0] == "E" or termination[0] == "e":
                 termination = 1
             else:
                 return None
@@ -162,7 +183,7 @@ class COMx(MAQ20Module):
         return self.write_register(70, 1)
 
     def read_file_server_username(self) -> str:
-        return response_to_string(self.read_registers(71, 10))
+        return utils.response_to_string(self.read_registers(71, 10))
 
     def write_file_server_username(self, username):
         if type(username) is not str:
@@ -171,7 +192,7 @@ class COMx(MAQ20Module):
             return self.write_registers(71, username)
 
     def read_file_server_password(self):
-        return response_to_string(self.read_registers(81, 10))
+        return utils.response_to_string(self.read_registers(81, 10))
 
     def write_file_server_password(self, password):
         if type(password) is not str:
@@ -236,7 +257,7 @@ class COMx(MAQ20Module):
     def delete_registration_numbers(self, numbers):
         if numbers == "all":
             for i in range(24):
-                self.write_register(1022, i+1)
+                self.write_register(1022, i + 1)
         try:
             for number in numbers:
                 self.write_register(1022, number)
@@ -393,10 +414,14 @@ class COMx(MAQ20Module):
         return self.read_register(1150)
 
     def read_total_space(self):
-        return utils.int16_to_int32([utils.signed16_to_unsigned16(x) for x in self.read_registers(1151, 2)])
+        return utils.int16_to_int32(
+            [utils.signed16_to_unsigned16(x) for x in self.read_registers(1151, 2)]
+        )
 
     def read_free_space(self):
-        return utils.int16_to_int32([utils.signed16_to_unsigned16(x) for x in self.read_registers(1153, 2)])
+        return utils.int16_to_int32(
+            [utils.signed16_to_unsigned16(x) for x in self.read_registers(1153, 2)]
+        )
 
     #############################
     # Module RTC and Temperature.
@@ -501,7 +526,7 @@ class COMx(MAQ20Module):
         PID Controller name, 10 characters max.
         :return: string of length 10
         """
-        return response_to_string(self.read_registers(1310, 10))
+        return utils.response_to_string(self.read_registers(1310, 10))
 
     def write_pid_name(self, name):
         """
@@ -515,7 +540,7 @@ class COMx(MAQ20Module):
         PID Controller Description, 10 characters max.
         :return: string of length 10
         """
-        return response_to_string(self.read_registers(1330, 10))
+        return utils.response_to_string(self.read_registers(1330, 10))
 
     def write_pid_description(self, description):
         """
@@ -529,7 +554,7 @@ class COMx(MAQ20Module):
         Engineering Units (EU) chosen for the Controller, 5 characters max.
         :return: string of length 5
         """
-        return response_to_string(self.read_registers(1350, 5))
+        return utils.response_to_string(self.read_registers(1350, 5))
 
     def write_pid_engineering_units(self, engineering_units):
         """
@@ -543,7 +568,7 @@ class COMx(MAQ20Module):
         Units chosen for Process Variable.  5 characters max.  Standard unit = "%".
         :return: string of length 5
         """
-        return response_to_string(self.read_registers(1355, 5))
+        return utils.response_to_string(self.read_registers(1355, 5))
 
     def write_pid_pv_range_unit(self, pv_range_unit):
         """
@@ -557,7 +582,7 @@ class COMx(MAQ20Module):
         Units chosen for Control Output.  5 characters max.  Standard unit = "%".
         :return: string of length 5
         """
-        return response_to_string(self.read_registers(1360, 5))
+        return utils.response_to_string(self.read_registers(1360, 5))
 
     def write_pid_co_range_unit(self, co_range_unit):
         """
@@ -585,112 +610,112 @@ class COMx(MAQ20Module):
         Process Variable maximum count value.  MSB at Address 1368, LSB at Address 1369.
         :return: 0 to 2^32-1
         """
-        return int16_to_int32(self.read_registers(1368, 2))
+        return utils.int16_to_int32(self.read_registers(1368, 2))
 
     def write_pid_pv_count_maximum(self, pv_count_maximum):
         """
         Process Variable maximum count value.  MSB at Address 1368, LSB at Address 1369.
         :return: 0 to 2^32-1
         """
-        return self.write_registers(1368, int32_to_int16s(pv_count_maximum))
+        return self.write_registers(1368, utils.int32_to_int16s(pv_count_maximum))
 
     def read_pid_pv_count_minimum(self):
         """
         Process Variable minimum count value.  MSB at Address 1370, LSB at Address 1371.
         :return: 0 to 2^32-1
         """
-        return int16_to_int32(self.read_registers(1370, 2))
+        return utils.int16_to_int32(self.read_registers(1370, 2))
 
     def write_pid_pv_count_minimum(self, pv_count_minimum):
         """
         Process Variable minimum count value.  MSB at Address 1370, LSB at Address 1371.
         :return: 0 to 2^32-1
         """
-        return self.write_registers(1370, int32_to_int16s(pv_count_minimum))
+        return self.write_registers(1370, utils.int32_to_int16s(pv_count_minimum))
 
     def read_pid_co_count_maximum(self):
         """
         Control Output maximum count value.  MSB at Address 1372, LSB at Address 1373.
         :return: 0 to 2^32-1
         """
-        return int16_to_int32(self.read_registers(1372, 2))
+        return utils.int16_to_int32(self.read_registers(1372, 2))
 
     def write_pid_co_count_maximum(self, co_count_maximum):
         """
         Control Output maximum count value.  MSB at Address 1372, LSB at Address 1373.
         :return: 0 to 2^32-1
         """
-        return self.write_registers(1372, int32_to_int16s(co_count_maximum))
+        return self.write_registers(1372, utils.int32_to_int16s(co_count_maximum))
 
     def read_pid_co_count_minimum(self):
         """
         Control Output minimum count value.  MSB at Address 1374, LSB at Address 1375.
         :return: 0 to 2^32-1
         """
-        return int16_to_int32(self.read_registers(1374, 2))
+        return utils.int16_to_int32(self.read_registers(1374, 2))
 
     def write_pid_co_count_minimum(self, co_count_minimum):
         """
         Control Output minimum count value.  MSB at Address 1374, LSB at Address 1375.
         :return: 0 to 2^32-1
         """
-        return self.write_registers(1374, int32_to_int16s(co_count_minimum))
+        return self.write_registers(1374, utils.int32_to_int16s(co_count_minimum))
 
     def read_pid_pv_range_maximum(self):
         """
         Process Variable Range maximum value.  Integer part at Address 1376, fractional part at Address 1377.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1376, 2))
+        return utils.ints_to_float(self.read_registers(1376, 2))
 
     def write_pid_pv_range_maximum(self, pv_range_maximum):
         """
         Process Variable Range maximum value.  Integer part at Address 1376, fractional part at Address 1377.
         :return: float type number
         """
-        return self.write_registers(1376, float_to_ints(pv_range_maximum))
+        return self.write_registers(1376, utils.float_to_ints(pv_range_maximum))
 
     def read_pid_pv_range_minimum(self):
         """
         Process Variable Range minimum value.  Integer part at Address 1378, fractional part at Address 1379.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1378, 2))
+        return utils.ints_to_float(self.read_registers(1378, 2))
 
     def write_pid_pv_range_minimum(self, pv_range_minimum):
         """
         Process Variable Range minimum value.  Integer part at Address 1378, fractional part at Address 1379.
         :return: float type number
         """
-        return self.write_registers(1378, float_to_ints(pv_range_minimum))
+        return self.write_registers(1378, utils.float_to_ints(pv_range_minimum))
 
     def read_pid_co_range_maximum(self):
         """
         Control Output Range maximum value.  Integer part at Address 1380, fractional part at Address 1381.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1380, 2))
+        return utils.ints_to_float(self.read_registers(1380, 2))
 
     def write_pid_co_range_maximum(self, co_range_maximum):
         """
         Control Output Range maximum value.  Integer part at Address 1380, fractional part at Address 1381.
         :return: float type number
         """
-        return self.write_registers(1380, float_to_ints(co_range_maximum))
+        return self.write_registers(1380, utils.float_to_ints(co_range_maximum))
 
     def read_pid_co_range_minimum(self):
         """
         Control Output Range minimum value.  Integer part at Address 1382, fractional part at Address 1383.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1382, 2))
+        return utils.ints_to_float(self.read_registers(1382, 2))
 
     def write_pid_co_range_minimum(self, co_range_minimum):
         """
         Control Output Range minimum value.  Integer part at Address 1382, fractional part at Address 1383.
         :return: float type number
         """
-        return self.write_registers(1382, float_to_ints(co_range_minimum))
+        return self.write_registers(1382, utils.float_to_ints(co_range_minimum))
 
     def read_pid_algorithm(self):
         """
@@ -719,10 +744,11 @@ class COMx(MAQ20Module):
         2 = Proportional & Derivative on PV.
         :return: string
         """
-        return {0: "Proportional & Derivative on Error",
-                1: "Proportional on Error / Derivative on PV",
-                2: "Proportional & Derivative on PV",
-                }[self.read_register(1388)]
+        return {
+            0: "Proportional & Derivative on Error",
+            1: "Proportional on Error / Derivative on PV",
+            2: "Proportional & Derivative on PV",
+        }[self.read_register(1388)]
 
     def write_pid_setpoint_action(self, setpoint_action):
         """
@@ -744,7 +770,9 @@ class COMx(MAQ20Module):
         Control Output Signal Type.  0 = Voltage, 1 = Current, 2 = Discrete Output (PWM)
         :return: string
         """
-        return {0: "Voltage", 1: "Current", 2: "Discrete Output (PWM)"}[self.read_register(1390)]
+        return {0: "Voltage", 1: "Current", 2: "Discrete Output (PWM)"}[
+            self.read_register(1390)
+        ]
 
     def read_pid_setpoint(self):
         """
@@ -752,7 +780,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1396, fractional part at Address 1397.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1396, 2))
+        return utils.ints_to_float(self.read_registers(1396, 2))
 
     def read_pid_process_variable(self):
         """
@@ -760,7 +788,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1398, fractional part at Address 1399.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1398, 2))
+        return utils.ints_to_float(self.read_registers(1398, 2))
 
     def read_pid_control_output(self):
         """
@@ -768,7 +796,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1400, fractional part at Address 1401.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1400, 2))
+        return utils.ints_to_float(self.read_registers(1400, 2))
 
     def read_pid_pv_maximum(self):
         """
@@ -776,7 +804,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1402, fractional part at Address 1403.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1402, 2))
+        return utils.ints_to_float(self.read_registers(1402, 2))
 
     def read_pid_pv_minimum(self):
         """
@@ -784,7 +812,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1404, fractional part at Address 1405.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1404, 2))
+        return utils.ints_to_float(self.read_registers(1404, 2))
 
     def read_pid_co_maximum(self):
         """
@@ -792,7 +820,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1406, fractional part at Address 1407.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1406, 2))
+        return utils.ints_to_float(self.read_registers(1406, 2))
 
     def read_pid_co_minimum(self):
         """
@@ -800,7 +828,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1408, fractional part at Address 1409.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1408, 2))
+        return utils.ints_to_float(self.read_registers(1408, 2))
 
     def read_pid_kc(self):
         """
@@ -808,7 +836,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1410, fractional part at Address 1411.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1410, 2))
+        return utils.ints_to_float(self.read_registers(1410, 2))
 
     def read_pid_ti(self):
         """
@@ -816,7 +844,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1412, fractional part at Address 1413.  Fractional part is in 10,000ths of a second.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1412, 2))
+        return utils.ints_to_float(self.read_registers(1412, 2))
 
     def read_pid_td(self):
         """
@@ -824,7 +852,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1414, fractional part at Address 1415.  Fractional part is in 10,000ths of a second.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1414, 2))
+        return utils.ints_to_float(self.read_registers(1414, 2))
 
     def read_pid_scan_time(self):
         """
@@ -832,7 +860,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1416, fractional part at Address 1417.  This value is fixed at 1s.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1416, 2))
+        return utils.ints_to_float(self.read_registers(1416, 2))
 
     def read_pid_co_high_clamp(self):
         """
@@ -840,7 +868,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1418, fractional part at Address 1419.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1418, 2))
+        return utils.ints_to_float(self.read_registers(1418, 2))
 
     def read_pid_co_low_clamp(self):
         """
@@ -848,7 +876,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1420, fractional part at Address 1421.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1420, 2))
+        return utils.ints_to_float(self.read_registers(1420, 2))
 
     def read_pid_pv_tracking(self):
         """
@@ -863,7 +891,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1423, fractional part at Address 1424.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1423, 2))
+        return utils.ints_to_float(self.read_registers(1423, 2))
 
     def read_pid_gap_multiplier(self):
         """
@@ -871,7 +899,7 @@ class COMx(MAQ20Module):
         Integer part at Address 1425, fractional part at Address 1426.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1425, 2))
+        return utils.ints_to_float(self.read_registers(1425, 2))
 
     def read_pid_filter_time_constant(self):
         """
@@ -879,19 +907,16 @@ class COMx(MAQ20Module):
         Integer part at Address 1427, fractional part at Address 1428. Fractional part is in 10,000ths of a second.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1427, 2))
+        return utils.ints_to_float(self.read_registers(1427, 2))
 
     def read_pid_active_alarm(self):
         """
         Indicates which alarm condition is active. 0 = Low-Low, 1 = Low, 2 = None, 3 = High-High, 4 = High.
         :return: string
         """
-        return {0: "Low-Low",
-                1: "Low",
-                2: "None",
-                3: "High-High",
-                4: "High",
-                }[self.read_register(1441)]
+        return {0: "Low-Low", 1: "Low", 2: "None", 3: "High-High", 4: "High"}[
+            self.read_register(1441)
+        ]
 
     def read_pid_alarm_deadband(self):
         """
@@ -899,35 +924,35 @@ class COMx(MAQ20Module):
         Integer part at Address 1442, fractional part at Address 1443.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1442, 2))
+        return utils.ints_to_float(self.read_registers(1442, 2))
 
     def read_pid_high_high_alarm_limit(self):
         """
         High-High Alarm Limit (Engineering Units). Integer part at Address 1444, fractional part at Address 1445.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1444, 2))
+        return utils.ints_to_float(self.read_registers(1444, 2))
 
     def read_pid_high_alarm_limit(self):
         """
         High Alarm Limit (Engineering Units). Integer part at Address 1446, fractional part at Address 1447.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1446, 2))
+        return utils.ints_to_float(self.read_registers(1446, 2))
 
     def read_pid_low_alarm_limit(self):
         """
         Low Alarm Limit (Engineering Units). Integer part at Address 1448, fractional part at Address 1449.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1448, 2))
+        return utils.ints_to_float(self.read_registers(1448, 2))
 
     def read_pid_low_low_alarm_limit(self):
         """
         Low-Low Alarm Limit (Engineering Units). Integer part at Address 1450, fractional part at Address 1451.
         :return: float type number
         """
-        return ints_to_float(self.read_registers(1450, 2))
+        return utils.ints_to_float(self.read_registers(1450, 2))
 
     ###################
     # Helper Functions.
@@ -937,10 +962,10 @@ class COMx(MAQ20Module):
         # TODO: Document this function.
         result = "Username: "
         username = self.read_registers(71, 10)
-        result += response_to_string(username) + "\n"
+        result += utils.response_to_string(username) + "\n"
         result += "Password: "
         password = self.read_registers(81, 10)
-        result += response_to_string(password) + "\n"
+        result += utils.response_to_string(password) + "\n"
         result += "Anonymous Login: "
         anonymous_login = self.read_register(91)
         if anonymous_login == 1:

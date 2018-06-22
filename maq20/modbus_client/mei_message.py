@@ -26,6 +26,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
     composed of a set of addressable data elements. The data elements are
     called objects and an object Id identifies them.
     """
+
     function_code = 0x2b
     sub_function_code = 0x0e
     _rtu_frame_size = 3
@@ -46,10 +47,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
         :returns: The byte encoded packet
         """
         packet = struct.pack(
-            '>BBB',
-            self.sub_function_code,
-            self.read_code,
-            self.object_id
+            ">BBB", self.sub_function_code, self.read_code, self.object_id
         )
         return packet
 
@@ -58,7 +56,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
 
         :param data: The incoming data
         """
-        params = struct.unpack('>BBB', data)
+        params = struct.unpack(">BBB", data)
         self.sub_function_code, self.read_code, self.object_id = params
 
     def execute(self, context):
@@ -72,9 +70,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
         if not (0x00 <= self.read_code <= 0x04):
             return self.do_exception(ModbusExceptions.IllegalValue)
 
-        information = DeviceInformationFactory.get(
-            _MCB, self.read_code, self.object_id
-        )
+        information = DeviceInformationFactory.get(_MCB, self.read_code, self.object_id)
         return ReadDeviceInformationResponse(self.read_code, information)
 
     def __str__(self):
@@ -82,7 +78,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
 
         :returns: The string representation of the request
         """
-        return 'ReadDeviceInformationRequest({0},{1})'.format(
+        return "ReadDeviceInformationRequest({0},{1})".format(
             self.read_code, self.object_id
         )
 
@@ -90,6 +86,7 @@ class ReadDeviceInformationRequest(ModbusRequest):
 class ReadDeviceInformationResponse(ModbusResponse):
     """
     """
+
     function_code = 0x2b
     sub_function_code = 0x0e
 
@@ -104,7 +101,7 @@ class ReadDeviceInformationResponse(ModbusResponse):
         count = data[7]
 
         while count > 0:
-            _, object_length = struct.unpack('>BB', data[size:size+2])
+            _, object_length = struct.unpack(">BB", data[size : size + 2])
             size += object_length + 2
             count -= 1
         return size + 2
@@ -131,17 +128,17 @@ class ReadDeviceInformationResponse(ModbusResponse):
         :returns: The byte encoded message
         """
         packet = struct.pack(
-            '>BBBBBB',
+            ">BBBBBB",
             self.sub_function_code,
             self.read_code,
             self.conformity,
             self.more_follows,
             self.next_object_id,
-            self.number_of_objects
+            self.number_of_objects,
         )
 
         for (object_id, data) in self.information.items():
-            packet += struct.pack('>BB', object_id, len(data))
+            packet += struct.pack(">BB", object_id, len(data))
             packet += data
 
         return packet
@@ -151,28 +148,24 @@ class ReadDeviceInformationResponse(ModbusResponse):
 
         :param data: The packet data to decode
         """
-        params = struct.unpack('>BBBBBB', data[0:6])
+        params = struct.unpack(">BBBBBB", data[0:6])
         self.sub_function_code, self.read_code = params[0:2]
         self.conformity, self.more_follows = params[2:4]
         self.next_object_id, self.number_of_objects = params[4:6]
         self.information, count = {}, 6  # skip the header information
 
         while count < len(data):
-            object_id, object_length = struct.unpack(
-                '>BB', data[count:count+2]
-            )
+            object_id, object_length = struct.unpack(">BB", data[count : count + 2])
             count += object_length + 2
-            self.information[object_id] = data[count-object_length:count]
+            self.information[object_id] = data[count - object_length : count]
 
     def __str__(self):
         """ Builds a representation of the response
 
         :returns: The string representation of the response
         """
-        return 'ReadDeviceInformationResponse({0})'.format(self.read_code)
+        return "ReadDeviceInformationResponse({0})".format(self.read_code)
 
 
 # Exported symbols
-__all__ = [
-    'ReadDeviceInformationRequest', 'ReadDeviceInformationResponse',
-]
+__all__ = ["ReadDeviceInformationRequest", "ReadDeviceInformationResponse"]

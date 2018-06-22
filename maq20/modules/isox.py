@@ -17,14 +17,16 @@ class ISOx(MAQ20Module):
         :param maq20_module: pass in the module returned by MAQ20.get_module_list()
         """
         if isinstance(maq20_module, MAQ20Module):
-            super(ISOx, self).__init__(com=maq20_module.get_com_module(),
-                                       registration_number=maq20_module.get_registration_number())
+            super(ISOx, self).__init__(
+                com=maq20_module.get_com_module(),
+                registration_number=maq20_module.get_registration_number(),
+            )
             self._scan_list = []
             self._index_scan_list = 0
             self._buffer_size = 100
             self.read_scan_list()
         else:
-            raise RuntimeError('Passed in object is not MAQ20 object.')
+            raise RuntimeError("Passed in object is not MAQ20 object.")
 
     def name_change(self, name: str):
         if len(name) < 15:
@@ -162,6 +164,7 @@ class ISOx(MAQ20Module):
 
     def _wait(self, wait):
         import time
+
         slept = 0
         while self.write_burst_busy() and wait:
             # print("Time waiting: " + str(slept) + " seconds.")

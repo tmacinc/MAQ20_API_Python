@@ -36,14 +36,17 @@ class TestMAQ20(unittest.TestCase):
 
     def test_response_to_string(self):
         self.assertEqual(
-            "MAQ20-COM4", utils.response_to_string([77, 65, 81, 50, 48, 45, 67, 79, 77, 52])
+            "MAQ20-COM4",
+            utils.response_to_string([77, 65, 81, 50, 48, 45, 67, 79, 77, 52]),
         )
         self.assertEqual("   ", utils.response_to_string([-2, 3.0, None]))
 
     def test_int16_to_int32(self):
-        # Test Maximum 
+        # Test Maximum
         self.assertEqual(2147483647, utils.int16_to_int32([0x7FFF, 0xFFFF]))
-        self.assertEqual(2147483647, utils.int16_to_int32([0xFFFF, 0x7FFF], msb_first=False))
+        self.assertEqual(
+            2147483647, utils.int16_to_int32([0xFFFF, 0x7FFF], msb_first=False)
+        )
         self.assertNotEqual(0, utils.int16_to_int32([0x7FFF, 0xFFFF]))
         self.assertNotEqual(0, utils.int16_to_int32([0x7FFF, 0xFFFF], msb_first=False))
         # Test Max input

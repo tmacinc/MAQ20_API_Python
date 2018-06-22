@@ -17,10 +17,11 @@ class Singleton(object):
     Singleton base class
     http://mail.python.org/pipermail/python-list/2007-July/450681.html
     """
+
     def __new__(cls, *args, **kwargs):
         """ Create a new instance
         """
-        if '_inst' not in vars(cls):
+        if "_inst" not in vars(cls):
             cls._inst = object.__new__(cls)
         return cls._inst
 
@@ -41,7 +42,7 @@ class IModbusDecoder(metaclass=ABCMeta):
         :param message: The raw modbus request packet
         :return: The decoded modbus message or None if error
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def lookup_pdu_class(self, function_code):
@@ -50,7 +51,7 @@ class IModbusDecoder(metaclass=ABCMeta):
         :param function_code: The function code specified in a frame.
         :returns: The class of the PDU that has a matching `function_code`.
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
 
 class IModbusFramer(metaclass=ABCMeta):
@@ -116,7 +117,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :returns: True if we successful, False otherwise
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def advance_frame(self):
@@ -125,7 +126,7 @@ class IModbusFramer(metaclass=ABCMeta):
         it or determined that it contains an error. It also has to reset the
         current frame header handle
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def reset_frame(self):
@@ -136,7 +137,7 @@ class IModbusFramer(metaclass=ABCMeta):
         end of the message (python just doesn't have the resolution to
         check for millisecond delays).
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def add_to_frame(self, message):
@@ -147,7 +148,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :param message: The most recent packet
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def is_frame_ready(self):
@@ -158,7 +159,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :returns: True if ready, False otherwise
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def get_frame_size(self):
@@ -167,7 +168,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :returns: The current size of the frame
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def get_frame(self):
@@ -175,7 +176,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :returns: The frame data or ''
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def populate_result(self, result):
@@ -186,7 +187,7 @@ class IModbusFramer(metaclass=ABCMeta):
 
         :param result: The response packet
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     @abstractmethod
     def build_packet(self, message):
@@ -198,7 +199,7 @@ class IModbusFramer(metaclass=ABCMeta):
         :param message: The request/response to send
         :returns: The built packet
         """
-        raise NotImplementedError('Method not implemented by derived class')
+        raise NotImplementedError("Method not implemented by derived class")
 
     # endregion
 
@@ -225,7 +226,7 @@ class IModbusFramer(metaclass=ABCMeta):
             if self.check_frame():
                 result = self.decoder.decode(self.get_frame())
                 if result is None:
-                    raise ModbusIOException('Unable to decode request')
+                    raise ModbusIOException("Unable to decode request")
                 self.populate_result(result)
                 self.advance_frame()
                 callback(result)  # defer or push to a thread?
@@ -247,9 +248,10 @@ class IModbusSlaveContext(metaclass=ABCMeta):
             get_values(self, fx, address, count=1)
             set_values(self, fx, address, values)
     """
-    __fx_mapper = {2: 'd', 4: 'i'}
-    __fx_mapper.update([(i, 'h') for i in [3, 6, 16, 22, 23]])
-    __fx_mapper.update([(i, 'c') for i in [1, 5, 15]])
+
+    __fx_mapper = {2: "d", 4: "i"}
+    __fx_mapper.update([(i, "h") for i in [3, 6, 16, 22, 23]])
+    __fx_mapper.update([(i, "c") for i in [1, 5, 15]])
 
     def decode(self, fx):
         """ Converts the function code to the datastore to
@@ -263,7 +265,7 @@ class IModbusSlaveContext(metaclass=ABCMeta):
     def reset(self):
         """ Resets all the datastores to their default values
         """
-        raise NotImplementedError('Context Reset')
+        raise NotImplementedError("Context Reset")
 
     @abstractmethod
     def validate(self, fx, address, count=1):
@@ -274,7 +276,7 @@ class IModbusSlaveContext(metaclass=ABCMeta):
         :param count: The number of values to test
         :returns: True if the request in within range, False otherwise
         """
-        raise NotImplementedError('validate context values')
+        raise NotImplementedError("validate context values")
 
     @abstractmethod
     def get_values(self, fx, address, count=1):
@@ -285,7 +287,7 @@ class IModbusSlaveContext(metaclass=ABCMeta):
         :param count: The number of values to retrieve
         :returns: The requested values from a:a+c
         """
-        raise NotImplementedError('get context values')
+        raise NotImplementedError("get context values")
 
     @abstractmethod
     def set_values(self, fx, address, values):
@@ -295,7 +297,7 @@ class IModbusSlaveContext(metaclass=ABCMeta):
         :param address: The starting address
         :param values: The new values to be set
         """
-        raise NotImplementedError('set context values')
+        raise NotImplementedError("set context values")
 
 
 class IPayloadBuilder(metaclass=ABCMeta):
@@ -315,14 +317,14 @@ class IPayloadBuilder(metaclass=ABCMeta):
 
         :returns: The payload buffer as a list
         """
-        raise NotImplementedError('set context values')
+        raise NotImplementedError("set context values")
 
 
 # Exported symbols
 __all__ = [
-    'Singleton',
-    'IModbusDecoder',
-    'IModbusFramer',
-    'IModbusSlaveContext',
-    'IPayloadBuilder',
+    "Singleton",
+    "IModbusDecoder",
+    "IModbusFramer",
+    "IModbusSlaveContext",
+    "IPayloadBuilder",
 ]

@@ -10,7 +10,6 @@ the svn version as well using the local .entries file.
 
 
 class Version(object):
-
     def __init__(self, package, major, minor, micro):
         """
 
@@ -28,17 +27,17 @@ class Version(object):
         """ Return a string in canonical short version format
         <major>.<minor>.<micro>
         """
-        return '{0}.{1}.{2}'.format(self.major, self.minor, self.micro)
+        return "{0}.{1}.{2}".format(self.major, self.minor, self.micro)
 
     def __str__(self):
         """ Returns a string representation of the object
 
         :returns: A string representation of this object
         """
-        return '[{0}, version {1}]'.format(self.package, self.short())
+        return "[{0}, version {1}]".format(self.package, self.short())
 
     @staticmethod
     def get_current_version():
-        version = Version('modbus_client', 1, 0, 0)
-        version.__name__ = 'modbus_client'  # fix epydoc error
+        version = Version("modbus_client", 1, 0, 0)
+        version.__name__ = "modbus_client"  # fix epydoc error
         return version

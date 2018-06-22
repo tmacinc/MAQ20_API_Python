@@ -17,5 +17,7 @@ if a_module is None:  # Check if module was found.
     raise TypeError("Module not found.")
 
 while True:
-    print(a_module[:])  # same as: a_module.read_data(0, number_of_channels=a_module.get_number_of_channels())
+    print(
+        a_module[:]
+    )  # same as: a_module.read_data(0, number_of_channels=a_module.get_number_of_channels())
     time.sleep(delay_s)

@@ -14,17 +14,21 @@ Released under the the BSD license
 """
 
 from maq20.modbus_client.version import Version
+
 __version__ = Version.get_current_version().short()
-__author__ = 'Galen Collins, Maxim Grischuk'
-__author_email__ = 'bashwork@gmail.com, uzumaxy@gmail.com'
+__author__ = "Galen Collins, Maxim Grischuk"
+__author_email__ = "bashwork@gmail.com, uzumaxy@gmail.com"
 
 # Block unhandled logging
 import logging as __logging
+
 try:
     from logging import NullHandler as CustomNullHandler
 except ImportError:
+
     class CustomNullHandler(__logging.Handler):
         def emit(self, record):
             pass
+
 
 __logging.getLogger(__name__).addHandler(CustomNullHandler())

@@ -4,6 +4,7 @@ from maq20.modbus_client.interfaces import IModbusSlaveContext
 
 # Logging
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -35,7 +36,7 @@ class RemoteSlaveContext(IModbusSlaveContext):
         :param count: The number of values to test
         :returns: True if the request in within range, False otherwise
         """
-        _logger.debug('validate[{0}] {1}:{2}'.format(fx, address, count))
+        _logger.debug("validate[{0}] {1}:{2}".format(fx, address, count))
         result = self.__get_callbacks[self.decode(fx)](address, count)
         return result.function_code < 0x80
 
@@ -48,7 +49,7 @@ class RemoteSlaveContext(IModbusSlaveContext):
         :returns: The requested values from a:a+c
         """
         # TODO deal with deferreds
-        _logger.debug('get values[{0}] {1}:{2}'.format(fx, address, count))
+        _logger.debug("get values[{0}] {1}:{2}".format(fx, address, count))
         result = self.__get_callbacks[self.decode(fx)](address, count)
         return self.__extract_result(self.decode(fx), result)
 
@@ -60,9 +61,7 @@ class RemoteSlaveContext(IModbusSlaveContext):
         :param values: The new values to be set
         """
         # TODO deal with deferreds
-        _logger.debug('set values[{0}] {1}:{2}'.format(
-            fx, address, len(values))
-        )
+        _logger.debug("set values[{0}] {1}:{2}".format(fx, address, len(values)))
         self.__set_callbacks[self.decode(fx)](address, values)
 
     def __str__(self):
@@ -70,7 +69,7 @@ class RemoteSlaveContext(IModbusSlaveContext):
 
         :returns: A string representation of the context
         """
-        return 'Remote Slave Context({0})'.format(self._client)
+        return "Remote Slave Context({0})".format(self._client)
 
     def __build_mapping(self):
         """
@@ -78,16 +77,16 @@ class RemoteSlaveContext(IModbusSlaveContext):
         code mapper.
         """
         self.__get_callbacks = {
-            'd': lambda a, c: self._client.read_discrete_inputs(a, c),
-            'c': lambda a, c: self._client.read_coils(a, c),
-            'h': lambda a, c: self._client.read_holding_registers(a, c),
-            'i': lambda a, c: self._client.read_input_registers(a, c),
+            "d": lambda a, c: self._client.read_discrete_inputs(a, c),
+            "c": lambda a, c: self._client.read_coils(a, c),
+            "h": lambda a, c: self._client.read_holding_registers(a, c),
+            "i": lambda a, c: self._client.read_input_registers(a, c),
         }
         self.__set_callbacks = {
-            'd': lambda a, v: self._client.write_coils(a, v),
-            'c': lambda a, v: self._client.write_coils(a, v),
-            'h': lambda a, v: self._client.write_registers(a, v),
-            'i': lambda a, v: self._client.write_registers(a, v),
+            "d": lambda a, v: self._client.write_coils(a, v),
+            "c": lambda a, v: self._client.write_coils(a, v),
+            "h": lambda a, v: self._client.write_registers(a, v),
+            "i": lambda a, v: self._client.write_registers(a, v),
         }
 
     def __extract_result(self, fx, result):
@@ -95,9 +94,9 @@ class RemoteSlaveContext(IModbusSlaveContext):
         a response.  TODO make this consistent (values?)
         """
         if result.function_code < 0x80:
-            if fx in ['d', 'c']:
+            if fx in ["d", "c"]:
                 return result.bits
-            if fx in ['h', 'i']:
+            if fx in ["h", "i"]:
                 return result.registers
         else:
             return result

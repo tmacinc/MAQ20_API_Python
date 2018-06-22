@@ -25,6 +25,7 @@ class DiagnosticStatusRequest(ModbusRequest):
     """
     This is a base class for all of the diagnostic request functions
     """
+
     function_code = 0x08
     _rtu_frame_size = 8
 
@@ -42,7 +43,7 @@ class DiagnosticStatusRequest(ModbusRequest):
 
         :returns: The encoded packet
         """
-        packet = struct.pack('>H', self.sub_function_code)
+        packet = struct.pack(">H", self.sub_function_code)
         if self.message is not None:
             if isinstance(self.message, str):
                 packet += self.message.encode()
@@ -50,9 +51,9 @@ class DiagnosticStatusRequest(ModbusRequest):
                 packet += self.message
             elif isinstance(self.message, list):
                 for piece in self.message:
-                    packet += struct.pack('>H', piece)
+                    packet += struct.pack(">H", piece)
             elif isinstance(self.message, int):
-                packet += struct.pack('>H', self.message)
+                packet += struct.pack(">H", self.message)
         return packet
 
     def decode(self, data):
@@ -60,7 +61,7 @@ class DiagnosticStatusRequest(ModbusRequest):
 
         :param data: The data to decode into the function code
         """
-        self.sub_function_code, self.message = struct.unpack('>HH', data)
+        self.sub_function_code, self.message = struct.unpack(">HH", data)
 
 
 class DiagnosticStatusResponse(ModbusResponse):
@@ -71,6 +72,7 @@ class DiagnosticStatusResponse(ModbusResponse):
     data and lets the higher classes define what extra data to append
     and how to execute a request
     """
+
     function_code = 0x08
     _rtu_frame_size = 8
 
@@ -89,7 +91,7 @@ class DiagnosticStatusResponse(ModbusResponse):
 
         :returns: The encoded packet
         """
-        packet = struct.pack('>H', self.sub_function_code)
+        packet = struct.pack(">H", self.sub_function_code)
         if self.message is not None:
             if isinstance(self.message, str):
                 packet += self.message.encode()
@@ -97,9 +99,9 @@ class DiagnosticStatusResponse(ModbusResponse):
                 packet += self.message
             elif isinstance(self.message, list):
                 for piece in self.message:
-                    packet += struct.pack('>H', piece)
+                    packet += struct.pack(">H", piece)
             elif isinstance(self.message, int):
-                packet += struct.pack('>H', self.message)
+                packet += struct.pack(">H", self.message)
         return packet
 
     def decode(self, data):
@@ -107,7 +109,7 @@ class DiagnosticStatusResponse(ModbusResponse):
 
         :param data: The data to decode into the function code
         """
-        self.sub_function_code, self.message = struct.unpack('>HH', data)
+        self.sub_function_code, self.message = struct.unpack(">HH", data)
 
 
 class DiagnosticStatusSimpleRequest(DiagnosticStatusRequest):
@@ -135,7 +137,7 @@ class DiagnosticStatusSimpleRequest(DiagnosticStatusRequest):
 
     def execute(self, *args):
         """ Base function to raise if not implemented """
-        raise NotImplementedError('Diagnostic Message Has No Execute Method')
+        raise NotImplementedError("Diagnostic Message Has No Execute Method")
 
 
 class DiagnosticStatusSimpleResponse(DiagnosticStatusResponse):
@@ -157,12 +159,14 @@ class DiagnosticStatusSimpleResponse(DiagnosticStatusResponse):
 
 # region Diagnostic Sub Code 00
 
+
 class ReturnQueryDataRequest(DiagnosticStatusRequest):
     """
     The data passed in the request data field is to be returned (looped back)
     in the response. The entire response message should be identical to the
     request.
     """
+
     sub_function_code = 0x0000
 
     def __init__(self, message=0x0000, **kwargs):
@@ -190,6 +194,7 @@ class ReturnQueryDataResponse(DiagnosticStatusResponse):
     in the response. The entire response message should be identical to the
     request.
     """
+
     sub_function_code = 0x0000
 
     def __init__(self, message=0x0000, **kwargs):
@@ -203,10 +208,12 @@ class ReturnQueryDataResponse(DiagnosticStatusResponse):
         else:
             self.message = [message]
 
+
 # endregion
 
 
 # region Diagnostic Sub Code 01
+
 
 class RestartCommunicationsOptionRequest(DiagnosticStatusRequest):
     """
@@ -217,6 +224,7 @@ class RestartCommunicationsOptionRequest(DiagnosticStatusRequest):
     not currently in Listen Only Mode, a normal response is returned. This
     occurs before the restart is executed.
     """
+
     sub_function_code = 0x0001
 
     def __init__(self, toggle=False, **kwargs):
@@ -248,6 +256,7 @@ class RestartCommunicationsOptionResponse(DiagnosticStatusResponse):
     not currently in Listen Only Mode, a normal response is returned. This
     occurs before the restart is executed.
     """
+
     sub_function_code = 0x0001
 
     def __init__(self, toggle=False, **kwargs):
@@ -261,16 +270,19 @@ class RestartCommunicationsOptionResponse(DiagnosticStatusResponse):
         else:
             self.message = [ModbusStatus.Off]
 
+
 # endregion
 
 
 # region Diagnostic Sub Code 02
+
 
 class ReturnDiagnosticRegisterRequest(DiagnosticStatusSimpleRequest):
     """
     The contents of the remote device's 16-bit diagnostic register are
     returned in the response
     """
+
     sub_function_code = 0x0002
 
     def execute(self, *args):
@@ -288,12 +300,15 @@ class ReturnDiagnosticRegisterResponse(DiagnosticStatusSimpleResponse):
     The contents of the remote device's 16-bit diagnostic register are
     returned in the response
     """
+
     sub_function_code = 0x0002
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 03
+
 
 class ChangeAsciiInputDelimiterRequest(DiagnosticStatusSimpleRequest):
     """
@@ -302,6 +317,7 @@ class ChangeAsciiInputDelimiterRequest(DiagnosticStatusSimpleRequest):
     character). This function is useful in cases of a Line Feed is not
     required at the end of ASCII messages.
     """
+
     sub_function_code = 0x0003
 
     def execute(self, *args):
@@ -321,12 +337,15 @@ class ChangeAsciiInputDelimiterResponse(DiagnosticStatusSimpleResponse):
     character). This function is useful in cases of a Line Feed is not
     required at the end of ASCII messages.
     """
+
     sub_function_code = 0x0003
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 04
+
 
 class ForceListenOnlyModeRequest(DiagnosticStatusSimpleRequest):
     """
@@ -335,6 +354,7 @@ class ForceListenOnlyModeRequest(DiagnosticStatusSimpleRequest):
     allowing them to continue communicating without interruption from the
     addressed remote device. No response is returned.
     """
+
     sub_function_code = 0x0004
 
     def execute(self, *args):
@@ -355,6 +375,7 @@ class ForceListenOnlyModeResponse(DiagnosticStatusResponse):
 
     This does not send a response
     """
+
     sub_function_code = 0x0004
     should_respond = False
 
@@ -364,16 +385,19 @@ class ForceListenOnlyModeResponse(DiagnosticStatusResponse):
         DiagnosticStatusResponse.__init__(self, **kwargs)
         self.message = []
 
+
 # endregion
 
 
 # region Diagnostic Sub Code 10
+
 
 class ClearCountersRequest(DiagnosticStatusSimpleRequest):
     """
     The goal is to clear ll counters and the diagnostic register.
     Also, counters are cleared upon power-up
     """
+
     sub_function_code = 0x000A
 
     def execute(self, *args):
@@ -390,12 +414,15 @@ class ClearCountersResponse(DiagnosticStatusSimpleResponse):
     The goal is to clear ll counters and the diagnostic register.
     Also, counters are cleared upon power-up
     """
+
     sub_function_code = 0x000A
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 11
+
 
 class ReturnBusMessageCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -403,6 +430,7 @@ class ReturnBusMessageCountRequest(DiagnosticStatusSimpleRequest):
     remote device has detected on the communications systems since its last
     restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000B
 
     def execute(self, *args):
@@ -420,12 +448,15 @@ class ReturnBusMessageCountResponse(DiagnosticStatusSimpleResponse):
     remote device has detected on the communications systems since its last
     restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000B
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 12
+
 
 class ReturnBusCommunicationErrorCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -433,6 +464,7 @@ class ReturnBusCommunicationErrorCountRequest(DiagnosticStatusSimpleRequest):
     by the remote device since its last restart, clear counter operation, or
     power-up
     """
+
     sub_function_code = 0x000C
 
     def execute(self, *args):
@@ -450,12 +482,15 @@ class ReturnBusCommunicationErrorCountResponse(DiagnosticStatusSimpleResponse):
     by the remote device since its last restart, clear counter operation, or
     power-up
     """
+
     sub_function_code = 0x000C
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 13
+
 
 class ReturnBusExceptionErrorCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -463,6 +498,7 @@ class ReturnBusExceptionErrorCountRequest(DiagnosticStatusSimpleRequest):
     responses returned by the remote device since its last restart,
     clear counters operation, or power-up
     """
+
     sub_function_code = 0x000D
 
     def execute(self, *args):
@@ -480,12 +516,15 @@ class ReturnBusExceptionErrorCountResponse(DiagnosticStatusSimpleResponse):
     responses returned by the remote device since its last restart,
     clear counters operation, or power-up
     """
+
     sub_function_code = 0x000D
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 14
+
 
 class ReturnSlaveMessageCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -493,6 +532,7 @@ class ReturnSlaveMessageCountRequest(DiagnosticStatusSimpleRequest):
     remote device, or broadcast, that the remote device has processed since
     its last restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000E
 
     def execute(self, *args):
@@ -510,12 +550,15 @@ class ReturnSlaveMessageCountResponse(DiagnosticStatusSimpleResponse):
     remote device, or broadcast, that the remote device has processed since
     its last restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000E
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 15
+
 
 class ReturnSlaveNoResponseCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -523,6 +566,7 @@ class ReturnSlaveNoResponseCountRequest(DiagnosticStatusSimpleRequest):
     remote device, or broadcast, that the remote device has processed since
     its last restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000F
 
     def execute(self, *args):
@@ -540,12 +584,15 @@ class ReturnSlaveNoResponseCountResponse(DiagnosticStatusSimpleResponse):
     remote device, or broadcast, that the remote device has processed since
     its last restart, clear counters operation, or power-up
     """
+
     sub_function_code = 0x000F
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 16
+
 
 class ReturnSlaveNAKCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -554,6 +601,7 @@ class ReturnSlaveNAKCountRequest(DiagnosticStatusSimpleRequest):
     response, since its last restart, clear counters operation, or power-up.
     Exception responses are described and listed in section 7 .
     """
+
     sub_function_code = 0x0010
 
     def execute(self, *args):
@@ -572,12 +620,15 @@ class ReturnSlaveNAKCountResponse(DiagnosticStatusSimpleResponse):
     response, since its last restart, clear counters operation, or power-up.
     Exception responses are described and listed in section 7.
     """
+
     sub_function_code = 0x0010
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 17
+
 
 class ReturnSlaveBusyCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -585,6 +636,7 @@ class ReturnSlaveBusyCountRequest(DiagnosticStatusSimpleRequest):
     remote device for which it returned a Slave Device Busy exception response,
     since its last restart, clear counters operation, or power-up.
     """
+
     sub_function_code = 0x0011
 
     def execute(self, *args):
@@ -602,16 +654,17 @@ class ReturnSlaveBusyCountResponse(DiagnosticStatusSimpleResponse):
     remote device for which it returned a Slave Device Busy exception response,
     since its last restart, clear counters operation, or power-up.
     """
+
     sub_function_code = 0x0011
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 18
 
-class ReturnSlaveBusCharacterOverrunCountRequest(
-    DiagnosticStatusSimpleRequest
-):
+
+class ReturnSlaveBusCharacterOverrunCountRequest(DiagnosticStatusSimpleRequest):
     """
     The response data field returns the quantity of messages addressed to the
     remote device that it couldn't handle due to a character overrun condition,
@@ -619,6 +672,7 @@ class ReturnSlaveBusCharacterOverrunCountRequest(
     overrun is caused by data characters arriving at the port faster than they
     can be stored, or by the loss of a character due to a hardware malfunction.
     """
+
     sub_function_code = 0x0012
 
     def execute(self, *args):
@@ -630,9 +684,7 @@ class ReturnSlaveBusCharacterOverrunCountRequest(
         return ReturnSlaveBusCharacterOverrunCountResponse(count)
 
 
-class ReturnSlaveBusCharacterOverrunCountResponse(
-    DiagnosticStatusSimpleResponse
-):
+class ReturnSlaveBusCharacterOverrunCountResponse(DiagnosticStatusSimpleResponse):
     """
     The response data field returns the quantity of messages addressed to the
     remote device that it couldn't handle due to a character overrun condition,
@@ -640,12 +692,15 @@ class ReturnSlaveBusCharacterOverrunCountResponse(
     overrun is caused by data characters arriving at the port faster than they
     can be stored, or by the loss of a character due to a hardware malfunction.
     """
+
     sub_function_code = 0x0012
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 19
+
 
 class ReturnIopOverrunCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -653,6 +708,7 @@ class ReturnIopOverrunCountRequest(DiagnosticStatusSimpleRequest):
     faster than they can be stored, or by the loss of a character due
     to a hardware malfunction.  This function is specific to the 884.
     """
+
     sub_function_code = 0x0013
 
     def execute(self, *args):
@@ -671,12 +727,15 @@ class ReturnIopOverrunCountResponse(DiagnosticStatusSimpleResponse):
     IOP overrun condition, since its last restart, clear counters
     operation, or power-up.
     """
+
     sub_function_code = 0x0013
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 20
+
 
 class ClearOverrunCountRequest(DiagnosticStatusSimpleRequest):
     """
@@ -685,6 +744,7 @@ class ClearOverrunCountRequest(DiagnosticStatusSimpleRequest):
     An error flag should be cleared, but nothing else in the
     specification mentions is, so it is ignored.
     """
+
     sub_function_code = 0x0014
 
     def execute(self, *args):
@@ -700,12 +760,15 @@ class ClearOverrunCountResponse(DiagnosticStatusSimpleResponse):
     """
     Clears the overrun error counter and reset the error flag
     """
+
     sub_function_code = 0x0014
+
 
 # endregion
 
 
 # region Diagnostic Sub Code 21
+
 
 class GetClearModbusPlusRequest(DiagnosticStatusSimpleRequest):
     """
@@ -718,6 +781,7 @@ class GetClearModbusPlusRequest(DiagnosticStatusSimpleRequest):
     them. Statistics are also cleared on power-up of the slave
     device.
     """
+
     sub_function_code = 0x0015
 
     def execute(self, *args):
@@ -740,47 +804,49 @@ class GetClearModbusPlusResponse(DiagnosticStatusSimpleResponse):
     length of the data field). The data contains the statistics for
     the Modbus Plus peer processor in the slave device.
     """
+
     sub_function_code = 0x0015
+
 
 # endregion
 
 
 # Exported symbols
 __all__ = [
-    'DiagnosticStatusRequest',
-    'DiagnosticStatusResponse',
-    'ReturnQueryDataRequest',
-    'ReturnQueryDataResponse',
-    'RestartCommunicationsOptionRequest',
-    'RestartCommunicationsOptionResponse',
-    'ReturnDiagnosticRegisterRequest',
-    'ReturnDiagnosticRegisterResponse',
-    'ChangeAsciiInputDelimiterRequest',
-    'ChangeAsciiInputDelimiterResponse',
-    'ForceListenOnlyModeRequest',
-    'ForceListenOnlyModeResponse',
-    'ClearCountersRequest',
-    'ClearCountersResponse',
-    'ReturnBusMessageCountRequest',
-    'ReturnBusMessageCountResponse',
-    'ReturnBusCommunicationErrorCountRequest',
-    'ReturnBusCommunicationErrorCountResponse',
-    'ReturnBusExceptionErrorCountRequest',
-    'ReturnBusExceptionErrorCountResponse',
-    'ReturnSlaveMessageCountRequest',
-    'ReturnSlaveMessageCountResponse',
-    'ReturnSlaveNoResponseCountRequest',
-    'ReturnSlaveNoResponseCountResponse',
-    'ReturnSlaveNAKCountRequest',
-    'ReturnSlaveNAKCountResponse',
-    'ReturnSlaveBusyCountRequest',
-    'ReturnSlaveBusyCountResponse',
-    'ReturnSlaveBusCharacterOverrunCountRequest',
-    'ReturnSlaveBusCharacterOverrunCountResponse',
-    'ReturnIopOverrunCountRequest',
-    'ReturnIopOverrunCountResponse',
-    'ClearOverrunCountRequest',
-    'ClearOverrunCountResponse',
-    'GetClearModbusPlusRequest',
-    'GetClearModbusPlusResponse',
+    "DiagnosticStatusRequest",
+    "DiagnosticStatusResponse",
+    "ReturnQueryDataRequest",
+    "ReturnQueryDataResponse",
+    "RestartCommunicationsOptionRequest",
+    "RestartCommunicationsOptionResponse",
+    "ReturnDiagnosticRegisterRequest",
+    "ReturnDiagnosticRegisterResponse",
+    "ChangeAsciiInputDelimiterRequest",
+    "ChangeAsciiInputDelimiterResponse",
+    "ForceListenOnlyModeRequest",
+    "ForceListenOnlyModeResponse",
+    "ClearCountersRequest",
+    "ClearCountersResponse",
+    "ReturnBusMessageCountRequest",
+    "ReturnBusMessageCountResponse",
+    "ReturnBusCommunicationErrorCountRequest",
+    "ReturnBusCommunicationErrorCountResponse",
+    "ReturnBusExceptionErrorCountRequest",
+    "ReturnBusExceptionErrorCountResponse",
+    "ReturnSlaveMessageCountRequest",
+    "ReturnSlaveMessageCountResponse",
+    "ReturnSlaveNoResponseCountRequest",
+    "ReturnSlaveNoResponseCountResponse",
+    "ReturnSlaveNAKCountRequest",
+    "ReturnSlaveNAKCountResponse",
+    "ReturnSlaveBusyCountRequest",
+    "ReturnSlaveBusyCountResponse",
+    "ReturnSlaveBusCharacterOverrunCountRequest",
+    "ReturnSlaveBusCharacterOverrunCountResponse",
+    "ReturnIopOverrunCountRequest",
+    "ReturnIopOverrunCountResponse",
+    "ClearOverrunCountRequest",
+    "ClearOverrunCountResponse",
+    "GetClearModbusPlusRequest",
+    "GetClearModbusPlusResponse",
 ]

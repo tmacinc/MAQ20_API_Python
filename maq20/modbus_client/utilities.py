@@ -13,6 +13,7 @@ import struct
 
 # region Helpers
 
+
 def default(value):
     """
     Given a python object, return the default value
@@ -38,18 +39,21 @@ def dict_property(store, index):
         setter = lambda self, value: store(self).__setitem__(index, value)
     elif isinstance(store, str):
         getter = lambda self: self.__getattribute__(store)[index]
-        setter = lambda self, value:\
-            self.__getattribute__(store).__setitem__(index, value)
+        setter = lambda self, value: self.__getattribute__(store).__setitem__(
+            index, value
+        )
     else:
         getter = lambda self: store[index]
         setter = lambda self, value: store.__setitem__(index, value)
 
     return property(getter, setter)
 
+
 # endregion
 
 
 # region Bit Packing Functions
+
 
 def pack_bitstring(bits):
     """ Creates a string out of an array of bits
@@ -61,20 +65,20 @@ def pack_bitstring(bits):
         bits   = [False, True, False, True]
         result = pack_bitstring(bits)
     """
-    ret = b''
+    ret = b""
     i = packed = 0
     for bit in bits:
         if bit:
             packed += 128
         i += 1
         if i == 8:
-            ret += struct.pack('B', packed)
+            ret += struct.pack("B", packed)
             i = packed = 0
         else:
             packed >>= 1
     if 0 < i < 8:
-        packed >>= (7 - i)
-        ret += struct.pack('B', packed)
+        packed >>= 7 - i
+        ret += struct.pack("B", packed)
     return ret
 
 
@@ -97,10 +101,12 @@ def unpack_bitstring(string):
             value >>= 1
     return bits
 
+
 # endregion
 
 
 # region Error Detection Functions
+
 
 def __generate_crc16_table():
     """ Generates a crc16 lookup table
@@ -118,6 +124,7 @@ def __generate_crc16_table():
             byte >>= 1
         result.append(crc)
     return result
+
 
 __crc16_table = __generate_crc16_table()
 
@@ -198,17 +205,18 @@ def rtu_frame_size(data, byte_count_pos):
     """
     return data[byte_count_pos] + byte_count_pos + 3
 
+
 # endregion
 
 
 # Exported symbols
 __all__ = [
-    'pack_bitstring',
-    'unpack_bitstring',
-    'default',
-    'compute_crc',
-    'check_crc',
-    'compute_lrc',
-    'check_lrc',
-    'rtu_frame_size'
+    "pack_bitstring",
+    "unpack_bitstring",
+    "default",
+    "compute_crc",
+    "check_crc",
+    "compute_lrc",
+    "check_lrc",
+    "rtu_frame_size",
 ]

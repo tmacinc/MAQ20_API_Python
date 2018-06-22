@@ -15,7 +15,9 @@ def signed16_to_unsigned16(number: int) -> int:
     :return: Returns the unsigned 16 bit representation of a negative number.
     """
     if number < -32767 or number > 65535:
-        raise ValueError("input number is outside the range of 16-bit numbers: [-32767, 65535]")
+        raise ValueError(
+            "input number is outside the range of 16-bit numbers: [-32767, 65535]"
+        )
     return ctypes.c_uint16(number).value
 
 
@@ -27,7 +29,9 @@ def unsigned16_to_signed16(number: int) -> int:
     :return: signed number of type int.
     """
     if number < -32767 or number > 65535:
-        raise ValueError("input number is outside the range of 16-bit numbers: [-32767, 65535]")
+        raise ValueError(
+            "input number is outside the range of 16-bit numbers: [-32767, 65535]"
+        )
     if number <= 0:
         return number
     return ctypes.c_int16(number).value
@@ -257,40 +261,3 @@ def counts_to_engineering_units_dict_input(counts, range_information):
         range_information["CountValue+FS"],
         range_information["CountValue-FS"],
     )
-
-
-if __name__ == "__main__":
-    nums = [0x0bcd, 0xe120]  # 198,041,888 and 3,776,973,773
-
-    print(int16_to_int32(nums))
-    print(int16_to_int32(nums, msb_first=False))
-
-    print("\nints to float:\n")
-
-    floats = []
-
-    for i in range(3):
-        for j in range(21):
-            floats.append(ints_to_float([i, j]))
-
-    results = []
-
-    for num in floats:
-        results.append(float_to_ints(num))
-
-    for i, j in zip(floats, results):
-        print("{}, {}".format(i, j))
-
-    print(float_to_ints(1.215480415))
-
-    print("--------------------")
-    print(int32_to_int16s(16))
-    print(int32_to_int16s(65536))
-    print(int32_to_int16s("2"))
-    print(int32_to_int16s(-2))
-
-    print(float_to_ints(7))
-
-    print(round_to_n(.0003051757, 3))
-    print(round_to_n(30002145, 3))
-    print(round_to_n(.01249, 3))
