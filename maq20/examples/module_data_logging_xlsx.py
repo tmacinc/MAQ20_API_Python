@@ -12,6 +12,7 @@ Improvements that can be made:
 Potential Change:
     - Use internal File I/O libraries to write a CSV file without using an external library.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 import time, xlsxwriter
 from datetime import datetime

@@ -494,7 +494,7 @@ class MAQ20Module:
         except (IndexError, AttributeError):
             raise StopIteration
 
-    # List Behaviour
+    # List Behavior
 
     def __len__(self):
         return self.get_number_of_channels()
@@ -510,7 +510,7 @@ class MAQ20Module:
     def __setitem__(self, key, value):
         if isinstance(key, slice):
             m_slice = list(range(self._number_of_channels))[key]
-            if len(m_slice) != len(m_slice):
+            if len(m_slice) != len(value):
                 raise AssertionError('key and value are not the same length.')
             for i in range(len(m_slice)):
                 m_slice[i] = self.write_channel_data(m_slice[i], value[i])

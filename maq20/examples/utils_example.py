@@ -1,6 +1,7 @@
 """
 Example of how to use the utilities module in the MAQ20 API when reading and writing directly to registers.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 import maq20.utilities as utils
 

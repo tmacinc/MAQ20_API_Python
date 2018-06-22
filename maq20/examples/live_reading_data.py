@@ -1,6 +1,7 @@
 """
 Example showing a loop used to read continuosly from a module until script is interrupted or stopped.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 import time
 

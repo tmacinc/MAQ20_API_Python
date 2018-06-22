@@ -11,6 +11,7 @@ Notes:
     - Change the string passed to maq20.find() to use another module.
     - Add more pens if a module with more than 16 channels is to be used.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtCore, QtGui
 from maq20 import MAQ20

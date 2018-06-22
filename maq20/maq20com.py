@@ -1,4 +1,4 @@
-from maq20.maq20module import *
+from maq20.maq20module import MAQ20Module
 from maq20.utilities import *
 from maq20.modbus_client.client.sync import ModbusTcpClient
 

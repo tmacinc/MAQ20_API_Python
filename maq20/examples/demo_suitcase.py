@@ -4,6 +4,7 @@ The Hardware is not needed to run this example.
 This example uses PyQT5 and was designed using QT Designer.
 'demo_suitcase_ui.py' is the output of the make_ui() function, this file is not meant to be modified directly.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20, MAQ20Module
 from maq20.modules import diol
 from PyQt5.QtCore import QTimer, pyqtSlot

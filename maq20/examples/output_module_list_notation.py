@@ -1,6 +1,7 @@
 """
 Example showing how to write data to a module using list notation.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 
 maq20 = MAQ20()  # Initialize system with default parameters ip_address='192.168.128.100', port=520

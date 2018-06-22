@@ -1,4 +1,4 @@
-from maq20 import MAQ20Module
+from maq20.maq20module import MAQ20Module
 import maq20.utilities as utils
 
 

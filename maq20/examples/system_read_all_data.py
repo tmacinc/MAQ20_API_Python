@@ -1,6 +1,7 @@
 """
 Shows how to display a snapshot of all data of all modules in the system.
 """
+import _example_init  # Only used by the examples, you don't need to do this.
 from maq20.maq20 import MAQ20
 
 # Initiate a maq20 system and communication.
