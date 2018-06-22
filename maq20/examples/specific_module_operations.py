@@ -3,7 +3,7 @@ Shows how to use a module that has special functions that other modules normally
 
 This example uses the IVI (not released) to access its burst mode parameters and functions.
 """
-import _example_init  # Only used by the examples, you don't need to do this.
+exec("import _example_init")  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 from maq20.modules.diol import DIOL
 

@@ -5,7 +5,7 @@ Note: This example does not change any settings because it writes the old values
         Also, If you want a setting to stay and be applied, a write to eeprom command needs to be sent and
         COM module needs a power cycle.
 """
-import _example_init  # Only used by the examples, you don't need to do this.
+exec("import _example_init")  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 from maq20.maq20com import COMx
 

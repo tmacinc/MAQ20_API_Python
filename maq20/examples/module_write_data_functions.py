@@ -1,7 +1,7 @@
 """
 Shows how to setup an output module for writing data to it and shows how to write data.
 """
-import _example_init  # Only used by the examples, you don't need to do this.
+exec("import _example_init")  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 
 maq20 = MAQ20(ip_address="192.168.128.100", port=502)  # Initialize

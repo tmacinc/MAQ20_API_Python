@@ -5,7 +5,7 @@ The API supports indexing, iteration, slicing, and negative indexing
 
 One module is required to tun this example.
 """
-import _example_init  # Only used by the examples, you don't need to do this.
+exec("import _example_init")  # Only used by the examples, you don't need to do this.
 
 from maq20 import MAQ20
 

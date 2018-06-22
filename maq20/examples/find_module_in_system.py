@@ -2,7 +2,7 @@
 This example shows how to find a module in a system to work with.
 Print the module to see information about that module.
 """
-import _example_init  # Only used by the examples, you don't need to do this.
+exec("import _example_init")  # Only used by the examples, you don't need to do this.
 from maq20 import MAQ20
 
 module_to_find = "VDN"
