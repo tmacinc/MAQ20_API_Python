@@ -1,6 +1,7 @@
 import maq20.utilities as utils
 from maq20.maq20module import MAQ20Module
 from maq20.modbus_client.client.sync import ModbusTcpClient
+import collections
 
 
 class COMx(MAQ20Module):
@@ -9,7 +10,7 @@ class COMx(MAQ20Module):
     Takes care of the communication backend and provides functions that read the COMx register map.
     """
 
-    def __init__(self, ip_address, port=502, timeout=3):
+    def __init__(self, ip_address="192.168.128.100", port=502, timeout=3):
         from maq20.modbus_client.constants import Defaults
 
         self._ip_address = ip_address
@@ -60,7 +61,7 @@ class COMx(MAQ20Module):
         :param value: int [-32767, 32767] or a str of size 1
         :return: modbus response.
         """
-        if type(value) is str:
+        if isinstance(value, str):
             value = ord(value[0])
         value = utils.signed16_to_unsigned16(value)
         return self._client.write_register(address, value)
@@ -74,7 +75,7 @@ class COMx(MAQ20Module):
         :return: modbus response.
         """
         ints = []
-        if type(values) is str:
+        if isinstance(values, str):
             for c in values:
                 ints.append(ord(c))
         else:
@@ -85,14 +86,14 @@ class COMx(MAQ20Module):
         return self._com.read_registers(50, 4)
 
     def write_ip_address(self, ip_address):
-        if type(ip_address) is str:
+        if isinstance(ip_address, str):
             first = ip_address.partition(".")
             second = first[2].partition(".")
             third = second[2].partition(".")
             numbers = [first[0], second[0], third[0], third[2]]
             numbers = [int(number) for number in numbers]
             return self.write_registers(50, numbers)
-        elif type(ip_address) is list:
+        elif isinstance(ip_address, collections.Iterable):
             return self.write_registers(50, ip_address)
         return None
 
@@ -100,14 +101,14 @@ class COMx(MAQ20Module):
         return self._com.read_registers(55, 4)
 
     def write_ethernet_subnet_mask(self, mask):
-        if type(mask) is str:
+        if isinstance(mask, str):
             first = mask.partition(".")
             second = first[2].partition(".")
             third = second[2].partition(".")
             numbers = [first[0], second[0], third[0], third[2]]
             numbers = [int(number) for number in numbers]
             return self.write_registers(55, numbers)
-        elif type(mask) is list:
+        elif isinstance(mask, collections.Iterable):
             return self.write_registers(55, mask)
         return None
 
@@ -147,7 +148,7 @@ class COMx(MAQ20Module):
         return {0: "None", 1: "Odd", 2: "Even"}[self._com.read_register(65)]
 
     def write_serial_port_parity(self, parity):
-        if type(parity) is str:
+        if isinstance(parity, str):
             parity = parity.lower()
             parity = {"none": 0, "odd": 1, "even": 2}[parity]
         self.write_register(65, parity)
@@ -156,7 +157,7 @@ class COMx(MAQ20Module):
         return {0: "4-wire", 1: "2-wire"}[self.read_register(66)]
 
     def write_rs485_type(self, rs485_type):
-        if type(rs485_type) is str:
+        if isinstance(rs485_type, str):
             if rs485_type[0] == "4":
                 rs485_type = 0
             elif rs485_type[1] == "2":
@@ -169,21 +170,21 @@ class COMx(MAQ20Module):
         return {0: False, 1: True}[self.read_register(67)]
 
     def write_termination(self, termination):
-        if type(termination) is str:
+        if isinstance(termination, str):
             if termination[0] == "D" or termination[0] == "d":
                 termination = 0
             elif termination[0] == "E" or termination[0] == "e":
                 termination = 1
             else:
                 return None
-        if type(termination) is bool:
+        if isinstance(termination, bool):
             termination = {False: 0, True: 1}[termination]
         return self.write_register(67, termination)
 
-    def read_slave_id(self):
+    def read_slave_id(self) -> int:
         return self.read_register(68)
 
-    def write_slave_id(self, slave_id):
+    def write_slave_id(self, slave_id: int):
         return self.write_register(68, slave_id)
 
     def write_save_port_and_server_settings(self):
@@ -194,37 +195,31 @@ class COMx(MAQ20Module):
     def read_file_server_username(self) -> str:
         return utils.response_to_string(self.read_registers(71, 10))
 
-    def write_file_server_username(self, username):
-        if type(username) is not str:
-            return False
-        else:
-            return self.write_registers(71, username)
+    def write_file_server_username(self, username: str):
+        return self.write_registers(71, username)
 
-    def read_file_server_password(self):
+    def read_file_server_password(self) -> str:
         return utils.response_to_string(self.read_registers(81, 10))
 
-    def write_file_server_password(self, password):
-        if type(password) is not str:
-            return False
-        else:
-            return self.write_registers(81, password)
+    def write_file_server_password(self, password: str):
+        return self.write_registers(81, password)
 
-    def read_file_server_anonymous_login(self):
+    def read_file_server_anonymous_login(self) -> int:
         return self.read_register(91)
 
-    def write_file_server_anonymous_login(self, input_value):
+    def write_file_server_anonymous_login(self, input_value: int):
         return self.write_register(91, input_value)
 
     #######################
     # Module Configuration.
     #######################
 
-    def read_module_status(self):
+    def read_module_status(self) -> list:
         return self.read_registers(100, 24)
 
     def write_module_status(self, input_value):
         # TODO: Write this function.
-        pass
+        raise NotImplementedError
 
     def read_ethernet_port_present(self):
         return self.read_register(130)
@@ -253,10 +248,9 @@ class COMx(MAQ20Module):
         :param enable: Boolean
         :return: response from modbus backend.
         """
-        result = None
-        if enable is True:
+        if enable:
             result = self.write_register(1020, 1)  # enable auto registration
-        elif enable is False:
+        else:
             result = self.write_register(1020, 0)  # disable auto registration
             # """This for loop """
             # for i in range(24):
@@ -275,38 +269,39 @@ class COMx(MAQ20Module):
         return True
 
     def register_module(self, serial_number, registration_number):
-        pass
+        # TODO: Write this function.
+        raise NotImplementedError
 
     # SD CARD
 
-    def read_log_file_name(self):
+    def read_log_file_name(self) -> str:
         return utils.response_to_string(self.read_registers(1100, 11))
 
     def write_log_file_name(self, name: str):
         return self.write_registers(1100, name) if len(name) < 12 else False
 
-    def read_log_start_address_1(self):
+    def read_log_start_address_1(self) -> int:
         """
         Default = 2000 (Start Address of I/O Module in Slot 1.  Data for this module is at Start Address 3000)
         :return: int
         """
         return self.read_register(1120)
 
-    def write_log_start_address_1(self, value):
+    def write_log_start_address_1(self, value: int):
         """
         Default = 2000 (Start Address of I/O Module in Slot 1.  Data for this module is at Start Address 3000)
         :return: modbus response.
         """
         return self.write_register(1120, value)
 
-    def read_number_of_registers_to_log_1(self):
+    def read_number_of_registers_to_log_1(self) -> int:
         """
         Number of Registers to Log starting at Log Start Address 1.  Maximum = 100, Default = 8
         :return: int
         """
         return self.read_register(1121)
 
-    def write_number_of_registers_to_log_1(self, value):
+    def write_number_of_registers_to_log_1(self, value: int):
         """
         Number of Registers to Log starting at Log Start Address 1.  Maximum = 100, Default = 8
         :param value: number to write
@@ -314,28 +309,28 @@ class COMx(MAQ20Module):
         """
         return self.write_register(1121, value)
 
-    def read_log_start_address_2(self):
+    def read_log_start_address_2(self) -> int:
         """
         Default = 4000 (Start Address of I/O Module in Slot 2.  Data for this module is at Start Address 5000)
         :return: int
         """
         return self.read_register(1122)
 
-    def write_log_start_address_2(self, value):
+    def write_log_start_address_2(self, value: int):
         """
         Default = 4000 (Start Address of I/O Module in Slot 2.  Data for this module is at Start Address 5000)
         :return: modbus response.
         """
         return self.write_register(1122, value)
 
-    def read_number_of_registers_to_log_2(self):
+    def read_number_of_registers_to_log_2(self) -> int:
         """
         Number of Registers to Log starting at Log Start Address 2.  Maximum = 100, Default = 8
         :return: int
         """
         return self.read_register(1123)
 
-    def write_number_of_registers_to_log_2(self, value):
+    def write_number_of_registers_to_log_2(self, value: int):
         """
         Number of Registers to Log starting at Log Start Address 2.  Maximum = 100, Default = 8
         :param value: number to write
@@ -343,28 +338,28 @@ class COMx(MAQ20Module):
         """
         return self.write_register(1123, value)
 
-    def read_log_start_address_3(self):
+    def read_log_start_address_3(self) -> int:
         """
         Default = 6000 (Start Address of I/O Module in Slot 3.  Data for this module is at Start Address 7000)
         :return: int
         """
         return self.read_register(1124)
 
-    def write_log_start_address_3(self, value):
+    def write_log_start_address_3(self, value: int):
         """
         Default = 6000 (Start Address of I/O Module in Slot 3.  Data for this module is at Start Address 7000)
         :return: modbus response.
         """
         return self.write_register(1124, value)
 
-    def read_number_of_registers_to_log_3(self):
+    def read_number_of_registers_to_log_3(self) -> int:
         """
         Number of Registers to Log starting at Log Start Address 3.  Maximum = 100, Default = 8
         :return: int
         """
         return self.read_register(1125)
 
-    def write_number_of_registers_to_log_3(self, value):
+    def write_number_of_registers_to_log_3(self, value: int):
         """
         Number of Registers to Log starting at Log Start Address 3.  Maximum = 100, Default = 8
         :param value: number to write
@@ -372,28 +367,28 @@ class COMx(MAQ20Module):
         """
         return self.write_register(1125, value)
 
-    def read_log_start_address_4(self):
+    def read_log_start_address_4(self) -> int:
         """
         Default = 8000 (Start Address of I/O Module in Slot 4.  Data for this module is at Start Address 9000)
         :return: int
         """
         return self.read_register(1126)
 
-    def write_log_start_address_4(self, value):
+    def write_log_start_address_4(self, value: int):
         """
         Default = 8000 (Start Address of I/O Module in Slot 4.  Data for this module is at Start Address 9000)
         :return: modbus response.
         """
         return self.write_register(1126, value)
 
-    def read_number_of_registers_to_log_4(self):
+    def read_number_of_registers_to_log_4(self) -> int:
         """
         Number of Registers to Log starting at Log Start Address 4.  Maximum = 100, Default = 8
         :return: int
         """
         return self.read_register(1127)
 
-    def write_number_of_registers_to_log_4(self, value):
+    def write_number_of_registers_to_log_4(self, value: int):
         """
         Number of Registers to Log starting at Log Start Address 4.  Maximum = 100, Default = 8
         :param value: number to write
@@ -401,33 +396,33 @@ class COMx(MAQ20Module):
         """
         return self.write_register(1127, value)
 
-    def read_log_interval(self):
+    def read_log_interval(self) -> int:
         return utils.int16_to_int32(self.read_registers(1130, 2), msb_first=True)
 
-    def write_log_interval(self, value):
+    def write_log_interval(self, value: int):
         return self.write_registers(1130, utils.int32_to_int16s(value))
 
-    def read_log_number_of_samples(self):
+    def read_log_number_of_samples(self) -> int:
         return utils.int16_to_int32(self.read_registers(1132, 2))
 
-    def write_log_number_of_samples(self, value):
+    def write_log_number_of_samples(self, value: int):
         return self.write_registers(1132, utils.int32_to_int16s(value))
 
-    def read_log_enable(self):
+    def read_log_enable(self) -> int:
         return self.read_register(1140)
 
     def write_log_enable(self, enable):
         return self.write_register(1140, enable)
 
-    def read_card_available(self):
+    def read_card_available(self) -> int:
         return self.read_register(1150)
 
-    def read_total_space(self):
+    def read_total_space(self) -> int:
         return utils.int16_to_int32(
             [utils.signed16_to_unsigned16(x) for x in self.read_registers(1151, 2)]
         )
 
-    def read_free_space(self):
+    def read_free_space(self) -> int:
         return utils.int16_to_int32(
             [utils.signed16_to_unsigned16(x) for x in self.read_registers(1153, 2)]
         )

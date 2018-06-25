@@ -84,7 +84,7 @@ class MAQ20:
                 module_list.append(MAQ20Module(com=self._com, registration_number=i))
         self._module_list = module_list
 
-    def get_system_information(self):
+    def get_system_information(self) -> str:
         """
         :return: a string containing information about every registered module in the system.
         """
@@ -93,7 +93,7 @@ class MAQ20:
             result_str += a_module.module_information() + "\n"
         return result_str
 
-    def get_module(self, registration_number):
+    def get_module(self, registration_number: int) -> MAQ20Module:
         """
         Returns the MAQ20Module with the registration number requested.
         :param registration_number: int, 0 to 23
@@ -108,7 +108,7 @@ class MAQ20:
         """
         return self._module_list
 
-    def read_system_data(self):
+    def read_system_data(self) -> list:
         """
         Read every channel in every module
         :return: a list of lists containing the values read.
@@ -140,16 +140,16 @@ class MAQ20:
             )
             i += 1
 
-    def get_com(self):
+    def get_com(self) -> COMx:
         """
         :return: MAQ20COM currently registered in this system. 
         """
         return self._com
 
-    def read_data(self, a_module=1, channel=0):
+    def read_data(self, a_module: int, channel: int):
         """
         Calls the read_data() function registered at a_module index.
-        :param a_module: int, 0 to 23
+        :param a_module: int, 1 to 25
         :param channel: int, 0 and greater.
         :return: list
         """
@@ -157,7 +157,7 @@ class MAQ20:
             start_channel=channel, number_of_channels=1
         )
 
-    def find(self, name_or_sn: str = None):
+    def find(self, name_or_sn: str) -> MAQ20Module:
         """
         Attempts to find a MAmodule by name or serial number.
         :param name_or_sn: a string that contains a partial name or full serial number.

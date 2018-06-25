@@ -130,11 +130,11 @@ def int16_to_int32(numbers, msb_first=True) -> int:
     )
 
 
-def int32_to_uint32(i):
+def int32_to_uint32(i: int) -> int:
     return ctypes.c_uint32(i).value
 
 
-def int32_to_int16s(number, msb_first=True):
+def int32_to_int16s(number: int, msb_first=True) -> list:
     """
     Convert a number into two small enough numbers to be 16 bit.
     :param msb_first:
@@ -149,7 +149,7 @@ def int32_to_int16s(number, msb_first=True):
     )
 
 
-def ints_to_float(numbers):
+def ints_to_float(numbers) -> float:
     """
     numbers[0]: integer part
     numbers[1]: decimal part
@@ -162,21 +162,21 @@ def ints_to_float(numbers):
     return result
 
 
-def float_to_ints(number):
+def float_to_ints(number) -> list:
     """
     Converts a float to a list of two integers.
     Used for COM module PID loop controls.
     :param number: float number
     :return: list of integers of size 2
     """
-    if type(number) is int:
+    if isinstance(number, int):
         return [number, 0]
     number_str = "{:.6}".format(number)
     numbers = number_str.split(".", maxsplit=1)
     return [int(x) for x in numbers]
 
 
-def round_to_n(x, n):
+def round_to_n(x, n: int):
     """
     Round a number to 3 significant digits
     :param x:
@@ -188,7 +188,7 @@ def round_to_n(x, n):
     return round(x, -int(floor(log10(x))) + (n - 1))
 
 
-def counts_to_engineering_units(counts, p_fs, n_fs, p_fs_c, n_fs_c):
+def counts_to_engineering_units(counts: int, p_fs, n_fs, p_fs_c, n_fs_c):
     """
     Converts a counts representation of a measurement into an engineering unit representation.
     :param counts: counts to be converted
@@ -216,7 +216,7 @@ def counts_to_engineering_units(counts, p_fs, n_fs, p_fs_c, n_fs_c):
     )  # calculate the result and round to calculated decimals.
 
 
-def engineering_units_to_counts(eng_value, p_fs, n_fs, p_fs_c, n_fs_c):
+def engineering_units_to_counts(eng_value, p_fs, n_fs, p_fs_c, n_fs_c) -> int:
     """
     Converts an Eng Value to the respective Count representation based on range information.
     :param eng_value: number
@@ -231,7 +231,7 @@ def engineering_units_to_counts(eng_value, p_fs, n_fs, p_fs_c, n_fs_c):
     return round((eng_value / m) + offset)
 
 
-def engineering_units_to_counts_dict_input(in_val, range_information):
+def engineering_units_to_counts_dict_input(in_val, range_information: dict) -> int:
     """
     Wrapper of engineering_units_to_counts() that takes a dictionary as an input.
     :param in_val: eng_value to be converted
@@ -247,7 +247,7 @@ def engineering_units_to_counts_dict_input(in_val, range_information):
     )
 
 
-def counts_to_engineering_units_dict_input(counts, range_information):
+def counts_to_engineering_units_dict_input(counts: int, range_information: dict):
     """
     Wrapper of counts_to_engineering_units() that takes a dictionary as an input.
     :param counts: counts to be converted

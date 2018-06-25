@@ -7,7 +7,7 @@ class MAQ20Module:
     This contains every functionality that is shared between all modules.
     """
 
-    def __init__(self, com=None, registration_number=0):
+    def __init__(self, com, registration_number=1):
         """
         Reads general information about the MAQ20 module to registers.
         Registers: [0, 100]
@@ -258,7 +258,7 @@ class MAQ20Module:
             self._channel_active_ranges = None  # type: list
 
     @staticmethod
-    def _check_range_validity(a_range):
+    def _check_range_validity(a_range: dict) -> bool:
         """
         Called by load_ranges_information(). Checks whether range information read makes sense
         :param a_range: list of range information. This is usually read from registers 1710+ and is length 11
@@ -281,35 +281,35 @@ class MAQ20Module:
             passed = False
         return passed
 
-    def get_engineering_full_scale_positive(self, channel):
+    def get_engineering_full_scale_positive(self, channel: int):
         if channel > self._number_of_channels:
             return None
         return self._ranges_information[self._channel_active_ranges[channel]][
             "Engineering+FS"
         ]
 
-    def get_engineering_full_scale_negative(self, channel):
+    def get_engineering_full_scale_negative(self, channel: int):
         if channel > self._number_of_channels:
             return None
         return self._ranges_information[self._channel_active_ranges[channel]][
             "Engineering-FS"
         ]
 
-    def get_counts_full_scale_positive(self, channel):
+    def get_counts_full_scale_positive(self, channel: int) -> int:
         if channel > self._number_of_channels:
             return None
         return self._ranges_information[self._channel_active_ranges[channel]][
             "CountValue+FS"
         ]
 
-    def get_counts_full_scale_negative(self, channel):
+    def get_counts_full_scale_negative(self, channel: int) -> int:
         if channel > self._number_of_channels:
             return None
         return self._ranges_information[self._channel_active_ranges[channel]][
             "CountValue-FS"
         ]
 
-    def get_engineering_units(self, channel):
+    def get_engineering_units(self, channel: int) -> str:
         if channel > self._number_of_channels:
             return None
         return self._ranges_information[self._channel_active_ranges[channel]][
@@ -329,7 +329,7 @@ class MAQ20Module:
             pass
         return self._channel_active_ranges
 
-    def get_channel_active_range(self, channel=0):
+    def get_channel_active_range(self, channel: int):
         """
         :param channel: channel requested.
         :return: integer of the active channel range.
@@ -340,17 +340,17 @@ class MAQ20Module:
             else False
         )
 
-    def get_ranges_information(self):
+    def get_ranges_information(self) -> list:
         """
         returns the current ranges information.
         :return: list(dict())
         """
         return self._ranges_information
 
-    def get_channel_ranges_information(self, channel):
+    def get_channel_ranges_information(self, channel: int):
         return self._ranges_information[self._channel_active_ranges[channel]]
 
-    def display_ranges_information(self):
+    def display_ranges_information(self) -> str:
         """
         Construct a string in human readable form of range information for all ranges in the module.
         :return: str
@@ -367,7 +367,7 @@ class MAQ20Module:
             info_str += "\n"
         return info_str
 
-    def counts_to_eng_units_list(self, data_list, channel):
+    def counts_to_eng_units_list(self, data_list, channel: int):
         result = []
         for i, data in enumerate(data_list):
             result.append(
@@ -385,7 +385,7 @@ class MAQ20Module:
     def get_name(self) -> str:
         return self._name
 
-    def get_registration_number(self):
+    def get_registration_number(self) -> int:
         return self._registration_number
 
     def get_inputs(self) -> int:
@@ -413,17 +413,19 @@ class MAQ20Module:
     # Channel Data.
     ###############
 
-    def _read_channel_data_counts_address_input(self, address, channel):
+    def _read_channel_data_counts_address_input(
+        self, address: int, channel: int
+    ) -> int:
         self._check_channel_inputs(channel)
         return self.read_register(address + channel)
 
     def _read_data_counts_address_input(
-        self, address, start_channel, number_of_channels
-    ):
+        self, address: int, start_channel: int, number_of_channels: int
+    ) -> list:
         self._check_channel_inputs(start_channel, number_of_channels)
         return self.read_registers(address + start_channel, number_of_channels)
 
-    def _read_channel_data_address_input(self, address, channel):
+    def _read_channel_data_address_input(self, address: int, channel: int):
         counts = self._read_channel_data_counts_address_input(address, channel)
         if self.has_range_information():
             return utils.counts_to_engineering_units_dict_input(
@@ -436,7 +438,9 @@ class MAQ20Module:
                 "This module does not have Range information available. Try reading counts instead."
             )
 
-    def _read_data_address_input(self, address, start_channel, number_of_channels):
+    def _read_data_address_input(
+        self, address: int, start_channel: int, number_of_channels: int
+    ):
         counts = self._read_data_counts_address_input(
             address, start_channel, number_of_channels
         )
@@ -449,22 +453,22 @@ class MAQ20Module:
                 "This module does not have Range information available. Try reading counts instead."
             )
 
-    def _check_channel_inputs(self, channel, number_of_channels=1):
+    def _check_channel_inputs(self, channel: int, number_of_channels=1) -> bool:
         if number_of_channels < 0:
-            raise AttributeError("Number of channels cannot be negative.")
+            raise ValueError("Number of channels cannot be negative.")
         if (
             0 <= channel < self._number_of_channels
             and channel + number_of_channels <= self._number_of_channels
         ):
             return True
         else:
-            raise AttributeError(
+            raise ValueError(
                 "Outside number of channels range: {}".format(self._number_of_channels)
             )
 
     # Counts:
 
-    def read_channel_data_counts(self, channel):
+    def read_channel_data_counts(self, channel: int) -> int:
         """
         Reads data from a channel of this module in raw counts.
         :param channel: channel number to read.
@@ -472,7 +476,7 @@ class MAQ20Module:
         """
         return self._read_channel_data_counts_address_input(1000, channel)
 
-    def write_channel_data_counts(self, channel, data):
+    def write_channel_data_counts(self, channel: int, data):
         self._check_channel_inputs(channel)
         p_fs_c = self.get_counts_full_scale_positive(channel)
         n_fs_c = self.get_counts_full_scale_negative(channel)
@@ -485,7 +489,7 @@ class MAQ20Module:
                 )
             )
 
-    def read_data_counts(self, start_channel=0, number_of_channels=1):
+    def read_data_counts(self, start_channel: int, number_of_channels: int) -> list:
         """
         Reads data for the requested channel in COUNTS.
         :param start_channel: channel to start reading from.
@@ -496,14 +500,14 @@ class MAQ20Module:
             1000, start_channel, number_of_channels
         )
 
-    def write_data_counts(self, start_channel, data_set):
+    def write_data_counts(self, start_channel: int, data_set):
         self._check_channel_inputs(start_channel, len(data_set))
         for i in range(len(data_set)):
             self.write_data_counts(i + start_channel, data_set[i])
 
     # Engineering values:
 
-    def read_channel_data(self, channel):
+    def read_channel_data(self, channel: int):
         """
         Reads channel data from the module.
         :param channel: channel to read.
@@ -511,7 +515,7 @@ class MAQ20Module:
         """
         return self._read_channel_data_address_input(1000, channel)
 
-    def write_channel_data(self, channel, data):
+    def write_channel_data(self, channel: int, data):
         """
         Writes data to channel.
         :param channel: int
@@ -538,7 +542,7 @@ class MAQ20Module:
                 "This module does not have Range information available. Try reading counts instead."
             )
 
-    def read_data(self, start_channel=0, number_of_channels=1):
+    def read_data(self, start_channel: int, number_of_channels: int):
         """
         Reads channel data from the module.
         :param start_channel: channel to start reading from.
@@ -547,7 +551,7 @@ class MAQ20Module:
         """
         return self._read_data_address_input(1000, start_channel, number_of_channels)
 
-    def write_data(self, start_channel, data_set):
+    def write_data(self, start_channel: int, data_set):
         """
         Writes data_set to the module starting at channel start_channel, data_set has to be iterable.
         :param start_channel: 
