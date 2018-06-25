@@ -1,6 +1,8 @@
 import maq20.utilities as utils
 from maq20.maq20module import MAQ20Module
 from maq20.modbus_client.client.sync import ModbusTcpClient
+from maq20.modbus_client.pdu import ExceptionResponse
+from maq20.modbus_client.exceptions import ModbusIOException
 import collections
 
 
@@ -44,14 +46,27 @@ class COMx(MAQ20Module):
         :param number_of_registers: number of registers to be read in sequence.
         :return: list(int) [-32767, 32767]
         """
+        if address < 0:
+            raise ValueError("address parameter cannot be negative: {}".format(address))
+        if number_of_registers < 0:
+            raise ValueError(
+                "number_of_registers parameter cannot be negative: {}".format(
+                    number_of_registers
+                )
+            )
+        if number_of_registers > 125:
+            raise ValueError(
+                "number_of_registers cannot be greater than 125: {}".format(
+                    number_of_registers
+                )
+            )
         result = self._client.read_holding_registers(
             address=address, count=number_of_registers
         )
         # converts the returned values to signed.
-        try:
-            return [utils.unsigned16_to_signed16(value) for value in result.registers]
-        except AttributeError:
-            return None
+        if isinstance(result, ExceptionResponse):
+            raise ModbusIOException("Exception Code: {}".format(result.exception_code))
+        return [utils.unsigned16_to_signed16(value) for value in result.registers]
 
     def write_register(self, address: int, value):
         """
@@ -61,6 +76,8 @@ class COMx(MAQ20Module):
         :param value: int [-32767, 32767] or a str of size 1
         :return: modbus response.
         """
+        if address < 0:
+            raise ValueError("address parameter cannot be negative: {}".format(address))
         if isinstance(value, str):
             value = ord(value[0])
         value = utils.signed16_to_unsigned16(value)
@@ -74,6 +91,8 @@ class COMx(MAQ20Module):
         :param values: list(int) [-32767, 32767] or a str
         :return: modbus response.
         """
+        if address < 0:
+            raise ValueError("address parameter cannot be negative: {}".format(address))
         ints = []
         if isinstance(values, str):
             for c in values:
@@ -979,4 +998,7 @@ class COMx(MAQ20Module):
         return result
 
     def __del__(self):
-        self._client.close()
+        try:
+            self._client.close()
+        except AttributeError:
+            pass

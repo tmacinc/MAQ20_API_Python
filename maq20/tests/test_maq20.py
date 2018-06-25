@@ -2,6 +2,7 @@ import time
 import unittest
 
 from maq20 import MAQ20
+from maq20.modbus_client.exceptions import ModbusIOException
 
 
 class TestMAQ20(unittest.TestCase):
@@ -32,6 +33,13 @@ class TestMAQ20(unittest.TestCase):
         self.assertEqual([97, 98, 99, 100], self.maq20.read_registers(1100, 4))
         self.maq20.write_registers(1100, "FILE")
         self.assertEqual([70, 73, 76, 69], self.maq20.read_registers(1100, 4))
+        self.assertRaises(ModbusIOException, self.maq20.read_registers, *(60000, 10))
+        # Check that errors are thrown
+        self.assertRaises(ValueError, self.maq20.read_registers, *(-2000, 10))
+        self.assertRaises(ValueError, self.maq20.read_registers, *(0, -10))
+        self.assertRaises(ValueError, self.maq20.read_registers, *(0, 126))
+        self.assertRaises(ValueError, self.maq20.write_register, *(-2000, 10))
+        self.assertRaises(ValueError, self.maq20.write_registers, *(-2000, [10, 10]))
         # COM
         com = self.maq20.get_com()
         answer = com.read_register(0)
@@ -46,6 +54,12 @@ class TestMAQ20(unittest.TestCase):
         self.assertEqual([97, 98, 99, 100], com.read_registers(1100, 4))
         com.write_registers(1100, "FILE")
         self.assertEqual([70, 73, 76, 69], com.read_registers(1100, 4))
+        # Check that errors are thrown
+        self.assertRaises(ValueError, com.read_registers, *(-2000, 10))
+        self.assertRaises(ValueError, com.read_registers, *(0, -10))
+        self.assertRaises(ValueError, com.read_registers, *(0, 126))
+        self.assertRaises(ValueError, com.write_register, *(-2000, 10))
+        self.assertRaises(ValueError, com.write_registers, *(-2000, [10, 10]))
         # Module
         mv = self.maq20.find("MVDN")
         answer = mv.read_register(0)
@@ -65,6 +79,17 @@ class TestMAQ20(unittest.TestCase):
         mv.write_registers(100, [1, 1, 1, 1])
         self.assertEqual([1, 1, 1, 1], mv.read_registers(100, 4))
         mv.write_registers(100, multiple_regs)
+        # Check that errors are thrown
+        self.assertRaises(ValueError, mv.read_register, -10)
+        self.assertRaises(ValueError, mv.read_register, 2000)
+        self.assertRaises(ValueError, mv.write_register, *(-10, 2))
+        self.assertRaises(ValueError, mv.write_register, *(2000, 2))
+        self.assertRaises(ValueError, mv.read_registers, *(-10, 2))
+        self.assertRaises(ValueError, mv.read_registers, *(2000, 2))
+        self.assertRaises(ValueError, mv.read_registers, *(0, -2))
+        self.assertRaises(ValueError, mv.read_registers, *(0, 126))
+        self.assertRaises(ValueError, mv.write_registers, *(-10, [2, 2]))
+        self.assertRaises(ValueError, mv.write_registers, *(2000, [2, 2]))
 
     def test_com_settings(self):
         com = self.maq20.get_com()  # type: COMx

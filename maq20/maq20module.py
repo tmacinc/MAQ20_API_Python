@@ -251,6 +251,10 @@ class MAQ20Module:
                             raise TypeError("Invalid Range Value")
                         break
             except Exception as e:
+                print(e)
+                print(type(e))
+                print(self.get_name())
+                print(self.get_registration_number())
                 pass
         else:
             self._number_of_ranges = None
