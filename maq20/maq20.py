@@ -33,7 +33,7 @@ class MAQ20:
         self.scan_module_list()
         self._iter_index = 0
 
-    def read_register(self, address):
+    def read_register(self, address: int) -> int:
         """
         Low level register access.
         Performs a modbus read register request to the MAQ20
@@ -42,7 +42,7 @@ class MAQ20:
         """
         return self._com.read_register(address)
 
-    def read_registers(self, address, number_of_registers):
+    def read_registers(self, address: int, number_of_registers: int) -> list:
         """
         Low level register access.
         Performs a modbus read registers request to the MAQ20
@@ -52,7 +52,7 @@ class MAQ20:
         """
         return self._com.read_registers(address, number_of_registers)
 
-    def write_register(self, address, value):
+    def write_register(self, address: int, value):
         """
         Low level register access.
         Performs a modbus write register request to the MAQ20
@@ -62,7 +62,7 @@ class MAQ20:
         """
         return self._com.write_register(address, value)
 
-    def write_registers(self, address, values=None):
+    def write_registers(self, address: int, values):
         """
         Low level register access.
         Performs a modbus write registers request to the MAQ20
@@ -70,7 +70,7 @@ class MAQ20:
         :param values: list(int) [-32767, 32767] or a str
         :return: modbus response.
         """
-        return self.read_registers(address, values)
+        return self._com.write_registers(address, values)
 
     def scan_module_list(self):
         """
@@ -302,3 +302,12 @@ class MAQ20:
 
     def __len__(self):
         return len(self._module_list)
+
+    def __del__(self):
+        try:
+            self.close()
+        except AttributeError:
+            pass
+
+    def close(self):
+        self._com.close()

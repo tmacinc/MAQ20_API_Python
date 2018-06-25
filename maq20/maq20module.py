@@ -53,7 +53,7 @@ class MAQ20Module:
     # Modbus Communication.
     #######################
 
-    def read_register(self, address):
+    def read_register(self, address: int) -> int:
         """
         Calls the MAQ20-COMx module's read_register().
         Performs a modbus read register request to the MAQ20
@@ -63,9 +63,11 @@ class MAQ20Module:
         if 0 <= address < 2000:
             return self._com.read_register(address + self._starting_address)
         else:
-            return False
+            raise ValueError(
+                "address parameter is not within module bounds: 0 <= address < 2000"
+            )
 
-    def read_registers(self, address, number_of_registers):
+    def read_registers(self, address: int, number_of_registers: int) -> list:
         """
         Calls the MAQ20-COMx module's read_registers().
         Performs a modbus read registers request to the MAQ20
@@ -82,9 +84,11 @@ class MAQ20Module:
                 address + self._starting_address, number_of_registers
             )
         else:
-            return False
+            raise ValueError(
+                "address + number_of_registers parameters are not within module bounds: 0 <= address < 2000"
+            )
 
-    def write_register(self, address, value):
+    def write_register(self, address: int, value):
         """
         Calls the MAQ20-COMx module's write_register().
         Performs a modbus write register request to the MAQ20
@@ -95,9 +99,11 @@ class MAQ20Module:
         if 0 <= address < 2000:
             return self._com.write_register(address + self._starting_address, value)
         else:
-            return False
+            raise ValueError(
+                "address parameter is not within module bounds: 0 <= address < 2000"
+            )
 
-    def write_registers(self, address, values=None):
+    def write_registers(self, address: int, values):
         """
         Calls the MAQ20-COMx module's write_registers().
         Performs a modbus write registers request to the MAQ20
@@ -108,7 +114,9 @@ class MAQ20Module:
         if 0 <= address < 2000:
             return self._com.write_registers(address + self._starting_address, values)
         else:
-            return False
+            raise ValueError(
+                "address parameter is not within module bounds: 0 <= address < 2000"
+            )
 
     def module_information(self) -> str:
         """
@@ -152,7 +160,7 @@ class MAQ20Module:
     # Ranges Information [1700,1899]
     ################################
 
-    def has_range_information(self):
+    def has_range_information(self) -> bool:
         """
         Checks if this module has range information stored.
         Range information is used to convert from counts to engineering units.
@@ -163,7 +171,7 @@ class MAQ20Module:
         else:
             return True
 
-    def read_range_count(self):
+    def read_range_count(self) -> int:
         return self.read_register(1700)
 
     def read_range(self, a_range=0):

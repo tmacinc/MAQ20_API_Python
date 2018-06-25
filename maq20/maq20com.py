@@ -12,12 +12,21 @@ class COMx(MAQ20Module):
     def __init__(self, ip_address, port=502, timeout=3):
         from maq20.modbus_client.constants import Defaults
 
+        self._ip_address = ip_address
+        self._port = port
         Defaults.Timeout = timeout
         if ip_address is not None or port is not None:
             self._client = ModbusTcpClient(ip_address, port=port)
         super(COMx, self).__init__(com=self, registration_number=0)
 
-    def read_register(self, address):
+    def close(self):
+        try:
+            self._client.close()
+        except Exception as e:
+            print(e)
+            print(type(e))
+
+    def read_register(self, address: int) -> int:
         """
         Low level register access.
         Performs a modbus read register request to the MAQ20
@@ -26,7 +35,7 @@ class COMx(MAQ20Module):
         """
         return self.read_registers(address, 1)[0]
 
-    def read_registers(self, address, number_of_registers):
+    def read_registers(self, address: int, number_of_registers: int) -> list:
         """
         Low level register access.
         Performs a modbus read registers request to the MAQ20
@@ -43,7 +52,7 @@ class COMx(MAQ20Module):
         except AttributeError:
             return None
 
-    def write_register(self, address, value):
+    def write_register(self, address: int, value):
         """
         Low level register access.
         Performs a modbus write register request to the MAQ20
@@ -56,7 +65,7 @@ class COMx(MAQ20Module):
         value = utils.signed16_to_unsigned16(value)
         return self._client.write_register(address, value)
 
-    def write_registers(self, address, values=None):
+    def write_registers(self, address: int, values):
         """
         Low level register access.
         Performs a modbus write registers request to the MAQ20
@@ -72,7 +81,7 @@ class COMx(MAQ20Module):
             ints = [utils.signed16_to_unsigned16(x) for x in values]
         return self._client.write_registers(address, ints)
 
-    def read_ip_address(self):
+    def read_ip_address(self) -> list:
         return self._com.read_registers(50, 4)
 
     def write_ip_address(self, ip_address):
