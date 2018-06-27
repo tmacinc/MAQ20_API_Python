@@ -69,3 +69,4 @@ latex
 html
 .pytest_cache/
 .vscode/*
+MANIFEST

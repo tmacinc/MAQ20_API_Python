@@ -2,16 +2,13 @@ This package is used to provide high level functions and wrappers to Dataforth's
 See examples for a quick start and start exploring the api.
 
 Dependencies:
-    Required:
-        pymodbus3
-        or as an alternative to pymodbus3: umodbus
     Recommended for some examples only:
         PyQt5
         xlsxwritter
         pyqtgraph
 
 Installation:
-    Note: Python 3 is required to use this api, as well as the dependencies described above.
+    Note: Python 3.4.0+ is required to use this api.
 
     Windows:
         Run the provided msi or install from source.

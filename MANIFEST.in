@@ -1,7 +1,2 @@
-prune __pycache__
-prune dist
-prune build
-prune .git
-prune maq20/examples
-exclude gitignore
-exclude __init__.py
+include *txt
+resursive-include *.ui

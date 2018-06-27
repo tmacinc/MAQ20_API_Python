@@ -1,4 +1,5 @@
 import time
+import importlib
 import unittest
 
 from maq20 import MAQ20
@@ -94,7 +95,7 @@ class TestMAQ20(unittest.TestCase):
     def test_com_settings(self):
         com = self.maq20.get_com()  # type: COMx
 
-        """Save current settings so that we can leave the system as it was before this example."""
+        # Save current settings so that we can leave the system as it was before this example.
         ip_address = com.read_ip_address()
         serial_port_baud = com.read_serial_port_baud()
         serial_port_parity = com.read_serial_port_parity()
@@ -139,8 +140,7 @@ class TestMAQ20(unittest.TestCase):
             )
 
     def test_fail_to_connect(self):
-        if float(self.maq20.get_com().get_firmware_version()[1:-1]) > 1.36:
-            self.assertRaises(Exception, MAQ20, "192.168.128.200")
+        self.assertRaises(Exception, MAQ20, "192.168.128.200")
 
     def test_set_and_read_voltage(self):
         voltages = [-2.0, -1.5, -1, -0.1, 0, 0.1, .5, 1.2, 2]
@@ -149,7 +149,7 @@ class TestMAQ20(unittest.TestCase):
         mv = self.maq20.find("MVDN")
         for voltage in voltages:
             vo[0] = voltage
-            time.sleep(0.5)  # Allow the value to settle
+            time.sleep(1)  # Allow the value to settle
             read_back = mv[0]
             self.assertTrue(
                 abs(voltage) - abs(read_back) < epsilon,
@@ -163,7 +163,7 @@ class TestMAQ20(unittest.TestCase):
         epsilon = 0.1 * 1e-3
         for current in currents:
             i_out[0] = current
-            time.sleep(0.5)  # Allow the value to settle
+            time.sleep(1)  # Allow the value to settle
             read_back = i_in[0]
             self.assertTrue(
                 abs(current * 1e-3) - abs(read_back) < epsilon,
@@ -206,3 +206,22 @@ class TestMAQ20(unittest.TestCase):
         self.assertIsInstance(brdg.display_ranges_information(), bool)
         self.assertIsInstance(rly.display_ranges_information(), bool)
         self.assertIsInstance(freq.display_ranges_information(), str)
+
+    @unittest.skipIf(
+        importlib.util.find_spec("numpy") is None, "numpy is not installed"
+    )
+    def test_numpy_numbers(self):
+        import numpy as np
+
+        voltages = np.linspace(-2, 2, 20)
+        epsilon = 0.1
+        vo = self.maq20.find("VO")
+        mv = self.maq20.find("MVDN")
+        for voltage in voltages:
+            vo[0] = voltage
+            time.sleep(1)  # Allow the value to settle
+            read_back = mv[0]
+            self.assertTrue(
+                abs(voltage) - abs(read_back) < epsilon,
+                msg="In: {} Out: {}".format(voltage, read_back),
+            )

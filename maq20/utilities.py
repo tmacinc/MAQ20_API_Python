@@ -1,9 +1,10 @@
 """
 This module provides a set of static functions that are meant to be used for common tasks.
 
-Import this module by typing: from maq20.utilities import *
+Import this module by typing: from maq20 import utilities
 """
 import ctypes
+from math import floor, log10
 
 
 def signed16_to_unsigned16(number: int) -> int:
@@ -183,8 +184,6 @@ def round_to_n(x, n: int):
     :param n:
     :return:
     """
-    from math import log10, floor
-
     return round(x, -int(floor(log10(x))) + (n - 1))
 
 
@@ -199,21 +198,16 @@ def counts_to_engineering_units(counts: int, p_fs, n_fs, p_fs_c, n_fs_c):
     :return: float
     """
 
-    m = (p_fs - n_fs) / (
-        p_fs_c - n_fs_c
-    )  # This is the slope, how many eng_units represents one count.
-
-    m_rounded = round_to_n(m, 3)  # round m to 3 significant digits.
-    number_of_decimals = (
-        len(str(m_rounded)) - 2
-    )  # get how many decimal digits is the results. -2 because of the '0.'
-
+    # This is the slope, how many eng_units represents one count.
+    m = (p_fs - n_fs) / (p_fs_c - n_fs_c)
+    # round m to 3 significant digits.
+    m_rounded = round_to_n(m, 3)
+    # get how many decimal digits is the results. -2 because of the '0.'
+    number_of_decimals = len(str(m_rounded)) - 2
     # calculate the offset of the counts from zero. If counts = 0 = eng units, then this is zero.
     offset = p_fs_c - (p_fs / m)
-
-    return round(
-        (counts - offset) * m, number_of_decimals
-    )  # calculate the result and round to calculated decimals.
+    # calculate the result and round to calculated decimals.
+    return round((counts - offset) * m, number_of_decimals)
 
 
 def engineering_units_to_counts(eng_value, p_fs, n_fs, p_fs_c, n_fs_c) -> int:
@@ -228,7 +222,7 @@ def engineering_units_to_counts(eng_value, p_fs, n_fs, p_fs_c, n_fs_c) -> int:
     """
     m = (p_fs - n_fs) / (p_fs_c - n_fs_c)
     offset = p_fs_c - (p_fs / m)
-    return round((eng_value / m) + offset)
+    return int(round((eng_value / m) + offset))
 
 
 def engineering_units_to_counts_dict_input(in_val, range_information: dict) -> int:

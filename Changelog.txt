@@ -1,0 +1,48 @@
+0.1.x
+    * Modbus communication with system
+    * address offseting
+    * Low level register reads and writes
+
+0.2.x
+    * Added many wrappers for attributes in address map.
+    * Added automatic counts to engineering values for certain modules.
+    * Added examples.
+
+0.3.x
+    * Added pymodbus3 support to allow the user to choose modbus backend.
+    * higher level write support
+    * Separated into multiple files that use inheritance.
+
+0.4.x
+    * Changed function names to start with a read or write if they perform a modbus request
+    * Documented all code.
+
+0.5.x
+    * Improved Range information reading code to support Count to ENG values in more modules, including Output Modules.
+    * Added support for Special modules: DIOL, Output modules, ISO, etc
+    * Added a utilities module.
+    * Changed example variety.
+    * Automatic rounding
+
+0.6.x
+    * Improved Range information code to support an old format used in certain modules.
+    * Added list notation for reading and writing values, examples are provided.
+    * Added a lot of error checking and reporting.
+    * Basic FTP connection that can retrieve files from the SD card.
+        - The data in the files read are count values, conversion to eng values will be added in the next update.
+
+0.9.0
+    * Added User Manual
+    * Added API Reference
+    * Alpha Release on website and github
+
+0.10.0
+    * Included a copy of open source Modbus library instead of requiring users to install it from somewhere else.
+    * Added Unit Tests.
+    * Added more examples.
+    * Added first draft of FTP functions.
+    * Started using "Black" formatter.
+    * Better exception and error reporting.
+    * More documentation.
+    * Warn that a method is not implemented yet.
+    * Tons of bug fixes.

@@ -209,8 +209,8 @@ class MAQ20Module:
                             "Engineering+FS": range_info[2] * 10 ** range_info[4],
                             "EngineeringUnits": str(chr(range_info[5]))
                             + str(chr(range_info[6])),
-                            "CountValue-FS": utils.int16_to_int32(range_info[7:9]),
-                            "CountValue+FS": utils.int16_to_int32(range_info[9:11]),
+                            "CountValue-FS": range_info[8],
+                            "CountValue+FS": range_info[10],
                         }
                     )
                     check = self._ranges_information[-1]
@@ -235,12 +235,8 @@ class MAQ20Module:
                                         * 10 ** range_info[4],
                                         "EngineeringUnits": str(chr(range_info[5]))
                                         + str(chr(range_info[6])),
-                                        "CountValue-FS": utils.int16_to_int32(
-                                            range_info[7:9]
-                                        ),
-                                        "CountValue+FS": utils.int16_to_int32(
-                                            range_info[9:11]
-                                        ),
+                                        "CountValue-FS": range_info[8],
+                                        "CountValue+FS": range_info[10],
                                     }
                                 )
                                 check = self._ranges_information[-1]
@@ -251,10 +247,6 @@ class MAQ20Module:
                             raise TypeError("Invalid Range Value")
                         break
             except Exception as e:
-                print(e)
-                print(type(e))
-                print(self.get_name())
-                print(self.get_registration_number())
                 pass
         else:
             self._number_of_ranges = None
