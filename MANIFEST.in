@@ -1,2 +1,2 @@
-include *txt
+include LICENSE.txt
 resursive-include *.ui

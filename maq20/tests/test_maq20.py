@@ -8,7 +8,7 @@ from maq20.modbus_client.exceptions import ModbusIOException
 
 class TestMAQ20(unittest.TestCase):
     def setUp(self):
-        self.maq20 = MAQ20()
+        self.maq20 = MAQ20(ip_address="192.168.0.203")
 
     def tearDown(self):
         self.maq20.close()
@@ -140,7 +140,42 @@ class TestMAQ20(unittest.TestCase):
             )
 
     def test_fail_to_connect(self):
+        # Test different timeouts, including the default timeout for connect
+        # Default timeout = 3
+        start_time = time.time()
         self.assertRaises(Exception, MAQ20, "192.168.128.200")
+        time_taken = time.time() - start_time
+        self.assertTrue(
+            3 < time_taken < 4, "Expected: [3, 4], Got {}".format(time_taken)
+        )
+        # timeout = 4
+        start_time = time.time()
+        self.assertRaises(Exception, MAQ20, "192.168.128.200", **{"timeout": 4})
+        time_taken = time.time() - start_time
+        self.assertTrue(
+            4 < time_taken < 5, "Expected: [4, 5], Got {}".format(time_taken)
+        )
+        # timeout = 1
+        start_time = time.time()
+        self.assertRaises(Exception, MAQ20, "192.168.128.200", **{"timeout": 1})
+        time_taken = time.time() - start_time
+        self.assertTrue(
+            1 < time_taken < 2, "Expected: [1, 2], Got {}".format(time_taken)
+        )
+        # timeout = 10
+        start_time = time.time()
+        self.assertRaises(Exception, MAQ20, "192.168.128.200", **{"timeout": 10})
+        time_taken = time.time() - start_time
+        self.assertTrue(
+            10 < time_taken < 11, "Expected: [10, 11], Got {}".format(time_taken)
+        )
+        # timeout = 0
+        start_time = time.time()
+        self.assertRaises(Exception, MAQ20, "192.168.128.200", **{"timeout": 0})
+        time_taken = time.time() - start_time
+        self.assertTrue(
+            0 < time_taken < 1, "Expected: [0, 1], Got {}".format(time_taken)
+        )
 
     def test_set_and_read_voltage(self):
         voltages = [-2.0, -1.5, -1, -0.1, 0, 0.1, .5, 1.2, 2]

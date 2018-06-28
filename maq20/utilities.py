@@ -124,15 +124,23 @@ def int16_to_int32(numbers, msb_first=True) -> int:
     """
     if len(numbers) != 2:
         raise ValueError("2 numbers are needed to convert to a single value")
-    return (
-        (numbers[0] << 16) | numbers[1]
-        if msb_first
-        else (numbers[1] << 16) | numbers[0]
-    )
+    if msb_first:
+        msb = (numbers[0] & 0x0FFFF) << 16
+        lsb = numbers[1] & 0x0FFFF
+    else:
+        msb = (numbers[1] & 0x0FFFF) << 16
+        lsb = numbers[0] & 0x0FFFF
+    merged_numbers = msb | lsb
+    return ctypes.c_int32(merged_numbers).value
 
 
 def int32_to_uint32(i: int) -> int:
-    return ctypes.c_uint32(i).value
+    if -2147483648 <= i <= 4294967295:
+        return ctypes.c_uint32(i).value
+    else:
+        raise ValueError(
+            "input {} should be within -2147483647 <= i <= 4294967295".format(i)
+        )
 
 
 def int32_to_int16s(number: int, msb_first=True) -> list:
@@ -143,11 +151,11 @@ def int32_to_int16s(number: int, msb_first=True) -> list:
     :return: list of integers of length 2
     """
     number_int = int(number)  # in case user passes in a string or a floating number
-    return (
-        [number_int >> 16, number_int & 0x0000FFFF]
-        if msb_first
-        else [number_int & 0x0000FFFF, number_int >> 16]
-    )
+    if msb_first:
+        numbers_16bit = [(number_int >> 16) & 0x0000FFFF, number_int & 0x0000FFFF]
+    else:
+        numbers_16bit = [number_int & 0x0000FFFF, (number_int >> 16) & 0x0000FFFF]
+    return [ctypes.c_int16(i).value for i in numbers_16bit]
 
 
 def ints_to_float(numbers) -> float:
