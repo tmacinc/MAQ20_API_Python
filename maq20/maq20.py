@@ -23,6 +23,8 @@ class MAQ20:
         self._port = 0
         self._username = ""
         self._password = ""
+        self._ftp_timeout = 20  # Seconds
+        self._ftp_passive = True
         if com is None:
             self._ip_address = ip_address
             self._port = port
@@ -198,13 +200,29 @@ class MAQ20:
     def ftp_login(self, username="maq20", password="1234"):
         self._username = username
         self._password = password
+    
+    def ftp_timeout(self, new_time_s):
+        self._ftp_timeout = new_time_s
+    
+    def ftp_passive(self, boolean):
+        self._ftp_passive = boolean
+    
+    def ftp_welcome_message(self):
+        if self._com.read_card_available():
+            with FTP(self._ip_address, timeout=self._ftp_timeout) as ftp:
+                ftp.login(user=self._username, passwd=self._password)
+                ftp.set_pasv(self._ftp_passive)
+                result = ftp.getwelcome()
+            return result
+        else:
+            return "SD card not inserted."
 
     def ftp_dir(self):
         if self._com.read_card_available():
-            with FTP(self._ip_address) as ftp:
+            with FTP(self._ip_address, timeout=self._ftp_timeout) as ftp:
                 result = []
                 ftp.login(user=self._username, passwd=self._password)
-                ftp.set_pasv(False)
+                ftp.set_pasv(self._ftp_passive)
                 ftp.dir(result.append)
             return result
         else:
@@ -212,9 +230,9 @@ class MAQ20:
 
     def ftp_get(self, filename: str):
         if self._com.read_card_available():
-            with FTP(self._ip_address) as ftp:
+            with FTP(self._ip_address, timeout=self._ftp_timeout) as ftp:
                 ftp.login(user=self._username, passwd=self._password)
-                # ftp.set_pasv(False)
+                ftp.set_pasv(self._ftp_passive)
                 with open(filename, "wb") as local_file:
                     result = ftp.retrbinary(
                         "RETR {}".format(filename.upper()), local_file.write
@@ -225,8 +243,9 @@ class MAQ20:
 
     def ftp_del(self, filename: str):
         if self._com.read_card_available():
-            with FTP(self._ip_address) as ftp:
+            with FTP(self._ip_address, timeout=self._ftp_timeout) as ftp:
                 ftp.login(user=self._username, passwd=self._password)
+                ftp.set_pasv(self._ftp_passive)
                 result = ftp.delete(filename)
             return result
         else:
@@ -276,6 +295,19 @@ class MAQ20:
         return (
             interval_ms * number_of_samples / 1000
         )  # return how long this will take in seconds
+    
+    ###################
+    # MISC.
+    ###################
+    
+    def read_time_since_boot(self) -> int:
+        return self._com.read_time_since_boot()
+    
+    def read_boot_count(self) -> int:
+        return self._com.read_boot_count()
+    
+    def write_boot_count_reset(self):
+        return self._com.write_boot_count_reset()
 
     # Magic Methods Override.
 

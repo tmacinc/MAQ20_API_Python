@@ -18,6 +18,7 @@ class COMx(MAQ20Module):
         self._ip_address = ip_address
         self._port = port
         Defaults.Timeout = timeout
+        self._sd_card_log_parameters = [0 for _ in range(48)]
         if ip_address is not None or port is not None:
             self._client = ModbusTcpClient(ip_address, port=port)
         super(COMx, self).__init__(com=self, registration_number=0)
@@ -212,13 +213,13 @@ class COMx(MAQ20Module):
         return self.write_register(70, 1)
 
     def read_file_server_username(self) -> str:
-        return utils.response_to_string(self.read_registers(71, 10))
+        return utils.response_to_string(self.read_registers(71, 10)).strip()
 
     def write_file_server_username(self, username: str):
         return self.write_registers(71, username)
 
     def read_file_server_password(self) -> str:
-        return utils.response_to_string(self.read_registers(81, 10))
+        return utils.response_to_string(self.read_registers(81, 10)).strip()
 
     def write_file_server_password(self, password: str):
         return self.write_registers(81, password)
@@ -432,6 +433,14 @@ class COMx(MAQ20Module):
 
     def write_log_enable(self, enable):
         return self.write_register(1140, enable)
+    
+    def sd_card_log_setup(self):
+        self._sd_card_parameters_clear()
+    
+    def 
+    
+    def _sd_card_parameters_clear(self):
+        self._sd_card_log_parameters = [0 for _ in range(48)]
 
     def read_card_available(self) -> int:
         return self.read_register(1150)
@@ -976,6 +985,41 @@ class COMx(MAQ20Module):
         :return: float type number
         """
         return utils.ints_to_float(self.read_registers(1450, 2))
+
+    ###################
+    # MISC.
+    ###################
+    
+    def read_time_since_boot(self) -> int:
+        return utils.int16_to_int32(self.read_registers(1612, 2))
+    
+    def read_boot_count(self) -> int:
+        return self.read_register(1610)
+    
+    def write_boot_count_reset(self):
+        return self.write_register(1610, 0)
+
+    ###################
+    # Status Registers
+    ###################
+
+    def read_eth_tx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1900, 2)))
+    
+    def read_eth_rx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1902, 2)))
+    
+    def read_usb_tx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1904, 2)))
+    
+    def read_usb_rx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1906, 2)))
+    
+    def read_serial_tx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1908, 2)))
+
+    def read_serial_rx_counter(self):
+        return utils.int32_to_uint32(utils.int16_to_int32(self.read_registers(1910, 2)))
 
     ###################
     # Helper Functions.

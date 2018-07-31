@@ -401,6 +401,10 @@ class MAQ20Module:
 
     def get_firmware_version(self) -> str:
         return self._firmwareVersion
+    
+    def get_firmware_version_number(self) -> float:
+        fw_version_str = self._firmwareVersion.replace("F", "")
+        return float(fw_version_str)
 
     def get_com_module(self):
         return self._com

@@ -17,7 +17,7 @@ def main():
     print("Running tests for maq20.utilities")
     unittest.main("maq20.tests.test_utilities", exit=False)
     print("Running tests for MAQ20 System")
-    unittest.main("maq20.tests.test_maq20", exit=True)
+    unittest.main("maq20.tests.test_maq20", exit=False)
 
 
 if __name__ == "__main__":
