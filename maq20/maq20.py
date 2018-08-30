@@ -34,6 +34,7 @@ class MAQ20:
         self._module_list = []  # type: list[MAQ20Module]
         self.scan_module_list()
         self._iter_index = 0
+        self._sd_card_log_parameters = [0 for _ in range(48)]
 
     def read_register(self, address: int) -> int:
         """
@@ -200,13 +201,13 @@ class MAQ20:
     def ftp_login(self, username="maq20", password="1234"):
         self._username = username
         self._password = password
-    
+
     def ftp_timeout(self, new_time_s):
         self._ftp_timeout = new_time_s
-    
+
     def ftp_passive(self, boolean):
         self._ftp_passive = boolean
-    
+
     def ftp_welcome_message(self):
         if self._com.read_card_available():
             with FTP(self._ip_address, timeout=self._ftp_timeout) as ftp:
@@ -256,10 +257,53 @@ class MAQ20:
         response = self.ftp_dir()
         for line in response:
             line_sections = line.split(" ")
-            if len(line_sections[-1]) > 0 and line_sections[-1].endswith(
-                ".TXT"
-            ):  # Check that line is not empty
-                result.append(line_sections[-1])
+            if len(line_sections[-1]) > 0:  # Check that line is not empty
+                if line_sections[-1] != "SYSTEM~1":
+                    result.append(line_sections[-1])
+        return result
+
+    # SD Card Log Functions
+
+    def sd_card_clear(self):
+        self._sd_card_parameters_clear()
+
+    def sd_card_setup_log(
+        self, log_number: int, starting_address: int, number_of_samples: int
+    ):
+        if 0 <= log_number <= 24:
+            self._sd_card_log_parameters[log_number * 2] = starting_address
+            self._sd_card_log_parameters[(log_number * 2) + 1] = number_of_samples
+
+    def _sd_card_parameters_clear(self):
+        self._sd_card_log_parameters = [0 for _ in range(48)]
+
+    def sd_card_log_start(self, filename: str, interval_ms=100, samples=100):
+        if not self._com.read_card_available():
+            raise AssertionError("The SD card is not inserted in the COMx module")
+        if len(filename) > 11:
+            raise ValueError("filename has to be 11 characters or less")
+        # Write filename
+        self._com.write_registers(1100, filename)
+
+        self._com.write_log_interval(interval_ms)
+        self._com.write_log_number_of_samples(samples)
+        # Write parameters
+        self._com.write_registers(1120, self._sd_card_log_parameters[0:8])
+        self._com.write_registers(1160, self._sd_card_log_parameters[8:48])
+
+        self._com.write_log_enable(1)
+        if not self._com.read_log_enable():
+            raise AssertionError(
+                "The SD card log could not start, please check your parameters and try again"
+            )
+
+    def sd_card_check_parameters(self):
+        result = {}
+        for i in range(1, 25):
+            result["Log {0:02}".format(i)] = {
+                "Start Address": self._sd_card_log_parameters[(i - 1) * 2],
+                "Registers to Log": self._sd_card_log_parameters[((i - 1) * 2) + 1],
+            }
         return result
 
     def setup_sd_card_logging(
@@ -295,17 +339,17 @@ class MAQ20:
         return (
             interval_ms * number_of_samples / 1000
         )  # return how long this will take in seconds
-    
+
     ###################
     # MISC.
     ###################
-    
+
     def read_time_since_boot(self) -> int:
         return self._com.read_time_since_boot()
-    
+
     def read_boot_count(self) -> int:
         return self._com.read_boot_count()
-    
+
     def write_boot_count_reset(self):
         return self._com.write_boot_count_reset()
 
