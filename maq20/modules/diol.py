@@ -170,7 +170,12 @@ class DIOL(MAQ20Module):
                "Internal Trigger      : {0[10]}\n" \
                "External Enable       : {0[11]}\n" \
                "External Enable Status: {0[12]}\n".format(response, pulse_count, frequency)
-
+    
+    def read_special_function_1_pulse_frequency_counter_countonly(self, timer):
+        response = self.read_registers({0: 1100, 1: 1200}[timer], 13)
+        pulse_count = utils.int16_to_int32(response[4:6])
+        return pulse_count
+    
     def write_special_function_2_pulse_frequency_counter_with_debounce(self,
                                                                        timer,
                                                                        internal_trigger=0,
@@ -247,6 +252,12 @@ class DIOL(MAQ20Module):
                "Low Time (x 100us)    : {0[10]}\n" \
                "High Time (x 100us)   : {0[11]}\n".format(response, pulse_count, frequency)
 
+    def read_special_function_2_pulse_frequency_counter_with_debounce_frequency(self, timer):
+        response = self.read_registers({0: 1100, 1: 1200}[timer], 12)
+        pulse_count = utils.int16_to_int32(response[4:6])
+        frequency = utils.int16_to_int32(response[6:8])
+        return frequency
+    
     def write_special_function_3_waveform_measurement(self,
                                                       timer,
                                                       timebase=1,
