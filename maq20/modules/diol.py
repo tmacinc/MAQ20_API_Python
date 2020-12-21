@@ -159,23 +159,18 @@ class DIOL(MAQ20Module):
         response = self.read_registers({0: 1100, 1: 1200}[timer], 13)
         pulse_count = utils.int16_to_int32(response[4:6])
         frequency = utils.int16_to_int32(response[6:8])
-        return "Function              : 1 = Pulse/Frequency Counter\n" \
-               "Arm/Disarm            : {0[1]}\n" \
-               "Function Status       : {0[2]}\n" \
-               "Alarm Status          : {0[3]}\n" \
-               "Pulse Count           : {1}\n" \
-               "Frequency             : {2}\n" \
-               "RPM                   : {0[8]}\n" \
-               "Pulses Per Revolution : {0[9]}\n" \
-               "Internal Trigger      : {0[10]}\n" \
-               "External Enable       : {0[11]}\n" \
-               "External Enable Status: {0[12]}\n".format(response, pulse_count, frequency)
-    
-    def read_special_function_1_pulse_frequency_counter_countonly(self, timer):
-        response = self.read_registers({0: 1100, 1: 1200}[timer], 13)
-        pulse_count = utils.int16_to_int32(response[4:6])
-        return pulse_count
-    
+        return {"Function": "1 = Pulse/Frequency Counter".format(response, pulse_count, frequency),
+               "Arm/Disarm": "{0[1]}".format(response, pulse_count, frequency),
+               "Function Status": "{0[2]}".format(response, pulse_count, frequency),
+               "Alarm_Status": "{0[3]}".format(response, pulse_count, frequency),
+               "Pulse_Count": "{1}".format(response, pulse_count, frequency),
+               "Frequency": "{2}".format(response, pulse_count, frequency),
+               "RPM": "{0[8]}".format(response, pulse_count, frequency),
+               "Pulses Per Revolution": "{0[9]}".format(response, pulse_count, frequency),
+               "Internal Trigger": "{0[10]}".format(response, pulse_count, frequency),
+               "External Enable": "{0[11]}".format(response, pulse_count, frequency),
+               "External Enable Status": "{0[12]}".format(response, pulse_count, frequency)}
+
     def write_special_function_2_pulse_frequency_counter_with_debounce(self,
                                                                        timer,
                                                                        internal_trigger=0,
@@ -241,23 +236,17 @@ class DIOL(MAQ20Module):
         response = self.read_registers({0: 1100, 1: 1200}[timer], 12)
         pulse_count = utils.int16_to_int32(response[4:6])
         frequency = utils.int16_to_int32(response[6:8])
-        return "Function              : 2 = Pulse/Frequency Counter w/ Debounce\n" \
-               "Arm/Disarm            : {0[1]}\n" \
-               "Function Status       : {0[2]}\n" \
-               "Alarm Status          : {0[3]}\n" \
-               "Pulse Count           : {1}\n" \
-               "Frequency             : {2}\n" \
-               "Internal Trigger      : {0[8]}\n" \
-               "Debounce Output Enable: {0[9]}\n" \
-               "Low Time (x 100us)    : {0[10]}\n" \
-               "High Time (x 100us)   : {0[11]}\n".format(response, pulse_count, frequency)
+        return {"Function": "2 = Pulse/Frequency Counter w/ Debounce".format(response, pulse_count, frequency),
+               "Arm/Disarm": "{0[1]}".format(response, pulse_count, frequency),
+               "Function Status": "{0[2]}".format(response, pulse_count, frequency),
+               "Alarm Status": "{0[3]}".format(response, pulse_count, frequency),
+               "Pulse Count": "{1}".format(response, pulse_count, frequency),
+               "Frequency": "{2}".format(response, pulse_count, frequency),
+               "Internal Trigger": "{0[8]}".format(response, pulse_count, frequency),
+               "Debounce Output Enable": "{0[9]}".format(response, pulse_count, frequency),
+               "Low Time (x 100us)": "{0[10]}".format(response, pulse_count, frequency),
+               "High Time (x 100us)": "{0[11]}".format(response, pulse_count, frequency)}
 
-    def read_special_function_2_pulse_frequency_counter_with_debounce_frequency(self, timer):
-        response = self.read_registers({0: 1100, 1: 1200}[timer], 12)
-        pulse_count = utils.int16_to_int32(response[4:6])
-        frequency = utils.int16_to_int32(response[6:8])
-        return frequency
-    
     def write_special_function_3_waveform_measurement(self,
                                                       timer,
                                                       timebase=1,
